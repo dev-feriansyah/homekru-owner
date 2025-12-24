@@ -1,7 +1,7 @@
 // // ignore_for_file: deprecated_member_use
 
 // import 'package:flutter/material.dart';
-// import 'package:fortune/core/app_exports.dart';
+// import 'package:fortune/core/utils/image_constant.dart';
 // import 'package:fortune/core/utils/size_utils.dart';
 // import 'package:fortune/theme/theme_helper.dart';
 
