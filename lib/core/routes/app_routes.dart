@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:homekru_owner/presentation/helper/add_helper_screen.dart';
 import 'package:homekru_owner/presentation/helper/helper_list_screen.dart';
 import 'package:homekru_owner/presentation/member/helper/screen/attendence_log_screen.dart';
-import 'package:homekru_owner/presentation/member/helper/screen/add%20_member_screen.dart';
+import 'package:homekru_owner/presentation/member/helper/screen/add_member_screen.dart';
 import 'package:homekru_owner/presentation/member/helper/screen/helper_overview_screen.dart';
 import 'package:homekru_owner/presentation/member/helper/screen/live_in_helper_settings.dart';
 import 'package:homekru_owner/presentation/member/helper/screen/member_screen.dart';

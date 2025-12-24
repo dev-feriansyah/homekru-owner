@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:homekru_owner/presentation/task/screens/task_managment/%20create_from_scratch_screen.dart';
+import 'package:homekru_owner/presentation/task/screens/task_managment/create_from_scratch_screen.dart';
 import 'package:homekru_owner/presentation/task/screens/task_managment/suggeste_tasks_screen.dart';
 import 'package:homekru_owner/core/theme/theme_helper.dart';
 import 'package:homekru_owner/shared/widgets/custom_app_bar.dart';
