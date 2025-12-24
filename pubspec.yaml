@@ -1,5 +1,5 @@
 name: homekru_owner
-description: "A new Flutter project."
+description: 'A new Flutter project.'
 publish_to: 'none'
 version: 0.1.0
 
@@ -9,7 +9,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  shared_preferences: ^2.5.3
   http: ^1.4.0
   intl: ^0.20.2
   flutter_svg: ^2.2.0
@@ -18,18 +17,13 @@ dependencies:
   smooth_page_indicator: ^1.2.1
   flutter_screenutil: ^5.9.3
   awesome_drawer_bar: ^1.2.1
-  flutter_zoom_drawer: ^3.2.0
   flutter_otp_text_field: ^1.1.1
   ionicons: ^0.2.1
-  eva_icons_flutter: ^3.0.0
   dropdown_search: ^6.0.2
   go_router: ^16.2.0
   image_picker: ^1.2.0
-  syncfusion_flutter_charts: ^31.1.19
   dotted_border: ^3.1.0
   google_fonts: ^6.3.1
-
-
 
 dev_dependencies:
   flutter_test:
@@ -44,7 +38,6 @@ flutter:
     - assets/images/tasks/
     - assets/images/svgs/
 
-
   fonts:
     - family: Poppins
       fonts:
@@ -52,4 +45,3 @@ flutter:
     - family: PoppinsMedium
       fonts:
         - asset: assets/fonts/Poppins-Medium.ttf
-
