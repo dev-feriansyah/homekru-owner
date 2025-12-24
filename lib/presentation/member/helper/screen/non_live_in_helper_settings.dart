@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:homekru_owner/core/utils/common_utils.dart';
-import 'package:homekru_owner/core/utils/constants/app_strings.dart';
+import 'package:homekru_owner/core/constants/app_strings.dart';
 import 'package:homekru_owner/core/utils/date_time_utils.dart';
 import 'package:homekru_owner/presentation/bottom_navigation_bar/provider/dashboard_provider.dart';
 import 'package:homekru_owner/presentation/member/provider/add_member_provider.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:homekru_owner/core/utils/image_constant.dart';
+import 'package:homekru_owner/core/constants/image_constant.dart';
 import 'package:homekru_owner/core/utils/size_utils.dart';
 import 'package:homekru_owner/presentation/attendance_screen/provider/attendance_provider.dart';
 import 'package:homekru_owner/core/routes/app_navigator.dart';

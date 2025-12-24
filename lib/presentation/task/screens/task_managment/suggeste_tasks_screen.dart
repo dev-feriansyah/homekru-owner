@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:homekru_owner/core/utils/common_utils.dart';
-import 'package:homekru_owner/core/utils/image_constant.dart';
+import 'package:homekru_owner/core/constants/image_constant.dart';
 import 'package:homekru_owner/core/utils/logger.dart';
 import 'package:homekru_owner/presentation/task/widgets/dialogs/frequency_dialog.dart';
 import 'package:homekru_owner/presentation/task/widgets/dialogs/scope_of_work_dialog.dart';

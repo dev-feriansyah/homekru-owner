@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:homekru_owner/core/utils/image_constant.dart';
+import 'package:homekru_owner/core/constants/image_constant.dart';
 
 class HomeScreenProvider extends ChangeNotifier {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();

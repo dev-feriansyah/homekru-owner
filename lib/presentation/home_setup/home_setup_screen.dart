@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:homekru_owner/core/utils/common_utils.dart';
-import 'package:homekru_owner/core/utils/image_constant.dart';
+import 'package:homekru_owner/core/constants/image_constant.dart';
 import 'package:homekru_owner/core/theme/theme_helper.dart';
 import 'package:homekru_owner/shared/widgets/bottom_sheets/add_room_bottom_sheet.dart';
 import 'package:homekru_owner/shared/widgets/custom_app_bar.dart';

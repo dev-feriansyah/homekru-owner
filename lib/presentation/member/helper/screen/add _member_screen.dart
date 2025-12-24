@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:homekru_owner/core/utils/constants/app_strings.dart';
+import 'package:homekru_owner/core/constants/app_strings.dart';
 import 'package:homekru_owner/presentation/member/provider/add_member_provider.dart';
 import 'package:homekru_owner/core/routes/app_navigator.dart';
 import 'package:homekru_owner/core/routes/app_routes.dart';

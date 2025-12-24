@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:homekru_owner/core/utils/common_utils.dart';
-import 'package:homekru_owner/core/utils/image_constant.dart';
+import 'package:homekru_owner/core/constants/image_constant.dart';
 import 'package:homekru_owner/core/utils/size_utils.dart';
 import 'package:homekru_owner/presentation/auth/provider/create_household_provider.dart';
 import 'package:homekru_owner/presentation/auth/provider/login_provider.dart';

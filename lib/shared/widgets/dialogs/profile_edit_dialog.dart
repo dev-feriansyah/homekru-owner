@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:homekru_owner/core/utils/constants/app_strings.dart';
+import 'package:homekru_owner/core/constants/app_strings.dart';
 import 'package:homekru_owner/core/utils/logger.dart';
 import 'package:homekru_owner/core/theme/theme_helper.dart';
 import 'package:homekru_owner/shared/widgets/custom_dropdown_widget.dart';
