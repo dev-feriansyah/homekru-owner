@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:homekru_owner/routes/app_navigator.dart';
-import 'package:homekru_owner/routes/app_routes.dart';
+import 'package:homekru_owner/core/routes/app_navigator.dart';
+import 'package:homekru_owner/core/routes/app_routes.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({Key? key}) : super(key: key);

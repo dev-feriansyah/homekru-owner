@@ -5,8 +5,8 @@ import 'package:homekru_owner/core/utils/size_utils.dart';
 import 'package:homekru_owner/presentation/auth/provider/create_household_provider.dart';
 import 'package:homekru_owner/presentation/auth/provider/login_provider.dart';
 
-import 'package:homekru_owner/routes/app_navigator.dart';
-import 'package:homekru_owner/routes/app_routes.dart';
+import 'package:homekru_owner/core/routes/app_navigator.dart';
+import 'package:homekru_owner/core/routes/app_routes.dart';
 import 'package:homekru_owner/core/theme/theme_helper.dart';
 import 'package:homekru_owner/shared/widgets/custom_elevated_button.dart';
 import 'package:homekru_owner/shared/widgets/custom_image_view.dart';

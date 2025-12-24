@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:homekru_owner/routes/app_routes.dart';
+import 'package:homekru_owner/core/routes/app_routes.dart';
 
 class AppNavigator {
   AppNavigator._();

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:homekru_owner/core/utils/image_constant.dart';
-import 'package:homekru_owner/routes/app_navigator.dart';
+import 'package:homekru_owner/core/routes/app_navigator.dart';
 import 'package:homekru_owner/core/theme/theme_helper.dart';
 import 'package:homekru_owner/shared/widgets/custom_text.dart';
 

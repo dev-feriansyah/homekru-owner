@@ -8,8 +8,8 @@ import 'package:homekru_owner/presentation/bottom_navigation_bar/provider/dashbo
 import 'package:homekru_owner/presentation/home_screen/provider/home_screen_provider.dart'
     show HomeScreenProvider;
 import 'package:provider/provider.dart';
-import 'package:homekru_owner/routes/app_navigator.dart';
-import 'package:homekru_owner/routes/app_routes.dart';
+import 'package:homekru_owner/core/routes/app_navigator.dart';
+import 'package:homekru_owner/core/routes/app_routes.dart';
 import 'package:homekru_owner/core/theme/theme_helper.dart';
 import 'package:homekru_owner/shared/widgets/custom_image_view.dart';
 import 'package:homekru_owner/shared/widgets/custom_text.dart';
