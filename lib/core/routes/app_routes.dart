@@ -38,8 +38,7 @@ import 'package:homekru_owner/features/deduction/deduction_screen.dart';
 import 'package:homekru_owner/features/deduction/provider/deduction_provider.dart';
 import 'package:homekru_owner/features/notification/notification.dart';
 import 'package:homekru_owner/features/notification/provider/notification_provider.dart';
-import 'package:homekru_owner/features/onBoarding/onboarding_screen.dart';
-import 'package:homekru_owner/features/onBoarding/provider/onBoarding_provider.dart';
+import 'package:homekru_owner/features/onboarding/views/onboarding_screen.dart';
 import 'package:homekru_owner/features/overtime_detailed_screen/overtime_detailed_screen.dart';
 import 'package:homekru_owner/features/overtime_tracker/overtime_tracker_screen.dart';
 import 'package:homekru_owner/features/overtime_tracker/overtime_tracker_detailed_screen.dart';
@@ -113,8 +112,8 @@ class AppRoutes {
 
   static GoRouter router = GoRouter(
     navigatorKey: navigationKey,
-    initialLocation: kDebugMode ? dashboard : initialRoute,
-    // initialLocation: dashboard,
+    // initialLocation: kDebugMode ? dashboard : initialRoute,
+    initialLocation: onBoarding,
     routes: [
       GoRoute(
         name: initialRoute,
@@ -124,11 +123,7 @@ class AppRoutes {
       GoRoute(
         name: onBoarding,
         path: onBoarding,
-        builder:
-            (context, state) => ChangeNotifierProvider(
-              create: (context) => OnboardingProvider(),
-              child: const OnBoardingScreen(),
-            ),
+        builder: (context, state) => const OnboardingScreen(),
       ),
       GoRoute(
         name: login,
