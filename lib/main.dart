@@ -17,7 +17,8 @@ import 'package:homekru_owner/features/task/provider/task_management_provider.da
 import 'package:homekru_owner/features/task/provider/task_provider.dart';
 import 'package:homekru_owner/core/routes/app_routes.dart';
 import 'package:homekru_owner/core/theme/provider/theme_provider.dart';
-import 'package:provider/provider.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:provider/provider.dart' hide Consumer;
 
 var globalMessengerKey = GlobalKey<ScaffoldMessengerState>();
 
@@ -38,7 +39,7 @@ void main() async {
   Future.wait([
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]),
   ]).then((value) {
-    runApp(MyApp());
+    runApp(const ProviderScope(child: MyApp()));
   });
 }
 
@@ -76,8 +77,8 @@ class MyApp extends StatelessWidget {
               create: (context) => TaskManagementProvider(),
             ),
           ],
-          child: Consumer<ThemeProvider>(
-            builder: (context, provider, child) {
+          child: Consumer(
+            builder: (BuildContext context, WidgetRef ref, Widget? child) {
               return SafeArea(
                 top: false,
                 bottom: true,
