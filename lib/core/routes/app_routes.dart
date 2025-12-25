@@ -54,8 +54,7 @@ import 'package:homekru_owner/features/reports/reports_screen.dart';
 import 'package:homekru_owner/features/analytics/analytics_screen.dart';
 import 'package:homekru_owner/features/feedback/feedback_screen.dart';
 import 'package:homekru_owner/features/help_support/help_support_screen.dart';
-import 'package:homekru_owner/features/splash_screens/splash_screen.dart';
-import 'package:homekru_owner/features/splash_screens/provider/splash_provider.dart';
+import 'package:homekru_owner/features/splash_screens/views/splash_screen.dart';
 import 'package:homekru_owner/features/cms_pages/terms_conditions_screen.dart';
 import 'package:homekru_owner/features/cms_pages/privacy_policy_screen.dart';
 import 'package:homekru_owner/features/cms_pages/faqs_screen.dart';
@@ -120,11 +119,7 @@ class AppRoutes {
       GoRoute(
         name: initialRoute,
         path: initialRoute,
-        builder:
-            (context, state) => ChangeNotifierProvider(
-              create: (context) => SplashProvider(),
-              child: const SplashScreen(),
-            ),
+        builder: (context, state) => const SplashScreen(),
       ),
       GoRoute(
         name: onBoarding,

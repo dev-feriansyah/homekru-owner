@@ -12,7 +12,6 @@ import 'package:homekru_owner/features/onBoarding/provider/onBoarding_provider.d
 import 'package:homekru_owner/features/overtime_tracker/provider/overtime_tracker_provider.dart';
 import 'package:homekru_owner/features/profile_scren/provider/profile_provider.dart';
 import 'package:homekru_owner/features/settings/provider/settings_provider.dart';
-import 'package:homekru_owner/features/splash_screens/provider/splash_provider.dart';
 import 'package:homekru_owner/features/task/provider/task_management_provider.dart';
 import 'package:homekru_owner/features/task/provider/task_provider.dart';
 import 'package:homekru_owner/core/routes/app_routes.dart';
@@ -52,7 +51,6 @@ class MyApp extends StatelessWidget {
       builder: (context, orientation, deviceType) {
         return MultiProvider(
           providers: [
-            ChangeNotifierProvider(create: (context) => SplashProvider()),
             ChangeNotifierProvider(create: (context) => OnboardingProvider()),
             ChangeNotifierProvider(create: (context) => LoginProvider()),
             ChangeNotifierProvider(
