@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:homekru_owner/shared/utils/size_utils.dart';
-import 'package:homekru_owner/features/auth/provider/create_household_provider.dart';
-import 'package:homekru_owner/features/auth/provider/login_provider.dart';
+import 'package:homekru_owner/features/auth/ui/providers/create_household_provider.dart';
 import 'package:homekru_owner/features/home_screen/provider/home_screen_provider.dart';
 import 'package:homekru_owner/features/member/provider/add_member_provider.dart';
 import 'package:homekru_owner/features/member/provider/day_off_eligibility_provider.dart';
@@ -50,7 +49,6 @@ class MyApp extends StatelessWidget {
       builder: (context, orientation, deviceType) {
         return MultiProvider(
           providers: [
-            ChangeNotifierProvider(create: (context) => LoginProvider()),
             ChangeNotifierProvider(
               create: (context) => CreateHouseholdProvider(),
             ),

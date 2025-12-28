@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:homekru_owner/shared/utils/common_utils.dart';
 import 'package:homekru_owner/core/constants/image_constant.dart';
 import 'package:homekru_owner/shared/utils/size_utils.dart';
-import 'package:homekru_owner/features/auth/provider/login_provider.dart';
 
 import 'package:homekru_owner/core/routes/app_navigator.dart';
 import 'package:homekru_owner/core/routes/app_routes.dart';
@@ -10,20 +10,22 @@ import 'package:homekru_owner/core/theme/theme_helper.dart';
 import 'package:homekru_owner/shared/widgets/custom_elevated_button.dart';
 import 'package:homekru_owner/shared/widgets/custom_image_view.dart';
 import 'package:homekru_owner/shared/widgets/custom_text.dart';
-import 'package:provider/provider.dart';
 
-class SignupScreen extends StatefulWidget {
+import '../widgets/auth_custom_text_field.dart';
+import '../widgets/password_text_field.dart';
+
+class SignupScreen extends HookWidget {
   const SignupScreen({super.key});
 
   @override
-  State<SignupScreen> createState() => _SignupScreenState();
-}
-
-class _SignupScreenState extends State<SignupScreen> {
-  final _formKey = GlobalKey<FormState>();
-
-  @override
   Widget build(BuildContext context) {
+    final formKey = useMemoized(() => GlobalKey<FormState>());
+    final fullNameController = useTextEditingController();
+    final emailController = useTextEditingController();
+    final phoneNumberController = useTextEditingController();
+    final passwordController = useTextEditingController();
+    final confirmPasswordController = useTextEditingController();
+
     return Scaffold(
       body: Container(
         width: SizeUtils.width,
@@ -45,7 +47,7 @@ class _SignupScreenState extends State<SignupScreen> {
             SizedBox(height: 50),
             Expanded(
               child: Form(
-                key: _formKey,
+                key: formKey,
                 child: Container(
                   // alignment: Alignment.center,
                   width: SizeUtils.width,
@@ -100,10 +102,10 @@ class _SignupScreenState extends State<SignupScreen> {
                                 size: 16,
                               ),
                               SizedBox(height: 5),
-                              CustomTextField(
-                                "Enter your full name",
-                                "name",
-                                TextInputType.name,
+                              AuthCustomTextField(
+                                controller: fullNameController,
+                                hintText: 'Enter your full name',
+                                keyboardType: TextInputType.name,
                               ),
                               SizedBox(height: 25),
                               CText(
@@ -113,10 +115,10 @@ class _SignupScreenState extends State<SignupScreen> {
                                 size: 16,
                               ),
                               SizedBox(height: 5),
-                              CustomTextField(
-                                "Enter your phone number",
-                                "phone",
-                                TextInputType.number,
+                              AuthCustomTextField(
+                                controller: phoneNumberController,
+                                hintText: 'Enter your phone number',
+                                keyboardType: TextInputType.number,
                               ),
                               SizedBox(height: 25),
                               CText(
@@ -126,10 +128,25 @@ class _SignupScreenState extends State<SignupScreen> {
                                 size: 16,
                               ),
                               SizedBox(height: 5),
-                              CustomTextField(
-                                "Enter your email",
-                                "email",
-                                TextInputType.emailAddress,
+                              AuthCustomTextField(
+                                controller: emailController,
+                                hintText: 'Enter your email',
+                                keyboardType: TextInputType.emailAddress,
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Email is required';
+                                  }
+
+                                  final emailRegex = RegExp(
+                                    r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$',
+                                  );
+
+                                  if (!emailRegex.hasMatch(value)) {
+                                    return 'Enter a valid email';
+                                  }
+
+                                  return null;
+                                },
                               ),
                               SizedBox(height: 25),
                               CText(
@@ -139,10 +156,9 @@ class _SignupScreenState extends State<SignupScreen> {
                                 size: 16,
                               ),
                               SizedBox(height: 5),
-                              CustomTextField(
-                                "Enter your password",
-                                "password",
-                                TextInputType.emailAddress,
+                              PasswordTextField(
+                                controller: passwordController,
+                                hintText: "Enter your password",
                               ),
                               SizedBox(height: 25),
                               CText(
@@ -152,16 +168,15 @@ class _SignupScreenState extends State<SignupScreen> {
                                 size: 16,
                               ),
                               SizedBox(height: 5),
-                              CustomTextField(
-                                "Enter your confirm password",
-                                "confirm-password",
-                                TextInputType.emailAddress,
+                              PasswordTextField(
+                                controller: confirmPasswordController,
+                                hintText: "Enter your confirm password",
                               ),
                               SizedBox(height: 8),
                               SizedBox(height: 30),
                               CustomElevatedButton(
                                 onPressed: () {
-                                  if (_formKey.currentState!.validate()) {
+                                  if (formKey.currentState!.validate()) {
                                     AppNavigator.goNamed(
                                       AppRoutes.wouldYouLike,
                                     );
@@ -262,84 +277,6 @@ class _SignupScreenState extends State<SignupScreen> {
           ],
         ),
       ),
-    );
-  }
-
-  Widget CustomTextField(hintText, label, keyboardType) {
-    return Consumer<LoginProvider>(
-      builder: (context, provider, child) {
-        return TextFormField(
-          cursorColor: appTheme.lightGrey,
-          controller:
-              (label == "password")
-                  ? provider.password
-                  : (label == "confirm-password")
-                  ? provider.confirmPassword
-                  : null,
-          obscureText:
-              (label == "password")
-                  ? provider.passwordVisibility
-                  : (label == "confirm-password")
-                  ? provider.confirPasswordVisibility
-                  : false,
-          keyboardType: keyboardType ?? TextInputType.none,
-          decoration: InputDecoration(
-            hintText: hintText,
-            hintStyle: TextStyle(
-              color: appTheme.lightGrey,
-              fontSize: 14,
-              fontWeight: FontWeight.w400,
-            ),
-            // filled: true,
-            fillColor: Colors.white,
-
-            contentPadding: const EdgeInsets.symmetric(
-              horizontal: 20,
-              vertical: 15,
-            ),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(15),
-              borderSide: BorderSide(color: appTheme.veryLightGrey),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(15),
-
-              borderSide: BorderSide(color: appTheme.veryLightGrey),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(15),
-              borderSide: BorderSide(color: appTheme.veryLightGrey),
-            ),
-            suffixIcon:
-                (label == "password" || label == "confirm-password")
-                    ? IconButton(
-                      onPressed: () {
-                        provider.changeVisibility(label);
-                      },
-                      icon: Icon(
-                        (label == "password" && provider.passwordVisibility) ||
-                                (label == "confirm-password" &&
-                                    provider.confirPasswordVisibility)
-                            ? Icons.visibility_off_outlined
-                            : Icons.visibility_outlined,
-                        color: appTheme.lightGrey,
-                        size: 20,
-                      ),
-                    )
-                    : null,
-          ),
-          validator: (val) {
-            if (val == null || val.isEmpty) {
-              return '$label is required';
-            }
-            if (label == "confirm-password" &&
-                provider.password.text != provider.confirmPassword.text) {
-              return "Passwords do not match";
-            }
-            return null;
-          },
-        );
-      },
     );
   }
 }

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:homekru_owner/shared/utils/common_utils.dart';
 import 'package:homekru_owner/core/constants/image_constant.dart';
 import 'package:homekru_owner/shared/utils/size_utils.dart';
-import 'package:homekru_owner/features/auth/provider/login_provider.dart';
 
 import 'package:homekru_owner/core/routes/app_navigator.dart';
 import 'package:homekru_owner/core/routes/app_routes.dart';
@@ -10,20 +10,18 @@ import 'package:homekru_owner/core/theme/theme_helper.dart';
 import 'package:homekru_owner/shared/widgets/custom_elevated_button.dart';
 import 'package:homekru_owner/shared/widgets/custom_image_view.dart';
 import 'package:homekru_owner/shared/widgets/custom_text.dart';
-import 'package:provider/provider.dart';
 
-class ConfirmPasswordScreen extends StatefulWidget {
+import '../widgets/password_text_field.dart';
+
+class ConfirmPasswordScreen extends HookWidget {
   const ConfirmPasswordScreen({super.key});
 
   @override
-  State<ConfirmPasswordScreen> createState() => _ConfirmPasswordScreenState();
-}
-
-class _ConfirmPasswordScreenState extends State<ConfirmPasswordScreen> {
-  final _formKey = GlobalKey<FormState>();
-
-  @override
   Widget build(BuildContext context) {
+    final formKey = useMemoized(() => GlobalKey<FormState>());
+    final passwordController = useTextEditingController();
+    final confirmPasswordController = useTextEditingController();
+
     return Scaffold(
       body: Container(
         width: SizeUtils.width,
@@ -45,7 +43,7 @@ class _ConfirmPasswordScreenState extends State<ConfirmPasswordScreen> {
             SizedBox(height: 50),
             Expanded(
               child: Form(
-                key: _formKey,
+                key: formKey,
                 child: Container(
                   // alignment: Alignment.center,
                   width: SizeUtils.width,
@@ -101,9 +99,9 @@ class _ConfirmPasswordScreenState extends State<ConfirmPasswordScreen> {
                                 size: 16,
                               ),
                               SizedBox(height: 5),
-                              CustomTextField(
-                                "Enter your password",
-                                "password",
+                              PasswordTextField(
+                                controller: passwordController,
+                                hintText: "Enter your password",
                               ),
                               SizedBox(height: 25),
                               CText(
@@ -113,15 +111,14 @@ class _ConfirmPasswordScreenState extends State<ConfirmPasswordScreen> {
                                 size: 16,
                               ),
                               SizedBox(height: 5),
-                              CustomTextField(
-                                "Enter your confirm password",
-                                "confirm-password",
+                              PasswordTextField(
+                                controller: confirmPasswordController,
+                                hintText: "Enter your confirm password",
                               ),
-
                               SizedBox(height: 30),
                               CustomElevatedButton(
                                 onPressed: () {
-                                  if (_formKey.currentState!.validate()) {
+                                  if (formKey.currentState!.validate()) {
                                     // NavigatorService.pushNamedAndRemoveUntil(
                                     //   AppRoutes.loginScreen,
                                     // );
@@ -135,10 +132,10 @@ class _ConfirmPasswordScreenState extends State<ConfirmPasswordScreen> {
                                   fontWeight: FontWeight.bold,
                                 ),
                                 buttonStyle: ButtonStyle(
-                                  backgroundColor: MaterialStateProperty.all(
+                                  backgroundColor: WidgetStateProperty.all(
                                     appTheme.primaryColor,
                                   ),
-                                  shape: MaterialStateProperty.all(
+                                  shape: WidgetStateProperty.all(
                                     RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(15),
                                     ),
@@ -158,78 +155,6 @@ class _ConfirmPasswordScreenState extends State<ConfirmPasswordScreen> {
           ],
         ),
       ),
-    );
-  }
-
-  Widget CustomTextField(hintText, label) {
-    return Consumer<LoginProvider>(
-      builder: (context, provider, child) {
-        return TextFormField(
-          cursorColor: appTheme.lightGrey,
-          controller:
-              (label == "password")
-                  ? provider.password
-                  : provider.confirmPassword,
-          obscureText:
-              (label == "password")
-                  ? provider.passwordVisibility
-                  : (label == "confirm-password")
-                  ? provider.confirPasswordVisibility
-                  : false,
-          decoration: InputDecoration(
-            hintText: hintText,
-            hintStyle: TextStyle(
-              color: appTheme.lightGrey,
-              fontSize: 14,
-              fontWeight: FontWeight.w400,
-            ),
-            // filled: true,
-            fillColor: Colors.white,
-
-            contentPadding: const EdgeInsets.symmetric(
-              horizontal: 20,
-              vertical: 15,
-            ),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(15),
-              borderSide: BorderSide(color: appTheme.veryLightGrey),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(15),
-
-              borderSide: BorderSide(color: appTheme.veryLightGrey),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(15),
-              borderSide: BorderSide(color: appTheme.veryLightGrey),
-            ),
-            suffixIcon: IconButton(
-              onPressed: () {
-                provider.changeVisibility(label);
-              },
-              icon: Icon(
-                (label == "password" && provider.passwordVisibility) ||
-                        (label == "confirm-password" &&
-                            provider.confirPasswordVisibility)
-                    ? Icons.visibility_off_outlined
-                    : Icons.visibility_outlined,
-                color: appTheme.lightGrey,
-                size: 20,
-              ),
-            ),
-          ),
-          validator: (val) {
-            if (val == null || val.isEmpty) {
-              return '$label is required';
-            }
-            if (label == "confirm-password" &&
-                provider.password.text != provider.confirmPassword.text) {
-              return "Passwords do not match";
-            }
-            return null;
-          },
-        );
-      },
     );
   }
 }

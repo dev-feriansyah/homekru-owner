@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:homekru_owner/shared/utils/common_utils.dart';
 import 'package:homekru_owner/core/constants/image_constant.dart';
 import 'package:homekru_owner/shared/utils/size_utils.dart';
-import 'package:homekru_owner/features/auth/provider/create_household_provider.dart';
-import 'package:homekru_owner/features/auth/provider/login_provider.dart';
+import 'package:homekru_owner/features/auth/ui/providers/create_household_provider.dart';
 
 import 'package:homekru_owner/core/routes/app_navigator.dart';
 import 'package:homekru_owner/core/routes/app_routes.dart';
@@ -13,16 +13,14 @@ import 'package:homekru_owner/shared/widgets/custom_image_view.dart';
 import 'package:homekru_owner/shared/widgets/custom_text.dart';
 import 'package:provider/provider.dart';
 
-class CreateHouseholdScreen extends StatefulWidget {
+import '../widgets/auth_custom_text_field.dart';
+
+class CreateHouseholdScreen extends HookWidget {
   const CreateHouseholdScreen({super.key});
-
-  @override
-  State<CreateHouseholdScreen> createState() => _CreateHouseholdScreenState();
-}
-
-class _CreateHouseholdScreenState extends State<CreateHouseholdScreen> {
   @override
   Widget build(BuildContext context) {
+    final householdController = useTextEditingController();
+
     return Scaffold(
       body: Container(
         width: SizeUtils.width,
@@ -99,7 +97,11 @@ class _CreateHouseholdScreenState extends State<CreateHouseholdScreen> {
                               size: 16,
                             ),
                             SizedBox(height: 5),
-                            CustomTextField("Enter household name", "password"),
+                            AuthCustomTextField(
+                              controller: householdController,
+                              hintText: 'Enter household name',
+                              keyboardType: TextInputType.text,
+                            ),
                             SizedBox(height: 20),
                             CText(
                               "Household Type",
@@ -193,61 +195,6 @@ class _CreateHouseholdScreenState extends State<CreateHouseholdScreen> {
       ),
     );
   }
-
-  Widget CustomTextField(hintText, label) {
-    return Consumer<LoginProvider>(
-      builder: (context, provider, child) {
-        return TextField(
-          cursorColor: appTheme.lightGrey,
-          obscureText:
-              (label != "password") ? false : provider.passwordVisibility,
-          decoration: InputDecoration(
-            hintText: hintText,
-            hintStyle: TextStyle(
-              color: appTheme.lightGrey,
-              fontSize: 14,
-              fontWeight: FontWeight.w400,
-            ),
-            // filled: true,
-            fillColor: Colors.white,
-
-            contentPadding: const EdgeInsets.symmetric(
-              horizontal: 20,
-              vertical: 15,
-            ),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(15),
-              borderSide: BorderSide(color: appTheme.veryLightGrey),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(15),
-
-              borderSide: BorderSide(color: appTheme.veryLightGrey),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(15),
-              borderSide: BorderSide(color: appTheme.veryLightGrey),
-            ),
-            suffixIcon:
-                (label != "password")
-                    ? null
-                    : IconButton(
-                      onPressed: () {
-                        provider.changeVisibility(label);
-                      },
-                      icon: Icon(
-                        (provider.passwordVisibility)
-                            ? Icons.visibility_off_outlined
-                            : Icons.remove_red_eye_outlined,
-                      ),
-                      color: appTheme.lightGrey,
-                      iconSize: 20,
-                    ),
-          ),
-        );
-      },
-    );
-  }
 }
 
 class CustomDropdownField extends StatelessWidget {
@@ -267,7 +214,7 @@ class CustomDropdownField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField<String>(
-      value: items.contains(selectedItem) ? selectedItem : null,
+      initialValue: items.contains(selectedItem) ? selectedItem : null,
 
       decoration: InputDecoration(
         contentPadding: const EdgeInsets.symmetric(

@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:homekru_owner/features/helper/add_helper_screen.dart';
 import 'package:homekru_owner/features/helper/helper_list_screen.dart';
@@ -19,17 +18,16 @@ import 'package:homekru_owner/features/task/screens/task_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:homekru_owner/features/attendance_screen/attendance_screen.dart';
 import 'package:homekru_owner/features/attendance_screen/provider/attendance_provider.dart';
-import 'package:homekru_owner/features/auth/confirm_password_screen.dart';
-import 'package:homekru_owner/features/auth/create_household_screen.dart';
-import 'package:homekru_owner/features/auth/forget_password_screen.dart';
-import 'package:homekru_owner/features/auth/invite_link_screen.dart'
+import 'package:homekru_owner/features/auth/ui/screens/confirm_password_screen.dart';
+import 'package:homekru_owner/features/auth/ui/screens/create_household_screen.dart';
+import 'package:homekru_owner/features/auth/ui/screens/forget_password_screen.dart';
+import 'package:homekru_owner/features/auth/ui/screens/invite_link_screen.dart'
     show InviteLinkScreen;
-import 'package:homekru_owner/features/auth/login_screen.dart';
-import 'package:homekru_owner/features/auth/provider/create_household_provider.dart';
-import 'package:homekru_owner/features/auth/provider/login_provider.dart';
-import 'package:homekru_owner/features/auth/signUp_screen.dart';
-import 'package:homekru_owner/features/auth/verify_otp.dart';
-import 'package:homekru_owner/features/auth/would_you_like_screen.dart';
+import 'package:homekru_owner/features/auth/ui/screens/login_screen.dart';
+import 'package:homekru_owner/features/auth/ui/providers/create_household_provider.dart';
+import 'package:homekru_owner/features/auth/ui/screens/signup_screen.dart';
+import 'package:homekru_owner/features/auth/ui/screens/verify_otp.dart';
+import 'package:homekru_owner/features/auth/ui/screens/would_you_like_screen.dart';
 import 'package:homekru_owner/features/bottom_navigation_bar/dashboard.dart';
 import 'package:homekru_owner/features/bottom_navigation_bar/provider/dashboard_provider.dart';
 import 'package:homekru_owner/features/coowner/coowner_list_screen.dart';
@@ -128,56 +126,32 @@ class AppRoutes {
       GoRoute(
         name: login,
         path: login,
-        builder:
-            (context, state) => ChangeNotifierProvider(
-              create: (context) => LoginProvider(),
-              child: const LoginScreen(),
-            ),
+        builder: (context, state) => const LoginScreen(),
       ),
       GoRoute(
         name: signup,
         path: signup,
-        builder:
-            (context, state) => ChangeNotifierProvider(
-              create: (context) => LoginProvider(),
-              child: const SignupScreen(),
-            ),
+        builder: (context, state) => const SignupScreen(),
       ),
       GoRoute(
         name: forgetPassword,
         path: forgetPassword,
-        builder:
-            (context, state) => ChangeNotifierProvider(
-              create: (context) => LoginProvider(),
-              child: const ForgetPasswordScreen(),
-            ),
+        builder: (context, state) => const ForgetPasswordScreen(),
       ),
       GoRoute(
         name: confirmPassword,
         path: confirmPassword,
-        builder:
-            (context, state) => ChangeNotifierProvider(
-              create: (context) => LoginProvider(),
-              child: const ConfirmPasswordScreen(),
-            ),
+        builder: (context, state) => const ConfirmPasswordScreen(),
       ),
       GoRoute(
         name: wouldYouLike,
         path: wouldYouLike,
-        builder:
-            (context, state) => ChangeNotifierProvider(
-              create: (context) => LoginProvider(),
-              child: const WouldYouLikeScreen(),
-            ),
+        builder: (context, state) => const WouldYouLikeScreen(),
       ),
       GoRoute(
         name: inviteLink,
         path: inviteLink,
-        builder:
-            (context, state) => ChangeNotifierProvider(
-              create: (context) => LoginProvider(),
-              child: const InviteLinkScreen(),
-            ),
+        builder: (context, state) => const InviteLinkScreen(),
       ),
       GoRoute(
         name: createHousehold,
@@ -228,11 +202,7 @@ class AppRoutes {
       GoRoute(
         name: verifyOtp,
         path: verifyOtp,
-        builder:
-            (context, state) => ChangeNotifierProvider(
-              create: (context) => LoginProvider(),
-              child: const VerifyOtpScreen(),
-            ),
+        builder: (context, state) => const VerifyOtpScreen(),
       ),
       GoRoute(
         name: overtimeDetailed,

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:homekru_owner/shared/utils/common_utils.dart';
 import 'package:homekru_owner/core/constants/image_constant.dart';
 import 'package:homekru_owner/shared/utils/size_utils.dart';
-import 'package:homekru_owner/features/auth/provider/login_provider.dart';
 
 import 'package:homekru_owner/core/routes/app_navigator.dart';
 import 'package:homekru_owner/core/routes/app_routes.dart';
@@ -10,7 +9,6 @@ import 'package:homekru_owner/core/theme/theme_helper.dart';
 import 'package:homekru_owner/shared/widgets/custom_elevated_button.dart';
 import 'package:homekru_owner/shared/widgets/custom_image_view.dart';
 import 'package:homekru_owner/shared/widgets/custom_text.dart';
-import 'package:provider/provider.dart';
 
 class WouldYouLikeScreen extends StatefulWidget {
   const WouldYouLikeScreen({super.key});
@@ -108,10 +106,10 @@ class _WouldYouLikeScreenState extends State<WouldYouLikeScreen> {
                                 fontWeight: FontWeight.bold,
                               ),
                               buttonStyle: ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all(
+                                backgroundColor: WidgetStateProperty.all(
                                   appTheme.primaryColor,
                                 ),
-                                shape: MaterialStateProperty.all(
+                                shape: WidgetStateProperty.all(
                                   RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(15),
                                   ),
@@ -130,15 +128,15 @@ class _WouldYouLikeScreenState extends State<WouldYouLikeScreen> {
                                 fontWeight: FontWeight.bold,
                               ),
                               buttonStyle: ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all(
+                                backgroundColor: WidgetStateProperty.all(
                                   appTheme.white,
                                 ),
-                                shape: MaterialStateProperty.all(
+                                shape: WidgetStateProperty.all(
                                   RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(15),
                                   ),
                                 ),
-                                side: MaterialStateProperty.all(
+                                side: WidgetStateProperty.all(
                                   BorderSide(color: appTheme.primaryColor),
                                 ),
                               ),
@@ -159,102 +157,86 @@ class _WouldYouLikeScreenState extends State<WouldYouLikeScreen> {
   }
 
   Widget customContainer(label) {
-    return Consumer<LoginProvider>(
-      builder: (context, provider, child) {
-        return GestureDetector(
-          onTap: () {
-            if (label == 'owner') {
-              provider.changeCreateHouseHold(true);
-            } else {
-              provider.changeCreateHouseHold(false);
-            }
-          },
-          child: Container(
-            width: SizeUtils.width,
-            padding: EdgeInsets.all(13),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              color:
-                  (label == "owner") ? appTheme.paleGreen : appTheme.paleOrange,
+    return GestureDetector(
+      child: Container(
+        width: SizeUtils.width,
+        padding: EdgeInsets.all(13),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          color: (label == "owner") ? appTheme.paleGreen : appTheme.paleOrange,
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              height: 60,
+              padding: EdgeInsets.all(15),
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color:
+                    (label == "owner")
+                        ? appTheme.lightGreen
+                        : appTheme.lightOrange,
+              ),
+              child: CustomImageView(
+                imagePath: ImageConstant.add,
+                color: (label == "owner") ? appTheme.brightGreen : null,
+              ),
             ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  height: 60,
-                  padding: EdgeInsets.all(15),
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color:
-                        (label == "owner")
-                            ? appTheme.lightGreen
-                            : appTheme.lightOrange,
-                  ),
-                  child: CustomImageView(
-                    imagePath: ImageConstant.add,
-                    color: (label == "owner") ? appTheme.brightGreen : null,
-                  ),
-                ),
-                SizedBox(width: 10),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 5.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        CText(
-                          "Create a new household",
-                          size: 16,
-                          weight: FontWeight.bold,
-                        ),
-                        SizedBox(height: 4),
-                        CText(
-                          "Primary account owner",
-                          size: 14,
-                          weight: FontWeight.w400,
-                          color: appTheme.grey,
-                        ),
-                      ],
+            SizedBox(width: 10),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.only(top: 5.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    CText(
+                      "Create a new household",
+                      size: 16,
+                      weight: FontWeight.bold,
                     ),
-                  ),
-                ),
-                SizedBox(width: 5),
-                Container(
-                  margin: EdgeInsets.only(top: 7),
-                  height: 20,
-                  width: 20,
-                  padding: EdgeInsets.all(2),
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: appTheme.white,
-                    border: Border.all(
-                      color:
-                          (label == "owner")
-                              ? appTheme.brightGreen
-                              : appTheme.orange,
-                      width: 2,
+                    SizedBox(height: 4),
+                    CText(
+                      "Primary account owner",
+                      size: 14,
+                      weight: FontWeight.w400,
+                      color: appTheme.grey,
                     ),
-                  ),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color:
-                          ((label == 'owner')
-                              ? (provider.createHouseHold
-                                  ? appTheme.brightGreen
-                                  : Colors.transparent)
-                              : (!provider.createHouseHold
-                                  ? appTheme.orange
-                                  : Colors.transparent)),
-                      shape: BoxShape.circle,
-                    ),
-                  ),
+                  ],
                 ),
-              ],
+              ),
             ),
-          ),
-        );
-      },
+            SizedBox(width: 5),
+            Container(
+              margin: EdgeInsets.only(top: 7),
+              height: 20,
+              width: 20,
+              padding: EdgeInsets.all(2),
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: appTheme.white,
+                border: Border.all(
+                  color:
+                      (label == "owner")
+                          ? appTheme.brightGreen
+                          : appTheme.orange,
+                  width: 2,
+                ),
+              ),
+              child: Container(
+                decoration: BoxDecoration(
+                  color:
+                      (label == 'owner'
+                          ? appTheme.brightGreen
+                          : appTheme.orange),
+                  shape: BoxShape.circle,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
