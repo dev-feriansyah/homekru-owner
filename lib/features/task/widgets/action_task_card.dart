@@ -285,8 +285,7 @@ class ActionTaskCard extends StatelessWidget {
         ]);
         break;
       case null:
-        // TODO: Handle this case.
-        throw UnimplementedError();
+      // TODO: Handle this case.
     }
 
     return buttons;

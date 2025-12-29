@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:homekru_owner/shared/utils/size_utils.dart';
 import 'package:homekru_owner/features/member/provider/add_member_provider.dart';
-import 'package:homekru_owner/features/member/provider/day_off_eligibility_provider.dart';
 import 'package:homekru_owner/features/task/provider/task_management_provider.dart';
 import 'package:homekru_owner/core/routes/app_routes.dart';
 import 'package:homekru_owner/core/theme/provider/theme_provider.dart';
@@ -43,9 +42,6 @@ class MyApp extends StatelessWidget {
         return MultiProvider(
           providers: [
             ChangeNotifierProvider(create: (context) => AddMemberProvider()),
-            ChangeNotifierProvider(
-              create: (context) => DayOffEligibilityProvider(),
-            ),
             ChangeNotifierProvider(
               create: (context) => ThemeProvider(isDark: false),
             ),

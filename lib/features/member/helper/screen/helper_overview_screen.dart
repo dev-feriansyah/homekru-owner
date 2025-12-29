@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:homekru_owner/shared/utils/common_utils.dart';
 import 'package:homekru_owner/core/constants/app_strings.dart';
 import 'package:homekru_owner/core/constants/image_constant.dart';
 import 'package:homekru_owner/shared/utils/logger.dart';
 import 'package:homekru_owner/shared/utils/size_utils.dart';
-import 'package:homekru_owner/features/member/provider/day_off_eligibility_provider.dart';
 import 'package:homekru_owner/features/member/widget/circular_progress.dart';
 import 'package:homekru_owner/features/member/widget/eligibility_widget.dart';
 import 'package:homekru_owner/features/member/widget/helper_profile_card.dart';
@@ -21,22 +21,54 @@ import 'package:homekru_owner/shared/widgets/custom_elevated_button.dart';
 import 'package:homekru_owner/shared/widgets/custom_image_view.dart';
 import 'package:homekru_owner/shared/widgets/custom_text.dart';
 import 'package:homekru_owner/shared/widgets/dialogs/profile_edit_dialog.dart';
-import 'package:provider/provider.dart';
 
-class HelperOverviewScreen extends StatelessWidget {
-  HelperOverviewScreen({super.key});
-  final ActionTask myTask = ActionTask(
-    initials: "MJ",
-    title: "Kitchen Cleaning",
-    subtitle: "Rina uploaded photo Proof",
-    time: "Today - 10:15 AM",
-    type: "Cleaning Supplies",
-    items: "Bathroom cleaner, Mop head",
-    urgency: "Standard",
-  );
+enum FrequencyOptions { daily, weekly, biWeekly, monthly }
+
+extension FrequencyOptionsX on FrequencyOptions {
+  String get label {
+    switch (this) {
+      case FrequencyOptions.daily:
+        return 'Daily';
+      case FrequencyOptions.weekly:
+        return 'Weekly';
+      case FrequencyOptions.biWeekly:
+        return 'Bi-weekly';
+      case FrequencyOptions.monthly:
+        return 'Monthly';
+    }
+  }
+}
+
+final ActionTask myTask = ActionTask(
+  initials: "MJ",
+  title: "Kitchen Cleaning",
+  subtitle: "Rina uploaded photo Proof",
+  time: "Today - 10:15 AM",
+  type: "Cleaning Supplies",
+  items: "Bathroom cleaner, Mop head",
+  urgency: "Standard",
+);
+
+class HelperOverviewScreen extends HookWidget {
+  const HelperOverviewScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final selectedFrequency = useState<String>(FrequencyOptions.weekly.label);
+    final allocatedLeaves = useState<int>(4);
+
+    void decrementLeaves() {
+      if (allocatedLeaves.value > 0) {
+        allocatedLeaves.value--;
+      }
+    }
+
+    void incrementLeaves() {
+      if (allocatedLeaves.value < 30) {
+        allocatedLeaves.value++;
+      }
+    }
+
     return Scaffold(
       backgroundColor: appTheme.lightBlue,
       appBar: CustomCommonAppBar(title: AppStrings.helperOverview),
@@ -104,9 +136,7 @@ class HelperOverviewScreen extends StatelessWidget {
                       "status": AppStrings.pending,
                       "statusColor": appTheme.amber,
                       "statusBgColor": appTheme.lightYellow,
-                      "onRemind": () {
-                        print("Remind clicked!");
-                      },
+                      "onRemind": () {},
                     },
                     {
                       "title": "Clean Kitchen",
@@ -144,7 +174,13 @@ class HelperOverviewScreen extends StatelessWidget {
                     weight: FontWeight.w500,
                   ),
                   GestureDetector(
-                    onTap: () => _showDayOffEligibilityDialog(context),
+                    onTap:
+                        () => _showDayOffEligibilityDialog(
+                          context: context,
+                          onIncrement: incrementLeaves,
+                          onDecrement: decrementLeaves,
+                          allocatedLeaves: allocatedLeaves.value,
+                        ),
                     child: Container(
                       padding: const EdgeInsets.symmetric(
                         horizontal: 14,
@@ -168,20 +204,14 @@ class HelperOverviewScreen extends StatelessWidget {
                 ],
               ),
               vGap(18.h),
-              Consumer<DayOffEligibilityProvider>(
-                builder:
-                    (context, provider, _) => EligibilityWidget(
-                      title: AppStrings.frequency,
-                      value: provider.selectedFrequency ?? "Weekly",
-                    ),
+              EligibilityWidget(
+                title: AppStrings.frequency,
+                value: selectedFrequency.value,
               ),
               vGap(15.h),
-              Consumer<DayOffEligibilityProvider>(
-                builder:
-                    (context, provider, _) => EligibilityWidget(
-                      title: AppStrings.allocatedLeaves,
-                      value: provider.allocatedLeaves.toString(),
-                    ),
+              EligibilityWidget(
+                title: AppStrings.allocatedLeaves,
+                value: allocatedLeaves.value.toString(),
               ),
               vGap(20.h),
 
@@ -230,7 +260,12 @@ class HelperOverviewScreen extends StatelessWidget {
     );
   }
 
-  void _showDayOffEligibilityDialog(BuildContext context) {
+  void _showDayOffEligibilityDialog({
+    required BuildContext context,
+    required Function onDecrement,
+    required Function onIncrement,
+    required int allocatedLeaves,
+  }) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -242,225 +277,215 @@ class HelperOverviewScreen extends StatelessWidget {
               color: appTheme.white,
               borderRadius: BorderRadius.circular(25.r),
             ),
-            child: Consumer<DayOffEligibilityProvider>(
-              builder:
-                  (context, provider, _) => Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          SizedBox(width: 32.w),
-                          Expanded(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    SizedBox(width: 32.w),
+                    Expanded(
+                      child: CText(
+                        "Day Off Eligibility",
+                        textAlign: TextAlign.center,
+                        size: 18.sp,
+                        weight: FontWeight.bold,
+                        color: appTheme.textPrimary,
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () => Navigator.of(context).pop(),
+                      child: CircleAvatar(
+                        radius: 16.r,
+                        backgroundColor: appTheme.lightBlueTwo,
+                        child: Icon(
+                          Icons.close,
+                          color: appTheme.primaryColor,
+                          size: 16.sp,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 20.h),
+
+                // Frequency Section
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    CText(
+                      "Frequency",
+                      size: 16.sp,
+                      weight: FontWeight.w500,
+                      color: appTheme.textPrimary,
+                    ),
+                    SizedBox(height: 8.h),
+                    CustomDropdownWidget(
+                      borderColor: appTheme.offWhite,
+                      items:
+                          FrequencyOptions.values.map((e) => e.label).toList(),
+                      hintText: "Select Frequency",
+                      selectedValue: FrequencyOptions.weekly.label,
+                      onChanged: (value) {},
+                    ),
+                  ],
+                ),
+                SizedBox(height: 20.h),
+
+                // Allocated Leaves Section
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    CText(
+                      "Allocated Leaves",
+                      size: 16.sp,
+                      weight: FontWeight.w500,
+                      color: appTheme.textPrimary,
+                    ),
+                    SizedBox(height: 8.h),
+                    Row(
+                      children: [
+                        // Remove button
+                        GestureDetector(
+                          onTap: () => onDecrement(),
+                          child: Container(
+                            width: 40.w,
+                            height: 40.h,
+                            decoration: BoxDecoration(
+                              color: appTheme.lightPink.withValues(alpha: 0.2),
+                              borderRadius: BorderRadius.circular(8.r),
+                              border: Border.all(
+                                color: appTheme.lightPink,
+                                width: 1.w,
+                              ),
+                            ),
+                            child: Icon(
+                              Icons.remove,
+                              color: appTheme.darkRed,
+                              size: 20.sp,
+                            ),
+                          ),
+                        ),
+                        SizedBox(width: 16.w),
+
+                        // Value display
+                        Container(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 20.w,
+                            vertical: 10.h,
+                          ),
+                          decoration: BoxDecoration(
+                            color: appTheme.lightBlue,
+                            borderRadius: BorderRadius.circular(8.r),
+                          ),
+                          child: CText(
+                            allocatedLeaves.toString(),
+                            size: 18.sp,
+                            color: appTheme.primaryColor,
+                            weight: FontWeight.w600,
+                          ),
+                        ),
+                        SizedBox(width: 16.w),
+
+                        // Add button
+                        GestureDetector(
+                          onTap: () => onIncrement(),
+                          child: Container(
+                            width: 40.w,
+                            height: 40.h,
+                            decoration: BoxDecoration(
+                              color: appTheme.mintGreen.withValues(alpha: 0.2),
+                              borderRadius: BorderRadius.circular(8.r),
+                              border: Border.all(
+                                color: appTheme.mintGreen,
+                                width: 1.w,
+                              ),
+                            ),
+                            child: Icon(
+                              Icons.add,
+                              color: appTheme.darkGreen,
+                              size: 20.sp,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                SizedBox(height: 20.h),
+
+                // Action Buttons
+                Row(
+                  children: [
+                    Expanded(
+                      child: Padding(
+                        padding: EdgeInsets.only(right: 6.w),
+                        child: OutlinedButton(
+                          style: ButtonStyle(
+                            shape: WidgetStateProperty.all(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15.r),
+                              ),
+                            ),
+                            side: WidgetStateProperty.all(
+                              BorderSide(color: appTheme.primaryColor),
+                            ),
+                          ),
+                          onPressed: () => Navigator.of(context).pop(),
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(vertical: 15.h),
                             child: CText(
-                              "Day Off Eligibility",
-                              textAlign: TextAlign.center,
-                              size: 18.sp,
-                              weight: FontWeight.bold,
-                              color: appTheme.textPrimary,
+                              "Cancel",
+                              size: 14.sp,
+                              color: appTheme.primaryColor,
+                              weight: FontWeight.w600,
                             ),
                           ),
-                          GestureDetector(
-                            onTap: () => Navigator.of(context).pop(),
-                            child: CircleAvatar(
-                              radius: 16.r,
-                              backgroundColor: appTheme.lightBlueTwo,
-                              child: Icon(
-                                Icons.close,
-                                color: appTheme.primaryColor,
-                                size: 16.sp,
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: EdgeInsets.only(left: 6.w),
+                        child: ElevatedButton(
+                          style: ButtonStyle(
+                            shape: WidgetStateProperty.all(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15.r),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 20.h),
-
-                      // Frequency Section
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          CText(
-                            "Frequency",
-                            size: 16.sp,
-                            weight: FontWeight.w500,
-                            color: appTheme.textPrimary,
-                          ),
-                          SizedBox(height: 8.h),
-                          CustomDropdownWidget(
-                            borderColor: appTheme.offWhite,
-                            items: provider.frequencyOptions,
-                            hintText: "Select Frequency",
-                            selectedValue: provider.selectedFrequency,
-                            onChanged: (value) {
-                              if (value != null) {
-                                provider.updateFrequency(value);
-                              }
-                            },
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 20.h),
-
-                      // Allocated Leaves Section
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          CText(
-                            "Allocated Leaves",
-                            size: 16.sp,
-                            weight: FontWeight.w500,
-                            color: appTheme.textPrimary,
-                          ),
-                          SizedBox(height: 8.h),
-                          Row(
-                            children: [
-                              // Remove button
-                              GestureDetector(
-                                onTap: provider.decrementLeaves,
-                                child: Container(
-                                  width: 40.w,
-                                  height: 40.h,
-                                  decoration: BoxDecoration(
-                                    color: appTheme.lightPink.withValues(
-                                      alpha: 0.2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8.r),
-                                    border: Border.all(
-                                      color: appTheme.lightPink,
-                                      width: 1.w,
-                                    ),
-                                  ),
-                                  child: Icon(
-                                    Icons.remove,
-                                    color: appTheme.darkRed,
-                                    size: 20.sp,
-                                  ),
-                                ),
-                              ),
-                              SizedBox(width: 16.w),
-
-                              // Value display
-                              Container(
-                                padding: EdgeInsets.symmetric(
-                                  horizontal: 20.w,
-                                  vertical: 10.h,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: appTheme.lightBlue,
-                                  borderRadius: BorderRadius.circular(8.r),
-                                ),
-                                child: CText(
-                                  provider.allocatedLeaves.toString(),
-                                  size: 18.sp,
-                                  color: appTheme.primaryColor,
-                                  weight: FontWeight.w600,
-                                ),
-                              ),
-                              SizedBox(width: 16.w),
-
-                              // Add button
-                              GestureDetector(
-                                onTap: provider.incrementLeaves,
-                                child: Container(
-                                  width: 40.w,
-                                  height: 40.h,
-                                  decoration: BoxDecoration(
-                                    color: appTheme.mintGreen.withValues(
-                                      alpha: 0.2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8.r),
-                                    border: Border.all(
-                                      color: appTheme.mintGreen,
-                                      width: 1.w,
-                                    ),
-                                  ),
-                                  child: Icon(
-                                    Icons.add,
-                                    color: appTheme.darkGreen,
-                                    size: 20.sp,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 20.h),
-
-                      // Action Buttons
-                      Row(
-                        children: [
-                          Expanded(
-                            child: Padding(
-                              padding: EdgeInsets.only(right: 6.w),
-                              child: OutlinedButton(
-                                style: ButtonStyle(
-                                  shape: WidgetStateProperty.all(
-                                    RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(15.r),
-                                    ),
-                                  ),
-                                  side: WidgetStateProperty.all(
-                                    BorderSide(color: appTheme.primaryColor),
-                                  ),
-                                ),
-                                onPressed: () => Navigator.of(context).pop(),
-                                child: Padding(
-                                  padding: EdgeInsets.symmetric(vertical: 15.h),
-                                  child: CText(
-                                    "Cancel",
-                                    size: 14.sp,
-                                    color: appTheme.primaryColor,
-                                    weight: FontWeight.w600,
-                                  ),
-                                ),
-                              ),
+                            backgroundColor: WidgetStateProperty.all(
+                              appTheme.primaryColor,
                             ),
                           ),
-                          Expanded(
-                            child: Padding(
-                              padding: EdgeInsets.only(left: 6.w),
-                              child: ElevatedButton(
-                                style: ButtonStyle(
-                                  shape: WidgetStateProperty.all(
-                                    RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(15.r),
-                                    ),
-                                  ),
-                                  backgroundColor: WidgetStateProperty.all(
-                                    appTheme.primaryColor,
-                                  ),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: CText(
+                                  'Day off eligibility updated successfully!',
+                                  color: Colors.white,
                                 ),
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: CText(
-                                        'Day off eligibility updated successfully!',
-                                        color: Colors.white,
-                                      ),
-                                      backgroundColor: appTheme.primaryColor,
-                                      duration: Duration(seconds: 2),
-                                    ),
-                                  );
-                                },
-                                child: Padding(
-                                  padding: EdgeInsets.symmetric(vertical: 15.h),
-                                  child: CText(
-                                    "Save",
-                                    color: appTheme.white,
-                                    size: 14.sp,
-                                    weight: FontWeight.w600,
-                                  ),
-                                ),
+                                backgroundColor: appTheme.primaryColor,
+                                duration: Duration(seconds: 2),
                               ),
+                            );
+                          },
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(vertical: 15.h),
+                            child: CText(
+                              "Save",
+                              color: appTheme.white,
+                              size: 14.sp,
+                              weight: FontWeight.w600,
                             ),
                           ),
-                        ],
+                        ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
+                ),
+              ],
             ),
           ),
         );
