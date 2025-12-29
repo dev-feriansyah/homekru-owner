@@ -9,7 +9,6 @@ import 'package:homekru_owner/features/member/helper/screen/live_in_helper_setti
 import 'package:homekru_owner/features/member/helper/screen/member_screen.dart';
 import 'package:homekru_owner/features/member/helper/screen/member_tasks_screen.dart';
 import 'package:homekru_owner/features/member/helper/screen/non_live_in_helper_settings.dart';
-import 'package:homekru_owner/features/task/provider/task_provider.dart';
 import 'package:homekru_owner/features/task/provider/task_management_provider.dart';
 import 'package:homekru_owner/features/action_item/screen/action_screen.dart';
 import 'package:homekru_owner/features/task/screens/task_detail_screen.dart';
@@ -302,29 +301,17 @@ class AppRoutes {
       GoRoute(
         name: task,
         path: task,
-        builder:
-            (context, state) => ChangeNotifierProvider(
-              create: (context) => TaskProvider(),
-              child: const TaskScreen(),
-            ),
+        builder: (context, state) => const TaskScreen(),
       ),
       GoRoute(
         name: taskDetail,
         path: taskDetail,
-        builder:
-            (context, state) => ChangeNotifierProvider(
-              create: (context) => TaskProvider(),
-              child: const TaskDetailScreen(),
-            ),
+        builder: (context, state) => const TaskDetailScreen(),
       ),
       GoRoute(
         name: action,
         path: action,
-        builder:
-            (context, state) => ChangeNotifierProvider(
-              create: (context) => TaskProvider(),
-              child: const ActionScreen(),
-            ),
+        builder: (context, state) => const ActionScreen(),
       ),
 
       // Member Section
