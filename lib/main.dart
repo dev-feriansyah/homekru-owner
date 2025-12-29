@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:homekru_owner/shared/utils/size_utils.dart';
-import 'package:homekru_owner/features/home_screen/provider/home_screen_provider.dart';
 import 'package:homekru_owner/features/member/provider/add_member_provider.dart';
 import 'package:homekru_owner/features/member/provider/day_off_eligibility_provider.dart';
 import 'package:homekru_owner/features/task/provider/task_management_provider.dart';
@@ -52,7 +51,6 @@ class MyApp extends StatelessWidget {
             ChangeNotifierProvider(
               create: (context) => ThemeProvider(isDark: false),
             ),
-            ChangeNotifierProvider(create: (context) => HomeScreenProvider()),
             ChangeNotifierProvider(
               create: (context) => TaskManagementProvider(),
             ),

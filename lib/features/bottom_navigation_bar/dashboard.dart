@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:homekru_owner/shared/utils/size_utils.dart';
 import 'package:homekru_owner/features/bottom_navigation_bar/provider/dashboard_provider.dart';
-import 'package:homekru_owner/features/home_screen/provider/home_screen_provider.dart';
 import 'package:homekru_owner/features/side_drawer/side_drawer.dart';
 
 import 'package:homekru_owner/core/theme/theme_helper.dart';
@@ -18,7 +17,6 @@ class Dashboard extends StatefulWidget {
 class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
-    final homeProvider = context.read<HomeScreenProvider>();
     return Consumer<DashboardProvider>(
       builder: (context, provider, child) {
         return
@@ -28,7 +26,6 @@ class _DashboardState extends State<Dashboard> {
         //   ) // Hide when drawer is open
         // :
         Scaffold(
-          key: homeProvider.scaffoldKey,
           drawer: Sidebar(),
           body: provider.screens[provider.selectedIndex],
           bottomNavigationBar: Container(
@@ -40,7 +37,7 @@ class _DashboardState extends State<Dashboard> {
               ),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.05),
+                  color: Colors.black.withValues(alpha: 0.05),
                   blurRadius: 8,
                   offset: const Offset(0, -1),
                 ),

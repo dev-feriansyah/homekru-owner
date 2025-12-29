@@ -5,8 +5,6 @@ import 'package:homekru_owner/core/constants/image_constant.dart';
 import 'package:homekru_owner/shared/utils/size_utils.dart';
 
 import 'package:homekru_owner/features/bottom_navigation_bar/provider/dashboard_provider.dart';
-import 'package:homekru_owner/features/home_screen/provider/home_screen_provider.dart'
-    show HomeScreenProvider;
 import 'package:provider/provider.dart';
 import 'package:homekru_owner/core/routes/app_navigator.dart';
 import 'package:homekru_owner/core/routes/app_routes.dart';
@@ -37,7 +35,6 @@ class Sidebar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final homeProvider = context.read<HomeScreenProvider>();
     return
     //  Scaffold(
     //   // backgroundColor: appTheme.primaryColor,
@@ -67,11 +64,7 @@ class Sidebar extends StatelessWidget {
                         padding: const EdgeInsets.only(right: 18),
                         child: GestureDetector(
                           onTap: () async {
-                            // Close the drawer
-                            // await provider.drawerController.toggle?.call();
-                            // provider.changeOpenDrawer(false);
-                            homeProvider.scaffoldKey.currentState
-                                ?.openEndDrawer();
+                            Scaffold.of(context).openEndDrawer();
                           },
                           child: Container(
                             // margin: EdgeInsets.only(right: 10),
@@ -241,12 +234,7 @@ class Sidebar extends StatelessWidget {
           } else if (title == "Manage Subscription") {
             AppNavigator.pushNamed(AppRoutes.manageSubscription);
           } else if (title == "Settings") {
-            // AppNavigator.push(AppRoutes.settings);
-            context
-                .read<HomeScreenProvider>()
-                .scaffoldKey
-                .currentState
-                ?.openEndDrawer();
+            Scaffold.of(context).openEndDrawer();
             context.read<DashboardProvider>().onItemTapped(3);
           } else if (title == "Terms and Conditions") {
             AppNavigator.pushNamed(AppRoutes.termsConditions);

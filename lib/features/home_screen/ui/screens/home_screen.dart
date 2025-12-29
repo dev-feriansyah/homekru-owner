@@ -4,7 +4,6 @@ import 'package:homekru_owner/shared/utils/common_utils.dart';
 import 'package:homekru_owner/core/constants/image_constant.dart';
 import 'package:homekru_owner/shared/utils/size_utils.dart';
 import 'package:homekru_owner/features/bottom_navigation_bar/provider/dashboard_provider.dart';
-import 'package:homekru_owner/features/home_screen/provider/home_screen_provider.dart';
 
 import 'package:homekru_owner/core/routes/app_navigator.dart';
 import 'package:homekru_owner/core/routes/app_routes.dart';
@@ -12,8 +11,31 @@ import 'package:homekru_owner/core/theme/theme_helper.dart';
 import 'package:homekru_owner/shared/widgets/bottom_sheets/invite_bottom_sheet.dart';
 import 'package:homekru_owner/shared/widgets/custom_image_view.dart';
 import 'package:homekru_owner/shared/widgets/custom_text.dart';
-import 'package:homekru_owner/features/home_screen/widgets/household_stats_dashboard.dart';
+import 'package:homekru_owner/features/home_screen/ui/widgets/household_stats_dashboard.dart';
 import 'package:provider/provider.dart';
+
+final List<Map<String, dynamic>> actionItemLists = [
+  {
+    "icon": ImageConstant.camera,
+    "title": "Task Proof",
+    "subtitle": "Verify Kitchen Cleaning Proof",
+  },
+  {
+    "icon": ImageConstant.deadline,
+    "title": "Deadline extension",
+    "subtitle": "Verify Kitchen Cleaning Proof",
+  },
+  {
+    "icon": ImageConstant.resource,
+    "title": "Resource request",
+    "subtitle": "Verify Kitchen Cleaning Proof",
+  },
+  {
+    "icon": ImageConstant.person,
+    "title": "Leave request",
+    "subtitle": "Verify Kitchen Cleaning Proof",
+  },
+];
 
 class HomeScreen extends StatefulWidget {
   final Function? toggle;
@@ -27,7 +49,6 @@ class _HomeScreenState extends State<HomeScreen> {
   // final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
-    final provider = context.read<HomeScreenProvider>();
     return Scaffold(
       // key: _scaffoldKey,
       // drawer: Sidebar(),
@@ -83,7 +104,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               // Call the toggle function - state management is handled in provider
                               // await widget.toggle?.call();
 
-                              provider.scaffoldKey.currentState?.openDrawer();
+                              Scaffold.of(context).openDrawer();
                             },
                             child: Container(
                               height: 70,
@@ -192,48 +213,40 @@ class _HomeScreenState extends State<HomeScreen> {
                         color: appTheme.white,
                         borderRadius: BorderRadius.circular(20),
                       ),
-                      child: Consumer<HomeScreenProvider>(
-                        builder: (
-                          BuildContext context,
-                          provider,
-                          Widget? child,
-                        ) {
-                          return ListView.builder(
-                            padding: EdgeInsets.all(0),
-                            itemCount: provider.requests.length,
-                            shrinkWrap: true,
-                            physics: NeverScrollableScrollPhysics(),
-                            itemBuilder: (context, index) {
-                              final item = provider.requests[index];
-                              return ListTile(
-                                contentPadding: EdgeInsets.all(0),
-                                leading: CircleAvatar(
-                                  radius: 18,
-                                  backgroundColor: appTheme.veryLightGrey,
-                                  child: CustomImageView(
-                                    imagePath: item["icon"],
-                                    //  ImageConstant.camera,
-                                  ),
-                                ),
-                                title: CText(
-                                  item["title"],
-                                  // "Task Proof",
-                                  size: 16.sp,
-                                  weight: FontWeight.bold,
-                                ),
-                                subtitle: CText(
-                                  item["subtitle"],
-                                  // "Verify Kitchen Cleaning Proof",
-                                  weight: FontWeight.w500,
-                                  size: 10,
-                                  color: appTheme.grey,
-                                ),
-                                trailing: Icon(
-                                  Icons.arrow_forward_ios_rounded,
-                                  size: 20,
-                                ),
-                              );
-                            },
+                      child: ListView.builder(
+                        padding: EdgeInsets.all(0),
+                        itemCount: actionItemLists.length,
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        itemBuilder: (context, index) {
+                          final item = actionItemLists[index];
+                          return ListTile(
+                            contentPadding: EdgeInsets.all(0),
+                            leading: CircleAvatar(
+                              radius: 18,
+                              backgroundColor: appTheme.veryLightGrey,
+                              child: CustomImageView(
+                                imagePath: item["icon"],
+                                //  ImageConstant.camera,
+                              ),
+                            ),
+                            title: CText(
+                              item["title"],
+                              // "Task Proof",
+                              size: 16.sp,
+                              weight: FontWeight.bold,
+                            ),
+                            subtitle: CText(
+                              item["subtitle"],
+                              // "Verify Kitchen Cleaning Proof",
+                              weight: FontWeight.w500,
+                              size: 10,
+                              color: appTheme.grey,
+                            ),
+                            trailing: Icon(
+                              Icons.arrow_forward_ios_rounded,
+                              size: 20,
+                            ),
                           );
                         },
                       ),
