@@ -2,13 +2,13 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:homekru_owner/features/helper/add_helper_screen.dart';
 import 'package:homekru_owner/features/helper/helper_list_screen.dart';
-import 'package:homekru_owner/features/member/helper/screen/attendence_log_screen.dart';
-import 'package:homekru_owner/features/member/helper/screen/add_member_screen.dart';
-import 'package:homekru_owner/features/member/helper/screen/helper_overview_screen.dart';
-import 'package:homekru_owner/features/member/helper/screen/live_in_helper_settings.dart';
-import 'package:homekru_owner/features/member/helper/screen/member_screen.dart';
-import 'package:homekru_owner/features/member/helper/screen/member_tasks_screen.dart';
-import 'package:homekru_owner/features/member/helper/screen/non_live_in_helper_settings.dart';
+import 'package:homekru_owner/features/member/ui/screens/attendence_log_screen.dart';
+import 'package:homekru_owner/features/member/ui/screens/add_member_screen.dart';
+import 'package:homekru_owner/features/member/ui/screens/helper_overview_screen.dart';
+import 'package:homekru_owner/features/member/ui/screens/live_in_helper_settings.dart';
+import 'package:homekru_owner/features/member/ui/screens/member_screen.dart';
+import 'package:homekru_owner/features/member/ui/screens/member_tasks_screen.dart';
+import 'package:homekru_owner/features/member/ui/screens/non_live_in_helper_settings.dart';
 import 'package:homekru_owner/features/task/provider/task_management_provider.dart';
 import 'package:homekru_owner/features/action_item/screen/action_screen.dart';
 import 'package:homekru_owner/features/task/screens/task_detail_screen.dart';
@@ -106,7 +106,7 @@ class AppRoutes {
 
   static GoRouter router = GoRouter(
     navigatorKey: navigationKey,
-    initialLocation: kDebugMode ? helperOverview : initialRoute,
+    initialLocation: kDebugMode ? dashboard : initialRoute,
     // initialLocation: onBoarding,
     routes: [
       GoRoute(

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:homekru_owner/core/constants/image_constant.dart';
 import 'package:homekru_owner/features/home_screen/ui/screens/home_screen.dart';
 import 'package:homekru_owner/features/settings/settings_screen.dart';
-import 'package:homekru_owner/features/member/helper/screen/member_screen.dart';
+import 'package:homekru_owner/features/member/ui/screens/member_screen.dart';
 import 'package:homekru_owner/features/side_drawer/side_drawer.dart';
 import 'package:homekru_owner/features/task/screens/task_screen.dart';
 

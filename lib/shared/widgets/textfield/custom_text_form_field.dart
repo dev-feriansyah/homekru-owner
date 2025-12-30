@@ -5,7 +5,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:homekru_owner/core/theme/theme_helper.dart';
 
 class CustomTextFormField extends StatelessWidget {
-  final TextEditingController controller;
+  final TextEditingController? controller;
+
+  final String? initialValue;
   final String? Function(String?)? validator;
   final String? hintText;
   final Widget? labelWidget;
@@ -32,9 +34,11 @@ class CustomTextFormField extends StatelessWidget {
   final BorderRadius? borderRadius;
   final FocusNode? focusNode;
   final Widget? suffixIcon;
+
   const CustomTextFormField({
     super.key,
-    required this.controller,
+    this.controller,
+    this.initialValue,
     this.validator,
     this.hintText,
     this.labelWidget,
@@ -60,7 +64,10 @@ class CustomTextFormField extends StatelessWidget {
     this.borderRadius = const BorderRadius.all(Radius.circular(15)),
     this.focusNode,
     this.suffixIcon,
-  });
+  }) : assert(
+         controller == null || initialValue == null,
+         'Cannot provide both controller and initialValue',
+       );
 
   @override
   Widget build(BuildContext context) {
@@ -88,6 +95,7 @@ class CustomTextFormField extends StatelessWidget {
         controller: controller,
         // autocorrect: false, // disable iOS corrections
         // enableSuggestions: false,
+        initialValue: controller == null ? initialValue : null,
         textInputAction: TextInputAction.done,
         keyboardType: keyboardType ?? TextInputType.text,
         maxLength: maxLength,

@@ -16,5 +16,3 @@ extension DateRangeX on DateRange {
     }
   }
 }
-
-final labels = DateRange.values.map((e) => e.label).toList();

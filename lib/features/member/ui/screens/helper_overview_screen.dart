@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:homekru_owner/shared/domain/value_objects/frequency_options.dart';
 import 'package:homekru_owner/shared/utils/common_utils.dart';
 import 'package:homekru_owner/core/constants/app_strings.dart';
 import 'package:homekru_owner/core/constants/image_constant.dart';
 import 'package:homekru_owner/shared/utils/logger.dart';
 import 'package:homekru_owner/shared/utils/size_utils.dart';
-import 'package:homekru_owner/features/member/widget/circular_progress.dart';
-import 'package:homekru_owner/features/member/widget/eligibility_widget.dart';
-import 'package:homekru_owner/features/member/widget/helper_profile_card.dart';
-import 'package:homekru_owner/features/member/widget/member_info_card.dart';
-import 'package:homekru_owner/features/member/widget/member_task_card.dart';
+import 'package:homekru_owner/features/member/ui/widgets/circular_progress.dart';
+import 'package:homekru_owner/features/member/ui/widgets/eligibility_widget.dart';
+import 'package:homekru_owner/features/member/ui/widgets/helper_profile_card.dart';
+import 'package:homekru_owner/features/member/ui/widgets/member_info_card.dart';
+import 'package:homekru_owner/features/member/ui/widgets/member_task_card.dart';
 import 'package:homekru_owner/features/task/widgets/action_task_card.dart';
 import 'package:homekru_owner/core/routes/app_navigator.dart';
 import 'package:homekru_owner/core/routes/app_routes.dart';
@@ -21,23 +22,6 @@ import 'package:homekru_owner/shared/widgets/custom_elevated_button.dart';
 import 'package:homekru_owner/shared/widgets/custom_image_view.dart';
 import 'package:homekru_owner/shared/widgets/custom_text.dart';
 import 'package:homekru_owner/shared/widgets/dialogs/profile_edit_dialog.dart';
-
-enum FrequencyOptions { daily, weekly, biWeekly, monthly }
-
-extension FrequencyOptionsX on FrequencyOptions {
-  String get label {
-    switch (this) {
-      case FrequencyOptions.daily:
-        return 'Daily';
-      case FrequencyOptions.weekly:
-        return 'Weekly';
-      case FrequencyOptions.biWeekly:
-        return 'Bi-weekly';
-      case FrequencyOptions.monthly:
-        return 'Monthly';
-    }
-  }
-}
 
 final ActionTask myTask = ActionTask(
   initials: "MJ",
