@@ -238,7 +238,7 @@ class _ReportsScreenState extends State<ReportsScreen> {
             color: appTheme.textPrimary,
           ),
           SizedBox(height: 16.h),
-          Container(
+          SizedBox(
             height: 200.h,
             child: Center(
               child: CText(

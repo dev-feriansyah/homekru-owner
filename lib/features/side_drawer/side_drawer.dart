@@ -1,20 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:homekru_owner/features/dashboard/ui/providers/dashboard_index.dart';
 import 'package:homekru_owner/shared/utils/common_utils.dart';
 import 'package:homekru_owner/core/constants/image_constant.dart';
 import 'package:homekru_owner/shared/utils/size_utils.dart';
 
-import 'package:homekru_owner/features/bottom_navigation_bar/provider/dashboard_provider.dart';
-import 'package:homekru_owner/features/home_screen/provider/home_screen_provider.dart'
-    show HomeScreenProvider;
-import 'package:provider/provider.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:homekru_owner/core/routes/app_navigator.dart';
 import 'package:homekru_owner/core/routes/app_routes.dart';
 import 'package:homekru_owner/core/theme/theme_helper.dart';
 import 'package:homekru_owner/shared/widgets/custom_image_view.dart';
 import 'package:homekru_owner/shared/widgets/custom_text.dart';
 
-class Sidebar extends StatelessWidget {
+class Sidebar extends ConsumerWidget {
   Sidebar({super.key});
 
   // Navigation + Icons list for Main section
@@ -36,13 +34,8 @@ class Sidebar extends StatelessWidget {
   ];
 
   @override
-  Widget build(BuildContext context) {
-    final homeProvider = context.read<HomeScreenProvider>();
-    return
-    //  Scaffold(
-    //   // backgroundColor: appTheme.primaryColor,
-    //   body:
-    Container(
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Container(
       width: SizeUtils.width * 0.8,
       decoration: BoxDecoration(
         color: appTheme.primaryColor,
@@ -61,34 +54,26 @@ class Sidebar extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  Consumer<DashboardProvider>(
-                    builder: (context, provider, child) {
-                      return Padding(
-                        padding: const EdgeInsets.only(right: 18),
-                        child: GestureDetector(
-                          onTap: () async {
-                            // Close the drawer
-                            // await provider.drawerController.toggle?.call();
-                            // provider.changeOpenDrawer(false);
-                            homeProvider.scaffoldKey.currentState
-                                ?.openEndDrawer();
-                          },
-                          child: Container(
-                            // margin: EdgeInsets.only(right: 10),
-                            padding: EdgeInsets.all(5),
-                            decoration: BoxDecoration(
-                              color: appTheme.white,
-                              shape: BoxShape.circle,
-                            ),
-                            child: Icon(
-                              Icons.close,
-                              size: 15,
-                              color: appTheme.primaryColor,
-                            ),
-                          ),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 18),
+                    child: GestureDetector(
+                      onTap: () async {
+                        Scaffold.of(context).openEndDrawer();
+                      },
+                      child: Container(
+                        // margin: EdgeInsets.only(right: 10),
+                        padding: EdgeInsets.all(5),
+                        decoration: BoxDecoration(
+                          color: appTheme.white,
+                          shape: BoxShape.circle,
                         ),
-                      );
-                    },
+                        child: Icon(
+                          Icons.close,
+                          size: 15,
+                          color: appTheme.primaryColor,
+                        ),
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -122,7 +107,7 @@ class Sidebar extends StatelessWidget {
                           ),
                           CText(
                             "Homeowner",
-                            color: appTheme.white.withOpacity(0.8),
+                            color: appTheme.white.withValues(alpha: 0.8),
                             size: 13,
                             weight: FontWeight.w500,
                           ),
@@ -143,7 +128,7 @@ class Sidebar extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 10),
-              ..._buildDrawerItems(context, mainNavigationItems),
+              ..._buildDrawerItems(context, ref, mainNavigationItems),
               vGap(12),
               const Divider(color: Colors.white30),
               vGap(12),
@@ -158,7 +143,7 @@ class Sidebar extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 10),
-              ..._buildDrawerItems(context, cmsItems),
+              ..._buildDrawerItems(context, ref, cmsItems),
 
               vGap(40.h),
               const Divider(color: Colors.white30),
@@ -208,6 +193,7 @@ class Sidebar extends StatelessWidget {
 
   List<Widget> _buildDrawerItems(
     BuildContext context,
+    WidgetRef ref,
     List<Map<String, String>> items,
   ) {
     return items.map((item) {
@@ -229,6 +215,7 @@ class Sidebar extends StatelessWidget {
           color: Colors.white,
         ),
         onTap: () {
+          Scaffold.of(context).openEndDrawer();
           // Basic navigation logic (expand if needed)
           if (title == "Action Items") {
             AppNavigator.pushNamed(AppRoutes.action);
@@ -241,13 +228,7 @@ class Sidebar extends StatelessWidget {
           } else if (title == "Manage Subscription") {
             AppNavigator.pushNamed(AppRoutes.manageSubscription);
           } else if (title == "Settings") {
-            // AppNavigator.push(AppRoutes.settings);
-            context
-                .read<HomeScreenProvider>()
-                .scaffoldKey
-                .currentState
-                ?.openEndDrawer();
-            context.read<DashboardProvider>().onItemTapped(3);
+            ref.read(dashboardIndexProvider.notifier).set(3);
           } else if (title == "Terms and Conditions") {
             AppNavigator.pushNamed(AppRoutes.termsConditions);
           } else if (title == "Privacy Policy") {

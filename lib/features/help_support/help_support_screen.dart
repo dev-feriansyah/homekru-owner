@@ -317,7 +317,7 @@ class _HelpSupportScreenState extends State<HelpSupportScreen> {
           SizedBox(height: 16.h),
           ..._contactOptions
               .map((option) => _buildContactOption(option))
-              .toList(),
+              ,
         ],
       ),
     );
@@ -435,7 +435,7 @@ class _HelpSupportScreenState extends State<HelpSupportScreen> {
               ),
             )
           else
-            ...filteredFAQs.map((faq) => _buildFAQItem(faq)).toList(),
+            ...filteredFAQs.map((faq) => _buildFAQItem(faq)),
         ],
       ),
     );
@@ -464,6 +464,8 @@ class _HelpSupportScreenState extends State<HelpSupportScreen> {
             weight: FontWeight.w500,
           ),
         ),
+        iconColor: appTheme.primaryColor,
+        collapsedIconColor: appTheme.grey,
         children: [
           Padding(
             padding: EdgeInsets.fromLTRB(16.w, 0, 16.w, 16.h),
@@ -474,8 +476,6 @@ class _HelpSupportScreenState extends State<HelpSupportScreen> {
             ),
           ),
         ],
-        iconColor: appTheme.primaryColor,
-        collapsedIconColor: appTheme.grey,
       ),
     );
   }

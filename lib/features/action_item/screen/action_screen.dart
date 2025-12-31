@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:homekru_owner/shared/utils/common_utils.dart';
 import 'package:homekru_owner/core/constants/app_strings.dart';
 import 'package:homekru_owner/features/action_item/widgets/redo_parameters_dialog.dart';
-import 'package:homekru_owner/features/task/widgets/action_task_card.dart';
+import 'package:homekru_owner/features/task/ui/widgets/action_task_card.dart';
 import 'package:homekru_owner/core/theme/theme_helper.dart';
 import 'package:homekru_owner/shared/widgets/custom_app_bar.dart';
 import 'package:homekru_owner/core/routes/app_navigator.dart';

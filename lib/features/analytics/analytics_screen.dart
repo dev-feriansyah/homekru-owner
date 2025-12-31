@@ -326,7 +326,7 @@ class _AnalyticsScreenState extends State<AnalyticsScreen>
             color: appTheme.textPrimary,
           ),
           SizedBox(height: 16.h),
-          Container(
+          SizedBox(
             height: 200.h,
             child: CustomPaint(
               painter: LineChartPainter(),
@@ -423,7 +423,7 @@ class _AnalyticsScreenState extends State<AnalyticsScreen>
             color: appTheme.textPrimary,
           ),
           SizedBox(height: 16.h),
-          Container(
+          SizedBox(
             height: 200.h,
             child: CustomPaint(painter: PieChartPainter(), size: Size.infinite),
           ),
@@ -457,7 +457,7 @@ class _AnalyticsScreenState extends State<AnalyticsScreen>
             color: appTheme.textPrimary,
           ),
           SizedBox(height: 16.h),
-          Container(
+          SizedBox(
             height: 150.h,
             child: CustomPaint(painter: BarChartPainter(), size: Size.infinite),
           ),
@@ -635,7 +635,7 @@ class _AnalyticsScreenState extends State<AnalyticsScreen>
             color: appTheme.textPrimary,
           ),
           SizedBox(height: 16.h),
-          Container(
+          SizedBox(
             height: 200.h,
             child: CustomPaint(
               painter: HelperDistributionPainter(),

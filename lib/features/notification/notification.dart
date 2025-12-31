@@ -5,14 +5,12 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:homekru_owner/core/constants/image_constant.dart';
 import 'package:homekru_owner/shared/utils/common_utils.dart';
 import 'package:homekru_owner/shared/utils/size_utils.dart';
-import 'package:homekru_owner/features/notification/provider/notification_provider.dart';
 
 import 'package:homekru_owner/core/routes/app_navigator.dart';
 import 'package:homekru_owner/core/theme/theme_helper.dart';
 import 'package:homekru_owner/shared/widgets/custom_app_bar.dart';
 import 'package:homekru_owner/shared/widgets/custom_elevated_button.dart';
 import 'package:homekru_owner/shared/widgets/custom_text.dart';
-import 'package:provider/provider.dart';
 
 class NotificationScreen extends StatefulWidget {
   const NotificationScreen({super.key});
@@ -54,49 +52,42 @@ class _NotificationScreenState extends State<NotificationScreen>
           //     height: 200,
           //   ),
           // ),
-          Consumer<NotificationProvider>(
-            builder: (context, provider, child) {
-              return Container(
-                height: SizeUtils.height,
-                child: Column(
-                  children: [
-                    // Tab Bar
-                    Container(
-                      // color: Colors.white,
-                      child: TabBar(
-                        indicatorSize: TabBarIndicatorSize.tab,
-                        controller: _tabController,
-                        indicatorColor: appTheme.primaryColor,
-                        indicatorWeight: 1,
-                        labelColor: appTheme.primaryColor,
-                        unselectedLabelColor: appTheme.grey,
-                        // labelPadding: EdgeInsets.symmetric(),
-                        labelStyle: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                        ),
-                        unselectedLabelStyle: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w400,
-                        ),
-                        tabs: [Tab(text: "All"), Tab(text: "Unread")],
-                      ),
-                    ),
-
-                    // Tab Content
-                    Expanded(
-                      child: TabBarView(
-                        controller: _tabController,
-                        children: [
-                          _buildAllNotifications(),
-                          _buildUnreadNotifications(),
-                        ],
-                      ),
-                    ),
-                  ],
+          SizedBox(
+            height: SizeUtils.height,
+            child: Column(
+              children: [
+                // Tab Bar
+                TabBar(
+                  indicatorSize: TabBarIndicatorSize.tab,
+                  controller: _tabController,
+                  indicatorColor: appTheme.primaryColor,
+                  indicatorWeight: 1,
+                  labelColor: appTheme.primaryColor,
+                  unselectedLabelColor: appTheme.grey,
+                  // labelPadding: EdgeInsets.symmetric(),
+                  labelStyle: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                  ),
+                  unselectedLabelStyle: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w400,
+                  ),
+                  tabs: [Tab(text: "All"), Tab(text: "Unread")],
                 ),
-              );
-            },
+
+                // Tab Content
+                Expanded(
+                  child: TabBarView(
+                    controller: _tabController,
+                    children: [
+                      _buildAllNotifications(),
+                      _buildUnreadNotifications(),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
           const SizedBox(height: 16),
         ],

@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:homekru_owner/shared/utils/common_utils.dart';
 import 'package:homekru_owner/shared/utils/size_utils.dart';
-import 'package:homekru_owner/features/overtime_tracker/provider/overtime_tracker_provider.dart';
 
 import 'package:homekru_owner/core/theme/theme_helper.dart';
 import 'package:homekru_owner/shared/widgets/custom_app_bar.dart';
@@ -11,7 +10,6 @@ import 'package:homekru_owner/shared/widgets/custom_text.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:homekru_owner/core/routes/app_navigator.dart';
 import 'package:homekru_owner/core/routes/app_routes.dart';
-import 'package:provider/provider.dart';
 
 class HelperListScreen extends StatefulWidget {
   const HelperListScreen({super.key});
@@ -38,131 +36,126 @@ class _HelperListScreenState extends State<HelperListScreen> {
           //     height: 200,
           //   ),
           // ),
-          Consumer<OvertimeTrackerProvider>(
-            builder: (context, provider, child) {
-              return Container(
-                // color: appTheme.lightBlue,
-                height: SizeUtils.height,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 20.0,
-                    vertical: 10,
-                  ),
-                  child: SingleChildScrollView(
-                    child: Column(
+          SizedBox(
+            // color: appTheme.lightBlue,
+            height: SizeUtils.height,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 20.0,
+                vertical: 10,
+              ),
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            CText(
-                              "Helper List",
-                              size: 18.sp,
-                              weight: FontWeight.bold,
-                              fontFamily: "PoppinsMedium",
-                            ),
-                          ],
+                        CText(
+                          "Helper List",
+                          size: 18.sp,
+                          weight: FontWeight.bold,
+                          fontFamily: "PoppinsMedium",
                         ),
-                        vGap(18.h),
-
-                        ListView.builder(
-                          itemCount: 5,
-                          shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(),
-                          itemBuilder: (context, index) {
-                            return Container(
-                              padding: EdgeInsets.symmetric(
-                                horizontal: 20.w,
-                                vertical: 16.h,
-                              ),
-                              margin: EdgeInsets.only(bottom: 20.h),
-                              width: SizeUtils.width,
-                              decoration: BoxDecoration(
-                                color: appTheme.white,
-                                borderRadius: BorderRadius.circular(15.r),
-                                // border: Border.all(
-                                //   color: appTheme.offWhite,
-                                //   width: 2.w,
-                                // ),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: appTheme.shadowColor,
-                                    blurRadius: 8,
-                                    offset: const Offset(0, 2),
-                                  ),
-                                  // BoxShadow(
-                                  //   color: appTheme.shadowColor,
-                                  //   blurRadius: 50,
-                                  //   offset: const Offset(10, 20),
-                                  //   spreadRadius: 0,
-                                  // ),
-                                ],
-                              ),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  CText(
-                                    "Helper Name ${index + 1}",
-                                    size: 16.sp,
-                                    color: appTheme.grey,
-                                    weight: FontWeight.w400,
-                                  ),
-                                  GestureDetector(
-                                    onTap:
-                                        () => _showHelperSettingsDialog(
-                                          context,
-                                          index,
-                                        ),
-                                    child: Icon(
-                                      Ionicons.settings_outline,
-                                      size: 24.sp,
-                                      color: appTheme.textPrimary,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            );
-                          },
-                        ),
-
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Text(
-                              "Add New Helper",
-                              style: GoogleFonts.karla(
-                                fontSize: 18.sp,
-                                fontWeight: FontWeight.bold,
-                                color: appTheme.grey,
-                              ),
-                            ),
-                            hGap(10.w),
-                            GestureDetector(
-                              onTap: () {
-                                AppNavigator.pushNamed(AppRoutes.addMember);
-                              },
-                              child: Container(
-                                padding: EdgeInsets.all(12.w),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(15.r),
-                                  color: appTheme.primaryColor,
-                                ),
-                                child: Icon(
-                                  Icons.add,
-                                  color: appTheme.white,
-                                  size: 25.sp,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        vGap(40.h),
                       ],
                     ),
-                  ),
+                    vGap(18.h),
+
+                    ListView.builder(
+                      itemCount: 5,
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        return Container(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 20.w,
+                            vertical: 16.h,
+                          ),
+                          margin: EdgeInsets.only(bottom: 20.h),
+                          width: SizeUtils.width,
+                          decoration: BoxDecoration(
+                            color: appTheme.white,
+                            borderRadius: BorderRadius.circular(15.r),
+                            // border: Border.all(
+                            //   color: appTheme.offWhite,
+                            //   width: 2.w,
+                            // ),
+                            boxShadow: [
+                              BoxShadow(
+                                color: appTheme.shadowColor,
+                                blurRadius: 8,
+                                offset: const Offset(0, 2),
+                              ),
+                              // BoxShadow(
+                              //   color: appTheme.shadowColor,
+                              //   blurRadius: 50,
+                              //   offset: const Offset(10, 20),
+                              //   spreadRadius: 0,
+                              // ),
+                            ],
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              CText(
+                                "Helper Name ${index + 1}",
+                                size: 16.sp,
+                                color: appTheme.grey,
+                                weight: FontWeight.w400,
+                              ),
+                              GestureDetector(
+                                onTap:
+                                    () => _showHelperSettingsDialog(
+                                      context,
+                                      index,
+                                    ),
+                                child: Icon(
+                                  Ionicons.settings_outline,
+                                  size: 24.sp,
+                                  color: appTheme.textPrimary,
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
+
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Text(
+                          "Add New Helper",
+                          style: GoogleFonts.karla(
+                            fontSize: 18.sp,
+                            fontWeight: FontWeight.bold,
+                            color: appTheme.grey,
+                          ),
+                        ),
+                        hGap(10.w),
+                        GestureDetector(
+                          onTap: () {
+                            AppNavigator.pushNamed(AppRoutes.addMember);
+                          },
+                          child: Container(
+                            padding: EdgeInsets.all(12.w),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15.r),
+                              color: appTheme.primaryColor,
+                            ),
+                            child: Icon(
+                              Icons.add,
+                              color: appTheme.white,
+                              size: 25.sp,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    vGap(40.h),
+                  ],
                 ),
-              );
-            },
+              ),
+            ),
           ),
           const SizedBox(height: 16),
         ],

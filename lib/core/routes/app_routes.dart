@@ -2,51 +2,38 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:homekru_owner/features/helper/add_helper_screen.dart';
 import 'package:homekru_owner/features/helper/helper_list_screen.dart';
-import 'package:homekru_owner/features/member/helper/screen/attendence_log_screen.dart';
-import 'package:homekru_owner/features/member/helper/screen/add_member_screen.dart';
-import 'package:homekru_owner/features/member/helper/screen/helper_overview_screen.dart';
-import 'package:homekru_owner/features/member/helper/screen/live_in_helper_settings.dart';
-import 'package:homekru_owner/features/member/helper/screen/member_screen.dart';
-import 'package:homekru_owner/features/member/helper/screen/member_tasks_screen.dart';
-import 'package:homekru_owner/features/member/helper/screen/non_live_in_helper_settings.dart';
-import 'package:homekru_owner/features/task/provider/task_provider.dart';
-import 'package:homekru_owner/features/task/provider/task_management_provider.dart';
+import 'package:homekru_owner/features/member/ui/screens/attendence_log_screen.dart';
+import 'package:homekru_owner/features/member/ui/screens/add_member_screen.dart';
+import 'package:homekru_owner/features/member/ui/screens/helper_overview_screen.dart';
+import 'package:homekru_owner/features/member/ui/screens/live_in_helper_settings.dart';
+import 'package:homekru_owner/features/member/ui/screens/member_screen.dart';
+import 'package:homekru_owner/features/member/ui/screens/member_tasks_screen.dart';
+import 'package:homekru_owner/features/member/ui/screens/non_live_in_helper_settings.dart';
 import 'package:homekru_owner/features/action_item/screen/action_screen.dart';
-import 'package:homekru_owner/features/task/screens/task_detail_screen.dart';
-import 'package:homekru_owner/features/task/screens/task_managment/clean_kitchhen_screen.dart';
-import 'package:homekru_owner/features/task/screens/task_managment/task_management_screen.dart';
-import 'package:homekru_owner/features/task/screens/task_screen.dart';
-import 'package:provider/provider.dart';
-import 'package:homekru_owner/features/attendance_screen/attendance_screen.dart';
-import 'package:homekru_owner/features/attendance_screen/provider/attendance_provider.dart';
-import 'package:homekru_owner/features/auth/confirm_password_screen.dart';
-import 'package:homekru_owner/features/auth/create_household_screen.dart';
-import 'package:homekru_owner/features/auth/forget_password_screen.dart';
-import 'package:homekru_owner/features/auth/invite_link_screen.dart'
+import 'package:homekru_owner/features/task/ui/screens/task_detail_screen.dart';
+import 'package:homekru_owner/features/task/ui/screens/task_managment/task_management_screen.dart';
+import 'package:homekru_owner/features/task/ui/screens/task_screen.dart';
+import 'package:homekru_owner/features/attendance_screen/ui/screens/attendance_screen.dart';
+import 'package:homekru_owner/features/auth/ui/screens/confirm_password_screen.dart';
+import 'package:homekru_owner/features/auth/ui/screens/create_household_screen.dart';
+import 'package:homekru_owner/features/auth/ui/screens/forget_password_screen.dart';
+import 'package:homekru_owner/features/auth/ui/screens/invite_link_screen.dart'
     show InviteLinkScreen;
-import 'package:homekru_owner/features/auth/login_screen.dart';
-import 'package:homekru_owner/features/auth/provider/create_household_provider.dart';
-import 'package:homekru_owner/features/auth/provider/login_provider.dart';
-import 'package:homekru_owner/features/auth/signUp_screen.dart';
-import 'package:homekru_owner/features/auth/verify_otp.dart';
-import 'package:homekru_owner/features/auth/would_you_like_screen.dart';
-import 'package:homekru_owner/features/bottom_navigation_bar/dashboard.dart';
-import 'package:homekru_owner/features/bottom_navigation_bar/provider/dashboard_provider.dart';
+import 'package:homekru_owner/features/auth/ui/screens/login_screen.dart';
+
+import 'package:homekru_owner/features/auth/ui/screens/signup_screen.dart';
+import 'package:homekru_owner/features/auth/ui/screens/verify_otp.dart';
+import 'package:homekru_owner/features/auth/ui/screens/would_you_like_screen.dart';
+import 'package:homekru_owner/features/dashboard/ui/screens/dashboard.dart';
 import 'package:homekru_owner/features/coowner/coowner_list_screen.dart';
 import 'package:homekru_owner/features/coowner/add_coowner_screen.dart';
-import 'package:homekru_owner/features/deduction/deduction_screen.dart';
-import 'package:homekru_owner/features/deduction/provider/deduction_provider.dart';
+import 'package:homekru_owner/features/deduction/screens/deduction_screen.dart';
 import 'package:homekru_owner/features/notification/notification.dart';
-import 'package:homekru_owner/features/notification/provider/notification_provider.dart';
-import 'package:homekru_owner/features/onBoarding/onboarding_screen.dart';
-import 'package:homekru_owner/features/onBoarding/provider/onBoarding_provider.dart';
-import 'package:homekru_owner/features/overtime_detailed_screen/overtime_detailed_screen.dart';
-import 'package:homekru_owner/features/overtime_tracker/overtime_tracker_screen.dart';
-import 'package:homekru_owner/features/overtime_tracker/overtime_tracker_detailed_screen.dart';
-import 'package:homekru_owner/features/overtime_tracker/provider/overtime_tracker_provider.dart';
-import 'package:homekru_owner/features/profile_scren/profile_screen.dart';
-import 'package:homekru_owner/features/profile_scren/provider/profile_provider.dart';
-import 'package:homekru_owner/features/settings/provider/settings_provider.dart';
+import 'package:homekru_owner/features/onboarding/views/onboarding_screen.dart';
+import 'package:homekru_owner/features/overtime_detailed_screen/screens/overtime_detailed_screen.dart';
+import 'package:homekru_owner/features/overtime_tracker/screens/overtime_tracker_screen.dart';
+import 'package:homekru_owner/features/overtime_tracker/screens/overtime_tracker_detailed_screen.dart';
+import 'package:homekru_owner/features/profile_scren/screens/profile_screen.dart';
 import 'package:homekru_owner/features/settings/settings_screen.dart';
 import 'package:homekru_owner/features/subscription/screens/manage_subscription_screen.dart';
 import 'package:homekru_owner/features/home_setup/home_setup_screen.dart';
@@ -54,8 +41,7 @@ import 'package:homekru_owner/features/reports/reports_screen.dart';
 import 'package:homekru_owner/features/analytics/analytics_screen.dart';
 import 'package:homekru_owner/features/feedback/feedback_screen.dart';
 import 'package:homekru_owner/features/help_support/help_support_screen.dart';
-import 'package:homekru_owner/features/splash_screens/splash_screen.dart';
-import 'package:homekru_owner/features/splash_screens/provider/splash_provider.dart';
+import 'package:homekru_owner/features/splash_screens/views/splash_screen.dart';
 import 'package:homekru_owner/features/cms_pages/terms_conditions_screen.dart';
 import 'package:homekru_owner/features/cms_pages/privacy_policy_screen.dart';
 import 'package:homekru_owner/features/cms_pages/faqs_screen.dart';
@@ -115,161 +101,93 @@ class AppRoutes {
   static GoRouter router = GoRouter(
     navigatorKey: navigationKey,
     initialLocation: kDebugMode ? dashboard : initialRoute,
-    // initialLocation: dashboard,
+    // initialLocation: onBoarding,
     routes: [
       GoRoute(
         name: initialRoute,
         path: initialRoute,
-        builder:
-            (context, state) => ChangeNotifierProvider(
-              create: (context) => SplashProvider(),
-              child: const SplashScreen(),
-            ),
+        builder: (context, state) => const SplashScreen(),
       ),
       GoRoute(
         name: onBoarding,
         path: onBoarding,
-        builder:
-            (context, state) => ChangeNotifierProvider(
-              create: (context) => OnboardingProvider(),
-              child: const OnBoardingScreen(),
-            ),
+        builder: (context, state) => const OnboardingScreen(),
       ),
       GoRoute(
         name: login,
         path: login,
-        builder:
-            (context, state) => ChangeNotifierProvider(
-              create: (context) => LoginProvider(),
-              child: const LoginScreen(),
-            ),
+        builder: (context, state) => const LoginScreen(),
       ),
       GoRoute(
         name: signup,
         path: signup,
-        builder:
-            (context, state) => ChangeNotifierProvider(
-              create: (context) => LoginProvider(),
-              child: const SignupScreen(),
-            ),
+        builder: (context, state) => const SignupScreen(),
       ),
       GoRoute(
         name: forgetPassword,
         path: forgetPassword,
-        builder:
-            (context, state) => ChangeNotifierProvider(
-              create: (context) => LoginProvider(),
-              child: const ForgetPasswordScreen(),
-            ),
+        builder: (context, state) => const ForgetPasswordScreen(),
       ),
       GoRoute(
         name: confirmPassword,
         path: confirmPassword,
-        builder:
-            (context, state) => ChangeNotifierProvider(
-              create: (context) => LoginProvider(),
-              child: const ConfirmPasswordScreen(),
-            ),
+        builder: (context, state) => const ConfirmPasswordScreen(),
       ),
       GoRoute(
         name: wouldYouLike,
         path: wouldYouLike,
-        builder:
-            (context, state) => ChangeNotifierProvider(
-              create: (context) => LoginProvider(),
-              child: const WouldYouLikeScreen(),
-            ),
+        builder: (context, state) => const WouldYouLikeScreen(),
       ),
       GoRoute(
         name: inviteLink,
         path: inviteLink,
-        builder:
-            (context, state) => ChangeNotifierProvider(
-              create: (context) => LoginProvider(),
-              child: const InviteLinkScreen(),
-            ),
+        builder: (context, state) => const InviteLinkScreen(),
       ),
       GoRoute(
         name: createHousehold,
         path: createHousehold,
-        builder:
-            (context, state) => ChangeNotifierProvider(
-              create: (context) => CreateHouseholdProvider(),
-              child: const CreateHouseholdScreen(),
-            ),
+        builder: (context, state) => const CreateHouseholdScreen(),
       ),
 
       GoRoute(
         name: dashboard,
         path: dashboard,
-        builder:
-            (context, state) => ChangeNotifierProvider(
-              create: (context) => DashboardProvider(),
-              child: const Dashboard(),
-            ),
+        builder: (context, state) => const Dashboard(),
       ),
       GoRoute(
         name: attendance,
         path: attendance,
-        builder:
-            (context, state) => ChangeNotifierProvider(
-              create: (context) => AttendanceProvider(),
-              child: const AttendanceScreen(),
-            ),
+        builder: (context, state) => const AttendanceScreen(),
       ),
       GoRoute(
         name: overtimeTracker,
         path: overtimeTracker,
-        builder:
-            (context, state) => ChangeNotifierProvider(
-              create: (context) => AttendanceProvider(),
-              child: const OvertimeTrackerScreen(),
-            ),
+        builder: (context, state) => const OvertimeTrackerScreen(),
       ),
       GoRoute(
         name: overtimeTrackerDetailed,
         path: overtimeTrackerDetailed,
-        builder:
-            (context, state) => ChangeNotifierProvider(
-              create: (context) => OvertimeTrackerProvider(),
-              child: const OvertimeTrackerDetailedScreen(),
-            ),
+        builder: (context, state) => const OvertimeTrackerDetailedScreen(),
       ),
       GoRoute(
         name: verifyOtp,
         path: verifyOtp,
-        builder:
-            (context, state) => ChangeNotifierProvider(
-              create: (context) => LoginProvider(),
-              child: const VerifyOtpScreen(),
-            ),
+        builder: (context, state) => const VerifyOtpScreen(),
       ),
       GoRoute(
         name: overtimeDetailed,
         path: overtimeDetailed,
-        builder:
-            (context, state) => ChangeNotifierProvider(
-              create: (context) => OvertimeTrackerProvider(),
-              child: const OvertimeDetailedScreen(),
-            ),
+        builder: (context, state) => const OvertimeDetailedScreen(),
       ),
       GoRoute(
         name: coownerList,
         path: coownerList,
-        builder:
-            (context, state) => ChangeNotifierProvider(
-              create: (context) => OvertimeTrackerProvider(),
-              child: const CoownerListScreen(),
-            ),
+        builder: (context, state) => const CoownerListScreen(),
       ),
       GoRoute(
         name: helperList,
         path: helperList,
-        builder:
-            (context, state) => ChangeNotifierProvider(
-              create: (context) => OvertimeTrackerProvider(),
-              child: const HelperListScreen(),
-            ),
+        builder: (context, state) => const HelperListScreen(),
       ),
       GoRoute(
         name: addCoOwner,
@@ -284,39 +202,23 @@ class AppRoutes {
       GoRoute(
         name: notification,
         path: notification,
-        builder:
-            (context, state) => ChangeNotifierProvider(
-              create: (context) => NotificationProvider(),
-              child: const NotificationScreen(),
-            ),
+        builder: (context, state) => const NotificationScreen(),
       ),
       GoRoute(
         name: profile,
         path: profile,
-        builder:
-            (context, state) => ChangeNotifierProvider(
-              create: (context) => ProfileProvider(),
-              child: const ProfileScreen(),
-            ),
+        builder: (context, state) => const ProfileScreen(),
       ),
       GoRoute(
         name: deduction,
         path: deduction,
-        builder:
-            (context, state) => ChangeNotifierProvider(
-              create: (context) => DeductionProvider(),
-              child: const DeductionScreen(),
-            ),
+        builder: (context, state) => const DeductionScreen(),
       ),
 
       GoRoute(
         name: settings,
         path: settings,
-        builder:
-            (context, state) => ChangeNotifierProvider(
-              create: (context) => SettingsProvider(),
-              child: const SettingsScreen(),
-            ),
+        builder: (context, state) => const SettingsScreen(),
       ),
       GoRoute(
         name: manageSubscription,
@@ -366,40 +268,24 @@ class AppRoutes {
       GoRoute(
         name: taskManagement,
         path: taskManagement,
-        builder:
-            (context, state) => ChangeNotifierProvider(
-              create: (context) => TaskManagementProvider(),
-              child: const TaskManagementScreen(),
-            ),
+        builder: (context, state) => const TaskManagementScreen(),
       ),
 
       // Tasks Section
       GoRoute(
         name: task,
         path: task,
-        builder:
-            (context, state) => ChangeNotifierProvider(
-              create: (context) => TaskProvider(),
-              child: const TaskScreen(),
-            ),
+        builder: (context, state) => const TaskScreen(),
       ),
       GoRoute(
         name: taskDetail,
         path: taskDetail,
-        builder:
-            (context, state) => ChangeNotifierProvider(
-              create: (context) => TaskProvider(),
-              child: const TaskDetailScreen(),
-            ),
+        builder: (context, state) => const TaskDetailScreen(),
       ),
       GoRoute(
         name: action,
         path: action,
-        builder:
-            (context, state) => ChangeNotifierProvider(
-              create: (context) => TaskProvider(),
-              child: const ActionScreen(),
-            ),
+        builder: (context, state) => const ActionScreen(),
       ),
 
       // Member Section
@@ -437,14 +323,6 @@ class AppRoutes {
         name: attendenceLog,
         path: attendenceLog,
         builder: (context, state) => AttendenceLogScreen(),
-      ),
-      GoRoute(
-        name: cleanKitchen,
-        path: cleanKitchen,
-        builder:
-            (context, state) => CleanKitchenScreen(
-              provider: state.extra as TaskManagementProvider,
-            ),
       ),
     ],
   );

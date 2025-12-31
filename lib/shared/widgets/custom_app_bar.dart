@@ -11,11 +11,11 @@ class CustomCommonAppBar extends StatelessWidget
   final VoidCallback? onBackTap;
   final Color? backgroundColor;
   const CustomCommonAppBar({
-    Key? key,
+    super.key,
     required this.title,
     this.onBackTap,
     this.backgroundColor,
-  }) : super(key: key);
+  });
 
   @override
   Size get preferredSize => const Size.fromHeight(80);

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:homekru_owner/shared/domain/value_objects/app_language.dart';
+import 'package:homekru_owner/shared/domain/value_objects/notification_setting.dart';
 import 'package:homekru_owner/shared/utils/common_utils.dart';
 import 'package:homekru_owner/core/routes/app_navigator.dart';
 import 'package:homekru_owner/core/routes/app_routes.dart';
@@ -8,15 +11,16 @@ import 'package:homekru_owner/shared/widgets/custom_elevated_button.dart';
 import 'package:homekru_owner/shared/widgets/custom_home_app_bar.dart';
 import 'package:homekru_owner/shared/widgets/custom_text.dart';
 import 'package:homekru_owner/shared/widgets/task_dropdown.dart';
-import 'package:provider/provider.dart';
-import 'provider/settings_provider.dart';
 
-class SettingsScreen extends StatelessWidget {
+class SettingsScreen extends HookWidget {
   const SettingsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final provider = context.read<SettingsProvider>();
+    final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+    final TextEditingController phoneController = TextEditingController();
+    final TextEditingController changePassController = TextEditingController();
+
     return Scaffold(
       appBar: CustomAppBar(
         title: 'Settings',
@@ -37,7 +41,7 @@ class SettingsScreen extends StatelessWidget {
           //   ),
           // ),
           Form(
-            key: provider.formKey,
+            key: formKey,
             child: ListView(
               padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 5.h),
               children: [
@@ -45,7 +49,7 @@ class SettingsScreen extends StatelessWidget {
                 vGap(12.h),
                 buildTextField(
                   "Update Phone Number",
-                  provider.phoneController,
+                  phoneController,
                   validator:
                       (value) =>
                           value == null || value.trim().isEmpty
@@ -56,7 +60,7 @@ class SettingsScreen extends StatelessWidget {
                 vGap(14.h),
                 buildTextField(
                   "Change Password",
-                  provider.changePasController,
+                  changePassController,
                   validator:
                       (value) =>
                           value == null || value.trim().isEmpty
@@ -98,28 +102,21 @@ class SettingsScreen extends StatelessWidget {
                 vGap(12.h),
 
                 /// 🔹 Language Dropdown
-                Consumer<SettingsProvider>(
-                  builder:
-                      (context, provider, _) => TaskDropdown(
-                        hintText: "Select Language",
-                        selectedTask: provider.selectedLanguage,
-                        tasks: provider.languageOptions,
-                        onChanged: (value) => provider.setLanguage(value!),
-                      ),
+                TaskDropdown(
+                  hintText: "Select Language",
+                  selectedTask: null,
+                  tasks: AppLanguage.values.map((e) => e.label).toList(),
+                  onChanged: (value) => {},
                 ),
                 vGap(14.h),
 
                 /// 🔹 Notification Preference Dropdown
-                Consumer<SettingsProvider>(
-                  builder:
-                      (context, provider, _) => TaskDropdown(
-                        hintText: "Notification Preference",
-                        selectedTask: provider.notificationPreference,
-                        tasks: provider.notificationOptions,
-                        onChanged:
-                            (value) =>
-                                provider.setNotificationPreference(value!),
-                      ),
+                TaskDropdown(
+                  hintText: "Notification Preference",
+                  selectedTask: null,
+                  tasks:
+                      NotificationSetting.values.map((e) => e.label).toList(),
+                  onChanged: (value) => {},
                 ),
 
                 vGap(35.h),
@@ -157,7 +154,7 @@ class SettingsScreen extends StatelessWidget {
                 CustomElevatedButton(
                   text: 'Save change',
                   onPressed: () {
-                    if (provider.formKey.currentState!.validate()) {}
+                    if (formKey.currentState!.validate()) {}
                   },
                 ),
                 vGap(30.h),

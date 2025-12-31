@@ -78,8 +78,9 @@ class _InviteEmailBottomSheetState extends State<InviteEmailBottomSheet> {
                     return AppStrings.pleaseEnterEmail;
                   }
                   final emailRegex = RegExp(r'^[^@\s]+@[^@\s]+\.[^@\s]+$');
-                  if (!emailRegex.hasMatch(value.trim()))
+                  if (!emailRegex.hasMatch(value.trim())) {
                     return AppStrings.enterValidEmail;
+                  }
                   return null;
                 },
                 keyboardType: TextInputType.emailAddress,

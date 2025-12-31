@@ -5,7 +5,7 @@ import 'package:homekru_owner/core/theme/theme_helper.dart';
 import 'base_button.dart';
 
 class CustomElevatedButton extends BaseButton {
-  CustomElevatedButton({
+  const CustomElevatedButton({
     super.key,
     this.decoration,
     this.leftIcon,

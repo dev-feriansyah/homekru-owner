@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 class BaseButton extends StatelessWidget{
 
-  BaseButton(
-  {Key? key,
+  const BaseButton(
+  {super.key,
   required this.text,
   this.onPressed,
   this.buttonStyle,
@@ -12,10 +12,7 @@ class BaseButton extends StatelessWidget{
   this.height,
   this.width,
   this.margin,
-  this.alignment})
- : super(
-    key: key
-    );
+  this.alignment});
 
   final String text;
   final VoidCallback? onPressed;

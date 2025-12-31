@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:homekru_owner/shared/domain/value_objects/live_in_status.dart';
+import 'package:homekru_owner/shared/domain/value_objects/user_role.dart';
 import 'package:homekru_owner/shared/utils/common_utils.dart';
 import 'package:homekru_owner/shared/utils/size_utils.dart';
-import 'package:homekru_owner/features/settings/provider/settings_provider.dart';
 import 'package:homekru_owner/features/settings/settings_screen.dart';
 import 'package:homekru_owner/core/routes/app_navigator.dart';
 import 'package:homekru_owner/core/theme/theme_helper.dart';
@@ -10,29 +12,23 @@ import 'package:homekru_owner/shared/widgets/custom_app_bar.dart';
 import 'package:homekru_owner/shared/widgets/custom_text.dart';
 import 'package:homekru_owner/shared/widgets/custom_elevated_button.dart';
 import 'package:homekru_owner/shared/widgets/task_dropdown.dart';
-import 'package:provider/provider.dart';
 
-class AddHelperScreen extends StatefulWidget {
+class AddHelperScreen extends HookWidget {
   const AddHelperScreen({super.key});
 
   @override
-  State<AddHelperScreen> createState() => _AddHelperScreenState();
-}
-
-class _AddHelperScreenState extends State<AddHelperScreen> {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _emailController = TextEditingController();
-
-  @override
-  void dispose() {
-    _nameController.dispose();
-    _emailController.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+    final TextEditingController nameController = TextEditingController();
+    final TextEditingController emailController = TextEditingController();
+
+    void onSubmit() {
+      if (formKey.currentState?.validate() ?? false) {
+        // For now, just pop after validation. Hook API here later.
+        AppNavigator.pop();
+      }
+    }
+
     return Scaffold(
       backgroundColor: appTheme.lightBlue,
       appBar: const CustomCommonAppBar(title: "Add Helper"),
@@ -47,7 +43,7 @@ class _AddHelperScreenState extends State<AddHelperScreen> {
           //     height: 200,
           //   ),
           // ),
-          Container(
+          SizedBox(
             // color: appTheme.lightBlue,
             height: SizeUtils.height,
             child: Padding(
@@ -58,7 +54,7 @@ class _AddHelperScreenState extends State<AddHelperScreen> {
                 //   vertical: 16,
                 // ),
                 child: Form(
-                  key: _formKey,
+                  key: formKey,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -71,7 +67,7 @@ class _AddHelperScreenState extends State<AddHelperScreen> {
                       vGap(18.h),
                       buildTextField(
                         "Full Name",
-                        _nameController,
+                        nameController,
                         validator:
                             (value) =>
                                 value == null || value.trim().isEmpty
@@ -82,7 +78,7 @@ class _AddHelperScreenState extends State<AddHelperScreen> {
                       vGap(12.h),
                       buildTextField(
                         "Email",
-                        _emailController,
+                        emailController,
                         validator: (value) {
                           if (value == null || value.trim().isEmpty) {
                             return 'Please enter email';
@@ -90,49 +86,36 @@ class _AddHelperScreenState extends State<AddHelperScreen> {
                           final emailRegex = RegExp(
                             r'^[^@\s]+@[^@\s]+\.[^@\s]+$',
                           );
-                          if (!emailRegex.hasMatch(value.trim()))
+                          if (!emailRegex.hasMatch(value.trim())) {
                             return 'Enter valid email';
+                          }
                           return null;
                         },
                       ),
                       vGap(12.h),
-                      Consumer<SettingsProvider>(
-                        builder:
-                            (context, provider, _) => TaskDropdown(
-                              hintText: "Role/Position",
-                              selectedTask: provider.selectedRole,
-                              tasks: provider.roleOptions,
-                              onChanged: (value) => provider.setRole(value!),
-                            ),
+                      TaskDropdown(
+                        hintText: "Role/Position",
+                        selectedTask: null,
+                        tasks: UserRole.values.map((e) => e.label).toList(),
+                        onChanged: (value) => {},
                       ),
                       vGap(12.h),
-                      Consumer<SettingsProvider>(
-                        builder:
-                            (context, provider, _) => TaskDropdown(
-                              hintText: "Live-in Status",
-                              selectedTask: provider.selectedLiveInStatus,
-                              tasks: provider.liveInStatusOptions,
-                              onChanged:
-                                  (value) => provider.setLiveInStatus(value!),
-                            ),
+                      TaskDropdown(
+                        hintText: "Live-in Status",
+                        selectedTask: null,
+                        tasks: LiveInStatus.values.map((e) => e.label).toList(),
+                        onChanged: (value) => {},
                       ),
                       vGap(12.h),
-                      Consumer<SettingsProvider>(
-                        builder:
-                            (context, provider, _) => TaskDropdown(
-                              hintText: "Working House",
-                              selectedTask: provider.selectedWorkingHouse,
-                              tasks: provider.workingHouseOptions,
-                              onChanged:
-                                  (value) => provider.setWorkingHouse(value!),
-                            ),
+                      TaskDropdown(
+                        hintText: "Working House",
+                        selectedTask: null,
+                        tasks: ['Yes', 'No'],
+                        onChanged: (value) => {},
                       ),
                       vGap(12.h),
                       vGap(24.h),
-                      CustomElevatedButton(
-                        text: 'Submit',
-                        onPressed: _onSubmit,
-                      ),
+                      CustomElevatedButton(text: 'Submit', onPressed: onSubmit),
                     ],
                   ),
                 ),
@@ -142,12 +125,5 @@ class _AddHelperScreenState extends State<AddHelperScreen> {
         ],
       ),
     );
-  }
-
-  void _onSubmit() {
-    if (_formKey.currentState?.validate() ?? false) {
-      // For now, just pop after validation. Hook API here later.
-      AppNavigator.pop();
-    }
   }
 }

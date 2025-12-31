@@ -89,8 +89,9 @@ class _HelperDetailsBottomSheetState extends State<HelperDetailsBottomSheet> {
                       return AppStrings.pleaseEnterRole;
                     }
                     final emailRegex = RegExp(r'^[a-zA-Z\s-]+$');
-                    if (!emailRegex.hasMatch(value.trim()))
+                    if (!emailRegex.hasMatch(value.trim())) {
                       return AppStrings.enterValidRole;
+                    }
                     return null;
                   },
                   keyboardType: TextInputType.text,

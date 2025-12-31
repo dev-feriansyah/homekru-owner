@@ -10,13 +10,13 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String? appHeaderImage;
   final PreferredSizeWidget? bottom;
   const CustomAppBar({
-    Key? key,
+    super.key,
     required this.title,
     this.onBackTap,
     this.toolbarHeight,
     this.appHeaderImage,
     this.bottom,
-  }) : super(key: key);
+  });
 
   @override
   Size get preferredSize => Size.fromHeight(toolbarHeight ?? 80);
