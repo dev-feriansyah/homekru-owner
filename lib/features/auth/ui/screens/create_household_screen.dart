@@ -10,7 +10,6 @@ import 'package:homekru_owner/core/theme/theme_helper.dart';
 import 'package:homekru_owner/shared/widgets/custom_elevated_button.dart';
 import 'package:homekru_owner/shared/widgets/custom_image_view.dart';
 import 'package:homekru_owner/shared/widgets/custom_text.dart';
-import 'package:provider/provider.dart';
 
 import '../widgets/auth_custom_text_field.dart';
 

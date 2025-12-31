@@ -1,37 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:homekru_owner/shared/domain/value_objects/frequency_options.dart';
 import 'package:homekru_owner/shared/utils/common_utils.dart';
 import 'package:homekru_owner/core/constants/app_strings.dart';
 import 'package:homekru_owner/shared/utils/date_time_utils.dart';
 import 'package:homekru_owner/features/settings/settings_screen.dart';
-import 'package:homekru_owner/core/routes/app_navigator.dart';
 import 'package:homekru_owner/core/theme/theme_helper.dart';
 import 'package:homekru_owner/shared/widgets/custom_assign_dropdown.dart';
 import 'package:homekru_owner/shared/widgets/custom_dropdown_widget.dart';
 import 'package:homekru_owner/shared/widgets/custom_text.dart';
-import 'package:homekru_owner/features/task/provider/task_management_provider.dart';
 import 'package:homekru_owner/shared/widgets/custom_toggle_switch.dart';
 import 'package:homekru_owner/shared/widgets/task_dropdown.dart';
 import 'package:homekru_owner/shared/widgets/textfield/custom_text_form_field.dart';
-import 'package:provider/provider.dart';
 
-class CreateFromScratchScreen extends StatefulWidget {
-  final TaskManagementProvider provider;
+List<String> assignees = ['James Miller', 'John Doe', 'Jane Smith'];
+List<Map<String, dynamic>> suggestedTasks = [
+  {'title': 'Clean Kitchen', 'isSelected': true, 'requirePhoto': false},
+];
 
-  const CreateFromScratchScreen({super.key, required this.provider});
-
-  @override
-  State<CreateFromScratchScreen> createState() =>
-      _CreateFromScratchScreenState();
-}
-
-final TextEditingController startTimeController = TextEditingController();
-
-class _CreateFromScratchScreenState extends State<CreateFromScratchScreen> {
-  String? selectedRoom;
-  String? customRoom;
-  bool showCustomRoomField = false;
-  final TextEditingController customRoomController = TextEditingController();
+class CreateFromScratchScreen extends HookWidget {
+  const CreateFromScratchScreen({super.key});
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -50,17 +39,17 @@ class _CreateFromScratchScreenState extends State<CreateFromScratchScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _buildAssignToSection(widget.provider),
+              _buildAssignToSection(),
               vGap(24.h),
-              _buildTaskDetailsSection(widget.provider),
+              _buildTaskDetailsSection(),
               vGap(24.h),
-              _buildSubTaskSection(widget.provider),
+              _buildSubTaskSection(),
               vGap(24.h),
-              _buildRequirePhotoSection(widget.provider),
+              _buildRequirePhotoSection(),
               vGap(5.h),
-              _buildRecurrenceSettingsSection(widget.provider),
+              _buildRecurrenceSettingsSection(context),
               vGap(32.h),
-              _buildActionButtons(widget.provider),
+              _buildActionButtons(context),
               vGap(32.h),
             ],
           ),
@@ -69,7 +58,13 @@ class _CreateFromScratchScreenState extends State<CreateFromScratchScreen> {
     );
   }
 
-  Widget _buildAssignToSection(TaskManagementProvider provider) {
+  Widget _buildAssignToSection() {
+    final currentAssignee = useState<String?>('James Miller');
+    final selectedRoom = useState<String>('Kitchen');
+    final showCustomRoomField = useState<bool>(false);
+    final TextEditingController customRoomController =
+        useTextEditingController();
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -83,13 +78,12 @@ class _CreateFromScratchScreenState extends State<CreateFromScratchScreen> {
 
         CustomAssignDropdown(
           borderColor: appTheme.offWhite,
-          items: provider.assignees,
+          items: assignees,
           hintText: "Select Assignee",
-          selectedValue: provider.currentAssignee,
-
+          selectedValue: currentAssignee.value,
           onChanged: (value) {
             if (value != null) {
-              provider.updateAssignee(value);
+              currentAssignee.value = value;
             }
           },
         ),
@@ -115,28 +109,27 @@ class _CreateFromScratchScreenState extends State<CreateFromScratchScreen> {
             "Custom Room",
           ],
           hintText: "Select room/zone",
-          selectedValue: selectedRoom,
+          selectedValue: selectedRoom.value,
           onChanged: (value) {
-            setState(() {
-              selectedRoom = value;
-              if (value == "Custom Room") {
-                showCustomRoomField = true;
-              } else {
-                showCustomRoomField = false;
-                customRoomController.clear();
-              }
-            });
+            selectedRoom.value = value ?? "";
+
+            if (value == "Custom Room") {
+              showCustomRoomField.value = true;
+            } else {
+              showCustomRoomField.value = false;
+              customRoomController.clear();
+            }
           },
         ),
 
         // Custom Room Field
-        if (showCustomRoomField) ...[
+        if (showCustomRoomField.value) ...[
           SizedBox(height: 16.h),
           buildTextField(
             "Enter custom room name",
             customRoomController,
             validator: (value) {
-              if (showCustomRoomField &&
+              if (showCustomRoomField.value &&
                   (value == null || value.trim().isEmpty)) {
                 return 'Please enter custom room name';
               }
@@ -151,7 +144,11 @@ class _CreateFromScratchScreenState extends State<CreateFromScratchScreen> {
     );
   }
 
-  Widget _buildTaskDetailsSection(TaskManagementProvider provider) {
+  Widget _buildTaskDetailsSection() {
+    final TextEditingController taskNameController = useTextEditingController();
+    final TextEditingController taskDescriptionController =
+        useTextEditingController();
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -164,7 +161,7 @@ class _CreateFromScratchScreenState extends State<CreateFromScratchScreen> {
         vGap(16.h),
         buildTextField(
           "Enter Task Name",
-          provider.taskNameController,
+          taskNameController,
           validator:
               (value) =>
                   value == null || value.trim().isEmpty
@@ -178,7 +175,7 @@ class _CreateFromScratchScreenState extends State<CreateFromScratchScreen> {
 
         buildTextField(
           "Add Task Description",
-          provider.taskDescriptionController,
+          taskDescriptionController,
           validator:
               (value) =>
                   value == null || value.trim().isEmpty
@@ -197,7 +194,13 @@ class _CreateFromScratchScreenState extends State<CreateFromScratchScreen> {
     );
   }
 
-  Widget _buildSubTaskSection(TaskManagementProvider provider) {
+  Widget _buildSubTaskSection() {
+    final List<TextEditingController> subTaskControllers = [
+      useTextEditingController(),
+      useTextEditingController(),
+      useTextEditingController(),
+    ];
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -210,18 +213,18 @@ class _CreateFromScratchScreenState extends State<CreateFromScratchScreen> {
         vGap(16.h),
 
         // Default 3 sub-task fields
-        ...List.generate(provider.subTaskControllers.length, (index) {
+        ...List.generate(subTaskControllers.length, (index) {
           return Column(
             children: [
               buildTextField(
                 "Sub Task ${index + 1}",
-                provider.subTaskControllers[index],
+                subTaskControllers[index],
                 validator: null, // Sub tasks are optional
                 keyboardType: TextInputType.text,
                 minLines: 1,
                 maxLines: 1,
               ),
-              if (index < provider.subTaskControllers.length - 1) vGap(12.h),
+              if (index < subTaskControllers.length - 1) vGap(12.h),
             ],
           );
         }),
@@ -230,7 +233,7 @@ class _CreateFromScratchScreenState extends State<CreateFromScratchScreen> {
 
         // Add More Sub Tasks Button
         GestureDetector(
-          onTap: () => _addSubTask(provider),
+          onTap: () => {subTaskControllers.add(TextEditingController())},
           child: Container(
             width: double.infinity,
             padding: EdgeInsets.symmetric(vertical: 15.h),
@@ -257,7 +260,8 @@ class _CreateFromScratchScreenState extends State<CreateFromScratchScreen> {
     );
   }
 
-  Widget _buildRequirePhotoSection(TaskManagementProvider provider) {
+  Widget _buildRequirePhotoSection() {
+    final requirePhoto = useState<bool>(false);
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
@@ -270,9 +274,9 @@ class _CreateFromScratchScreenState extends State<CreateFromScratchScreen> {
         hGap(5.w),
         Spacer(),
         CustomToggleSwitch(
-          initialValue: provider.requirePhoto,
+          initialValue: requirePhoto.value,
           onChanged: (val) {
-            provider.setRequirePhoto(val);
+            requirePhoto.value = val;
           },
         ),
         hGap(5.w),
@@ -280,7 +284,9 @@ class _CreateFromScratchScreenState extends State<CreateFromScratchScreen> {
     );
   }
 
-  Widget _buildRecurrenceSettingsSection(TaskManagementProvider provider) {
+  Widget _buildRecurrenceSettingsSection(BuildContext context) {
+    final TextEditingController startTimeController =
+        useTextEditingController();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -292,14 +298,11 @@ class _CreateFromScratchScreenState extends State<CreateFromScratchScreen> {
         ),
         vGap(16.h),
 
-        Consumer<TaskManagementProvider>(
-          builder:
-              (context, provider, _) => TaskDropdown(
-                hintText: "Select Frequency",
-                selectedTask: provider.selectedTime,
-                tasks: provider.frequencyOptions,
-                onChanged: (value) => provider.updateFrequency(value!),
-              ),
+        TaskDropdown(
+          hintText: "Select Frequency",
+          selectedTask: null,
+          tasks: FrequencyOptions.values.map((e) => e.label).toList(),
+          onChanged: (value) => {},
         ),
 
         vGap(16.h),
@@ -320,24 +323,25 @@ class _CreateFromScratchScreenState extends State<CreateFromScratchScreen> {
           suffixIcon: Icon(Icons.access_time, color: appTheme.grey),
         ),
         vGap(16.h),
-        Consumer<TaskManagementProvider>(
-          builder:
-              (context, provider, _) => TaskDropdown(
-                hintText: "Select Duration",
-                selectedTask: provider.selectedDuration,
-                tasks: provider.durationOptions,
-                onChanged: (value) => provider.updateDuration(value!),
-              ),
+        TaskDropdown(
+          hintText: "Select Duration",
+          selectedTask: null,
+          tasks: ['1 hour', '2 hours', '3 hours', '4 hours'],
+          onChanged: (value) => {},
         ),
       ],
     );
   }
 
-  Widget _buildActionButtons(TaskManagementProvider provider) {
+  Widget _buildActionButtons(BuildContext context) {
     return Column(
       children: [
         GestureDetector(
-          onTap: () => _assignTask(provider),
+          onTap:
+              () => {
+                // maybe need refactor
+                // _assignTask()
+              },
           child: Container(
             height: 50.h,
             width: double.infinity,
@@ -359,7 +363,7 @@ class _CreateFromScratchScreenState extends State<CreateFromScratchScreen> {
         ),
         vGap(16.h),
         GestureDetector(
-          onTap: () => _addMoreTask(provider),
+          onTap: () => _addMoreTask(context),
           child: Container(
             height: 50.h,
             width: double.infinity,
@@ -389,8 +393,8 @@ class _CreateFromScratchScreenState extends State<CreateFromScratchScreen> {
 
   // Helper Methods
 
-  void _addMoreTask(TaskManagementProvider provider) {
-    provider.clearForm();
+  void _addMoreTask(BuildContext context) {
+    // provider.clearForm();
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: CText(
@@ -402,65 +406,60 @@ class _CreateFromScratchScreenState extends State<CreateFromScratchScreen> {
     );
   }
 
-  void _addSubTask(TaskManagementProvider provider) {
-    provider.addSubTaskController();
-    setState(() {}); // Refresh UI to show new field
-  }
+  // void _assignTask() async {
+  //   // Check if all required fields are filled
+  //   bool isValid = true;
+  //   String errorMessage = '';
 
-  void _assignTask(TaskManagementProvider provider) async {
-    // Check if all required fields are filled
-    bool isValid = true;
-    String errorMessage = '';
+  //   // Check task name
+  //   if (provider.taskNameController.text.trim().isEmpty) {
+  //     isValid = false;
+  //     errorMessage = 'Please enter task name';
+  //   }
+  //   // Check task description
+  //   else if (provider.taskDescriptionController.text.trim().isEmpty) {
+  //     isValid = false;
+  //     errorMessage = 'Please enter task description';
+  //   }
+  //   // Check assignee
+  //   else if (provider.currentAssignee.isEmpty) {
+  //     isValid = false;
+  //     errorMessage = 'Please select an assignee';
+  //   }
+  //   // Check room selection
+  //   else if (selectedRoom == null) {
+  //     isValid = false;
+  //     errorMessage = 'Please select a room';
+  //   }
+  //   // Check custom room if selected
+  //   else if (selectedRoom == "Custom Room" &&
+  //       customRoomController.text.trim().isEmpty) {
+  //     isValid = false;
+  //     errorMessage = 'Please enter custom room name';
+  //   }
 
-    // Check task name
-    if (provider.taskNameController.text.trim().isEmpty) {
-      isValid = false;
-      errorMessage = 'Please enter task name';
-    }
-    // Check task description
-    else if (provider.taskDescriptionController.text.trim().isEmpty) {
-      isValid = false;
-      errorMessage = 'Please enter task description';
-    }
-    // Check assignee
-    else if (provider.currentAssignee.isEmpty) {
-      isValid = false;
-      errorMessage = 'Please select an assignee';
-    }
-    // Check room selection
-    else if (selectedRoom == null) {
-      isValid = false;
-      errorMessage = 'Please select a room';
-    }
-    // Check custom room if selected
-    else if (selectedRoom == "Custom Room" &&
-        customRoomController.text.trim().isEmpty) {
-      isValid = false;
-      errorMessage = 'Please enter custom room name';
-    }
+  //   if (!isValid) {
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //       SnackBar(
+  //         content: CText(errorMessage, color: Colors.white),
+  //         backgroundColor: Colors.red,
+  //       ),
+  //     );
+  //     return;
+  //   }
 
-    if (!isValid) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: CText(errorMessage, color: Colors.white),
-          backgroundColor: Colors.red,
-        ),
-      );
-      return;
-    }
+  //   // Create task
+  //   await provider.createTask();
 
-    // Create task
-    await provider.createTask();
+  //   // Show success message
+  //   ScaffoldMessenger.of(context).showSnackBar(
+  //     SnackBar(
+  //       content: CText('Task assigned successfully!', color: Colors.white),
+  //       backgroundColor: appTheme.blueAccentCustom,
+  //     ),
+  //   );
 
-    // Show success message
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: CText('Task assigned successfully!', color: Colors.white),
-        backgroundColor: appTheme.blueAccentCustom,
-      ),
-    );
-
-    // Navigate to task list screen
-    AppNavigator.pushNamed('/task-screen');
-  }
+  //   // Navigate to task list screen
+  //   AppNavigator.pushNamed('/task-screen');
+  // }
 }

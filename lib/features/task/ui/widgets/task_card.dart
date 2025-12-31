@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:homekru_owner/shared/utils/size_utils.dart';
-import 'package:homekru_owner/features/task/widgets/status_chip.dart';
+import 'package:homekru_owner/features/task/ui/widgets/status_chip.dart';
 import 'package:homekru_owner/core/theme/theme_helper.dart';
 import 'package:homekru_owner/shared/widgets/custom_text.dart';
 

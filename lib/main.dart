@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:homekru_owner/shared/utils/size_utils.dart';
-import 'package:homekru_owner/features/task/provider/task_management_provider.dart';
 import 'package:homekru_owner/core/routes/app_routes.dart';
 import 'package:homekru_owner/core/theme/provider/theme_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -42,9 +41,6 @@ class MyApp extends StatelessWidget {
           providers: [
             ChangeNotifierProvider(
               create: (context) => ThemeProvider(isDark: false),
-            ),
-            ChangeNotifierProvider(
-              create: (context) => TaskManagementProvider(),
             ),
           ],
           child: Consumer(

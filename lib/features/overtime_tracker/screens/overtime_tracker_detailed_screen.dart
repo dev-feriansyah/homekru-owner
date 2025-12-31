@@ -8,7 +8,6 @@ import 'package:homekru_owner/core/theme/theme_helper.dart';
 import 'package:homekru_owner/shared/widgets/custom_app_bar.dart';
 import 'package:homekru_owner/shared/widgets/custom_elevated_button.dart';
 import 'package:homekru_owner/shared/widgets/custom_text.dart';
-import 'package:provider/provider.dart';
 
 class OvertimeTrackerDetailedScreen extends StatefulWidget {
   const OvertimeTrackerDetailedScreen({super.key});

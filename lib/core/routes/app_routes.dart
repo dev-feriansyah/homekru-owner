@@ -9,12 +9,10 @@ import 'package:homekru_owner/features/member/ui/screens/live_in_helper_settings
 import 'package:homekru_owner/features/member/ui/screens/member_screen.dart';
 import 'package:homekru_owner/features/member/ui/screens/member_tasks_screen.dart';
 import 'package:homekru_owner/features/member/ui/screens/non_live_in_helper_settings.dart';
-import 'package:homekru_owner/features/task/provider/task_management_provider.dart';
 import 'package:homekru_owner/features/action_item/screen/action_screen.dart';
-import 'package:homekru_owner/features/task/screens/task_detail_screen.dart';
-import 'package:homekru_owner/features/task/screens/task_managment/clean_kitchhen_screen.dart';
-import 'package:homekru_owner/features/task/screens/task_managment/task_management_screen.dart';
-import 'package:homekru_owner/features/task/screens/task_screen.dart';
+import 'package:homekru_owner/features/task/ui/screens/task_detail_screen.dart';
+import 'package:homekru_owner/features/task/ui/screens/task_managment/task_management_screen.dart';
+import 'package:homekru_owner/features/task/ui/screens/task_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:homekru_owner/features/attendance_screen/attendance_screen.dart';
 import 'package:homekru_owner/features/attendance_screen/provider/attendance_provider.dart';
@@ -106,7 +104,7 @@ class AppRoutes {
 
   static GoRouter router = GoRouter(
     navigatorKey: navigationKey,
-    initialLocation: kDebugMode ? dashboard : initialRoute,
+    initialLocation: kDebugMode ? taskManagement : initialRoute,
     // initialLocation: onBoarding,
     routes: [
       GoRoute(
@@ -290,11 +288,7 @@ class AppRoutes {
       GoRoute(
         name: taskManagement,
         path: taskManagement,
-        builder:
-            (context, state) => ChangeNotifierProvider(
-              create: (context) => TaskManagementProvider(),
-              child: const TaskManagementScreen(),
-            ),
+        builder: (context, state) => const TaskManagementScreen(),
       ),
 
       // Tasks Section
@@ -349,14 +343,6 @@ class AppRoutes {
         name: attendenceLog,
         path: attendenceLog,
         builder: (context, state) => AttendenceLogScreen(),
-      ),
-      GoRoute(
-        name: cleanKitchen,
-        path: cleanKitchen,
-        builder:
-            (context, state) => CleanKitchenScreen(
-              provider: state.extra as TaskManagementProvider,
-            ),
       ),
     ],
   );

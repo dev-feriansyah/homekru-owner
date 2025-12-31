@@ -5,7 +5,7 @@ import 'package:homekru_owner/features/home_screen/ui/screens/home_screen.dart';
 import 'package:homekru_owner/features/settings/settings_screen.dart';
 import 'package:homekru_owner/features/member/ui/screens/member_screen.dart';
 import 'package:homekru_owner/features/side_drawer/side_drawer.dart';
-import 'package:homekru_owner/features/task/screens/task_screen.dart';
+import 'package:homekru_owner/features/task/ui/screens/task_screen.dart';
 
 class DashboardProvider extends ChangeNotifier {
   int _selectedIndex = 0;

@@ -1,31 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:homekru_owner/shared/utils/common_utils.dart';
 import 'package:homekru_owner/core/constants/image_constant.dart';
 import 'package:homekru_owner/shared/utils/logger.dart';
-import 'package:homekru_owner/features/task/widgets/dialogs/frequency_dialog.dart';
-import 'package:homekru_owner/features/task/widgets/dialogs/scope_of_work_dialog.dart';
+import 'package:homekru_owner/features/task/ui/widgets/dialogs/frequency_dialog.dart';
+import 'package:homekru_owner/features/task/ui/widgets/dialogs/scope_of_work_dialog.dart';
 import 'package:homekru_owner/core/theme/theme_helper.dart';
 import 'package:homekru_owner/shared/widgets/custom_assign_dropdown.dart';
 import 'package:homekru_owner/shared/widgets/custom_dropdown_widget.dart';
 import 'package:homekru_owner/shared/widgets/custom_text.dart';
-import 'package:homekru_owner/features/task/provider/task_management_provider.dart';
 import 'package:homekru_owner/shared/widgets/custom_toggle_switch.dart'
     show CustomToggleSwitch;
 
-class SuggestedTasksScreen extends StatefulWidget {
-  final TaskManagementProvider provider;
+List<String> assignees = ['James Miller', 'John Doe', 'Jane Smith'];
+List<Map<String, dynamic>> suggestedTasks = [
+  {'title': 'Clean Kitchen', 'isSelected': true, 'requirePhoto': false},
+];
 
-  const SuggestedTasksScreen({super.key, required this.provider});
+class SuggestedTasksScreen extends HookWidget {
+  const SuggestedTasksScreen({super.key});
 
-  @override
-  State<SuggestedTasksScreen> createState() => _SuggestedTasksScreenState();
-}
-
-class _SuggestedTasksScreenState extends State<SuggestedTasksScreen> {
-  String? selectedRoom;
   @override
   Widget build(BuildContext context) {
+    final selectedRoom = useState<String>('Kitchen');
+
     return Stack(
       children: [
         bottomWaveWidget(),
@@ -42,7 +41,7 @@ class _SuggestedTasksScreenState extends State<SuggestedTasksScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _buildAssignToSection(widget.provider),
+              _buildAssignToSection(),
               vGap(16.h),
               CustomDropdownWidget(
                 borderColor: appTheme.offWhite,
@@ -54,18 +53,16 @@ class _SuggestedTasksScreenState extends State<SuggestedTasksScreen> {
                   "Drawing room",
                 ],
                 hintText: "Select room/zone",
-                selectedValue: selectedRoom,
+                selectedValue: selectedRoom.value,
                 onChanged: (value) {
-                  setState(() {
-                    selectedRoom = value;
-                  });
+                  selectedRoom.value = value ?? '';
                 },
               ),
 
               vGap(24.h),
-              _buildSuggestedTasksSection(widget.provider),
+              _buildSuggestedTasksSection(context),
               vGap(32.h),
-              _buildActionButtons(widget.provider),
+              _buildActionButtons(),
               vGap(32.h),
             ],
           ),
@@ -74,7 +71,8 @@ class _SuggestedTasksScreenState extends State<SuggestedTasksScreen> {
     );
   }
 
-  Widget _buildAssignToSection(TaskManagementProvider provider) {
+  Widget _buildAssignToSection() {
+    final currentAssignee = useState('James Miller');
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -87,13 +85,13 @@ class _SuggestedTasksScreenState extends State<SuggestedTasksScreen> {
         vGap(16.h),
         CustomAssignDropdown(
           borderColor: appTheme.offWhite,
-          items: provider.assignees,
+          items: assignees,
           hintText: "Select Assignee",
-          selectedValue: provider.currentAssignee,
+          selectedValue: currentAssignee.value,
 
           onChanged: (value) {
             if (value != null) {
-              provider.updateAssignee(value);
+              currentAssignee.value = value;
             }
           },
         ),
@@ -112,7 +110,7 @@ class _SuggestedTasksScreenState extends State<SuggestedTasksScreen> {
 
         //       shadows: [
         //         BoxShadow(
-        //           color: Colors.black.withOpacity(0.05),
+        //           color: Colors.black.withValues(alpha: 0.05),
         //           blurRadius: 8,
         //           offset: const Offset(0, 2),
         //         ),
@@ -126,7 +124,7 @@ class _SuggestedTasksScreenState extends State<SuggestedTasksScreen> {
         //           width: 32.w,
         //           height: 32.h,
         //           decoration: BoxDecoration(
-        //             color: appTheme.blueAccentCustom.withOpacity(0.2),
+        //             color: appTheme.blueAccentCustom.withValues(alpha: 0.2),
         //             shape: BoxShape.circle,
         //           ),
         //           child: Center(
@@ -160,7 +158,7 @@ class _SuggestedTasksScreenState extends State<SuggestedTasksScreen> {
     );
   }
 
-  Widget _buildSuggestedTasksSection(TaskManagementProvider provider) {
+  Widget _buildSuggestedTasksSection(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -195,22 +193,18 @@ class _SuggestedTasksScreenState extends State<SuggestedTasksScreen> {
           ],
         ),
         vGap(16.h),
-        ...provider.suggestedTasks.asMap().entries.map((entry) {
+        ...suggestedTasks.asMap().entries.map((entry) {
           final index = entry.key;
           final task = entry.value;
-          return _buildSuggestedTaskItem(provider, index, task);
+          return _buildSuggestedTaskItem(index, task);
         }),
         vGap(16.h),
-        _buildSelectFrequencyRow(provider),
+        _buildSelectFrequencyRow(context),
       ],
     );
   }
 
-  Widget _buildSuggestedTaskItem(
-    TaskManagementProvider provider,
-    int index,
-    Map<String, dynamic> task,
-  ) {
+  Widget _buildSuggestedTaskItem(int index, Map<String, dynamic> task) {
     return Column(
       children: [
         Row(
@@ -225,7 +219,7 @@ class _SuggestedTasksScreenState extends State<SuggestedTasksScreen> {
               ),
             ),
             GestureDetector(
-              onTap: () => provider.toggleSuggestedTask(index),
+              onTap: () => {},
               child: Container(
                 width: 20.w,
                 height: 20.h,
@@ -261,12 +255,12 @@ class _SuggestedTasksScreenState extends State<SuggestedTasksScreen> {
           ],
         ),
         vGap(12.h),
-        _buildRequirePhotoSection(provider),
+        _buildRequirePhotoSection(),
       ],
     );
   }
 
-  Widget _buildSelectFrequencyRow(TaskManagementProvider provider) {
+  Widget _buildSelectFrequencyRow(BuildContext context) {
     return GestureDetector(
       onTap: () {
         addFrequencyPopup(context);
@@ -279,7 +273,7 @@ class _SuggestedTasksScreenState extends State<SuggestedTasksScreen> {
           borderRadius: BorderRadius.circular(15.r),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.05),
+              color: Colors.black.withValues(alpha: 0.05),
               blurRadius: 8,
               offset: const Offset(0, 2),
             ),
@@ -301,7 +295,7 @@ class _SuggestedTasksScreenState extends State<SuggestedTasksScreen> {
     );
   }
 
-  Widget _buildRequirePhotoSection(TaskManagementProvider provider) {
+  Widget _buildRequirePhotoSection() {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
@@ -324,7 +318,7 @@ class _SuggestedTasksScreenState extends State<SuggestedTasksScreen> {
     );
   }
 
-  Widget _buildActionButtons(TaskManagementProvider provider) {
+  Widget _buildActionButtons() {
     return Column(
       children: [
         GestureDetector(
@@ -381,72 +375,71 @@ class _SuggestedTasksScreenState extends State<SuggestedTasksScreen> {
   }
 
   // Helper Methods
-  void _showAssigneeBottomSheet(TaskManagementProvider provider) {
-    final assignees = [
-      'James Miller',
-      'Sarah Johnson',
-      'John Doe',
-      'Jane Smith',
-    ];
+  // void _showAssigneeBottomSheet(TaskManagementProvider provider) {
+  //   final assignees = [
+  //     'James Miller',
+  //     'Sarah Johnson',
+  //     'John Doe',
+  //     'Jane Smith',
+  //   ];
 
-    showModalBottomSheet(
-      context: context,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
-      ),
-      builder:
-          (context) => Container(
-            padding: EdgeInsets.all(20.w),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Container(
-                  width: 40.w,
-                  height: 4.h,
-                  decoration: BoxDecoration(
-                    color: Colors.grey[300],
-                    borderRadius: BorderRadius.circular(2.r),
-                  ),
-                ),
-                vGap(20.h),
-                CText(
-                  'Select Assignee',
-                  size: 18.sp,
-                  weight: FontWeight.w600,
-                  color: Colors.black87,
-                ),
-                vGap(20.h),
-                ...assignees
-                    .map(
-                      (assignee) => ListTile(
-                        leading: CircleAvatar(
-                          backgroundColor: appTheme.blueAccentCustom
-                              .withOpacity(0.2),
-                          child: CText(
-                            assignee.split(' ').map((e) => e[0]).join(),
-                            size: 14.sp,
-                            weight: FontWeight.w600,
-                            color: appTheme.blueAccentCustom,
-                          ),
-                        ),
-                        title: CText(
-                          assignee,
-                          size: 16.sp,
-                          weight: FontWeight.w500,
-                          color: Colors.black87,
-                        ),
-                        onTap: () {
-                          provider.updateAssignee(assignee);
-                          Navigator.pop(context);
-                        },
-                      ),
-                    )
-                    ,
-              ],
-            ),
-          ),
-    );
-  }
+  //   showModalBottomSheet(
+  //     context: context,
+  //     shape: RoundedRectangleBorder(
+  //       borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
+  //     ),
+  //     builder:
+  //         (context) => Container(
+  //           padding: EdgeInsets.all(20.w),
+  //           child: Column(
+  //             mainAxisSize: MainAxisSize.min,
+  //             children: [
+  //               Container(
+  //                 width: 40.w,
+  //                 height: 4.h,
+  //                 decoration: BoxDecoration(
+  //                   color: Colors.grey[300],
+  //                   borderRadius: BorderRadius.circular(2.r),
+  //                 ),
+  //               ),
+  //               vGap(20.h),
+  //               CText(
+  //                 'Select Assignee',
+  //                 size: 18.sp,
+  //                 weight: FontWeight.w600,
+  //                 color: Colors.black87,
+  //               ),
+  //               vGap(20.h),
+  //               ...assignees.map(
+  //                 (assignee) => ListTile(
+  //                   leading: CircleAvatar(
+  //                     backgroundColor: appTheme.blueAccentCustom.withValues(
+  //                       alpha: 0.2,
+  //                     ),
+  //                     child: CText(
+  //                       assignee.split(' ').map((e) => e[0]).join(),
+  //                       size: 14.sp,
+  //                       weight: FontWeight.w600,
+  //                       color: appTheme.blueAccentCustom,
+  //                     ),
+  //                   ),
+  //                   title: CText(
+  //                     assignee,
+  //                     size: 16.sp,
+  //                     weight: FontWeight.w500,
+  //                     color: Colors.black87,
+  //                   ),
+  //                   onTap: () {
+  //                     provider.updateAssignee(assignee);
+  //                     Navigator.pop(context);
+  //                   },
+  //                 ),
+  //               ),
+  //             ],
+  //           ),
+  //         ),
+  //   );
+  // }
 
   // void _showScopeOfWorkModal(TaskManagementProvider provider) {
   //   showModalBottomSheet(

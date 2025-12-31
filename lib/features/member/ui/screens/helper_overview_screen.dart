@@ -12,7 +12,7 @@ import 'package:homekru_owner/features/member/ui/widgets/eligibility_widget.dart
 import 'package:homekru_owner/features/member/ui/widgets/helper_profile_card.dart';
 import 'package:homekru_owner/features/member/ui/widgets/member_info_card.dart';
 import 'package:homekru_owner/features/member/ui/widgets/member_task_card.dart';
-import 'package:homekru_owner/features/task/widgets/action_task_card.dart';
+import 'package:homekru_owner/features/task/ui/widgets/action_task_card.dart';
 import 'package:homekru_owner/core/routes/app_navigator.dart';
 import 'package:homekru_owner/core/routes/app_routes.dart';
 import 'package:homekru_owner/core/theme/theme_helper.dart';

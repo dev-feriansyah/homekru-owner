@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:homekru_owner/shared/widgets/add_fab.dart';
 import 'package:homekru_owner/core/constants/app_strings.dart';
 import 'package:homekru_owner/core/constants/image_constant.dart';
-import 'package:homekru_owner/features/task/widgets/task_card.dart';
+import 'package:homekru_owner/features/task/ui/widgets/task_card.dart';
 import 'package:homekru_owner/core/routes/app_navigator.dart';
 import 'package:homekru_owner/core/routes/app_routes.dart';
 import 'package:homekru_owner/core/theme/theme_helper.dart';
