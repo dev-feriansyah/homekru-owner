@@ -13,9 +13,7 @@ import 'package:homekru_owner/features/action_item/screen/action_screen.dart';
 import 'package:homekru_owner/features/task/ui/screens/task_detail_screen.dart';
 import 'package:homekru_owner/features/task/ui/screens/task_managment/task_management_screen.dart';
 import 'package:homekru_owner/features/task/ui/screens/task_screen.dart';
-import 'package:provider/provider.dart';
-import 'package:homekru_owner/features/attendance_screen/attendance_screen.dart';
-import 'package:homekru_owner/features/attendance_screen/provider/attendance_provider.dart';
+import 'package:homekru_owner/features/attendance_screen/ui/screens/attendance_screen.dart';
 import 'package:homekru_owner/features/auth/ui/screens/confirm_password_screen.dart';
 import 'package:homekru_owner/features/auth/ui/screens/create_household_screen.dart';
 import 'package:homekru_owner/features/auth/ui/screens/forget_password_screen.dart';
@@ -159,20 +157,12 @@ class AppRoutes {
       GoRoute(
         name: attendance,
         path: attendance,
-        builder:
-            (context, state) => ChangeNotifierProvider(
-              create: (context) => AttendanceProvider(),
-              child: const AttendanceScreen(),
-            ),
+        builder: (context, state) => const AttendanceScreen(),
       ),
       GoRoute(
         name: overtimeTracker,
         path: overtimeTracker,
-        builder:
-            (context, state) => ChangeNotifierProvider(
-              create: (context) => AttendanceProvider(),
-              child: const OvertimeTrackerScreen(),
-            ),
+        builder: (context, state) => const OvertimeTrackerScreen(),
       ),
       GoRoute(
         name: overtimeTrackerDetailed,
