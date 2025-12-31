@@ -39,7 +39,7 @@ class Dashboard extends ConsumerWidget {
 
     return Scaffold(
       drawer: Sidebar(),
-      body: IndexedStack(index: dashboardIndex, children: _pages),
+      body: _pages[dashboardIndex],
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
           color: Colors.white,
@@ -57,11 +57,11 @@ class Dashboard extends ConsumerWidget {
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: List.generate(icons.length, (index) {
-            final isSelected = index == dashboardIndex;
+          children: List.generate(icons.length, (i) {
+            final isSelected = i == dashboardIndex;
 
             return GestureDetector(
-              onTap: () => notifier.set(index),
+              onTap: () => notifier.set(i),
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 300),
                 curve: Curves.easeInOut,
@@ -105,7 +105,7 @@ class Dashboard extends ConsumerWidget {
                             child: Column(
                               children: [
                                 CustomImageView(
-                                  imagePath: icons[index],
+                                  imagePath: icons[i],
                                   color:
                                       isSelected
                                           ? appTheme.primaryColor
@@ -115,7 +115,7 @@ class Dashboard extends ConsumerWidget {
 
                                 const SizedBox(height: 7),
                                 Text(
-                                  labels[index],
+                                  labels[i],
                                   style: TextStyle(
                                     fontSize: 12,
                                     fontWeight:

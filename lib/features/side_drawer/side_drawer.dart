@@ -215,6 +215,7 @@ class Sidebar extends ConsumerWidget {
           color: Colors.white,
         ),
         onTap: () {
+          Scaffold.of(context).openEndDrawer();
           // Basic navigation logic (expand if needed)
           if (title == "Action Items") {
             AppNavigator.pushNamed(AppRoutes.action);
@@ -227,7 +228,6 @@ class Sidebar extends ConsumerWidget {
           } else if (title == "Manage Subscription") {
             AppNavigator.pushNamed(AppRoutes.manageSubscription);
           } else if (title == "Settings") {
-            Scaffold.of(context).openEndDrawer();
             ref.read(dashboardIndexProvider.notifier).set(3);
           } else if (title == "Terms and Conditions") {
             AppNavigator.pushNamed(AppRoutes.termsConditions);
