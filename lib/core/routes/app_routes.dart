@@ -31,7 +31,6 @@ import 'package:homekru_owner/features/coowner/coowner_list_screen.dart';
 import 'package:homekru_owner/features/coowner/add_coowner_screen.dart';
 import 'package:homekru_owner/features/deduction/screens/deduction_screen.dart';
 import 'package:homekru_owner/features/notification/notification.dart';
-import 'package:homekru_owner/features/notification/provider/notification_provider.dart';
 import 'package:homekru_owner/features/onboarding/views/onboarding_screen.dart';
 import 'package:homekru_owner/features/overtime_detailed_screen/screens/overtime_detailed_screen.dart';
 import 'package:homekru_owner/features/overtime_tracker/screens/overtime_tracker_screen.dart';
@@ -213,11 +212,7 @@ class AppRoutes {
       GoRoute(
         name: notification,
         path: notification,
-        builder:
-            (context, state) => ChangeNotifierProvider(
-              create: (context) => NotificationProvider(),
-              child: const NotificationScreen(),
-            ),
+        builder: (context, state) => const NotificationScreen(),
       ),
       GoRoute(
         name: profile,
