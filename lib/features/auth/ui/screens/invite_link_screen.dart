@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:homekru_owner/shared/utils/common_utils.dart';
 import 'package:homekru_owner/core/constants/image_constant.dart';
-import 'package:homekru_owner/shared/utils/size_utils.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:homekru_owner/core/routes/app_navigator.dart';
 import 'package:homekru_owner/core/routes/app_routes.dart';
 import 'package:homekru_owner/core/theme/theme_helper.dart';
@@ -21,8 +21,8 @@ class _InviteLinkScreenState extends State<InviteLinkScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        width: SizeUtils.width,
-        height: SizeUtils.height,
+        width: 1.sw,
+        height: 1.sh,
         decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage(ImageConstant.backgroundImage),
@@ -35,13 +35,13 @@ class _InviteLinkScreenState extends State<InviteLinkScreen> {
             SizedBox(height: 50),
             CustomImageView(
               imagePath: ImageConstant.homeKruLogo,
-              height: SizeUtils.width * 0.2,
+              height: 1.sw * 0.2,
             ),
             SizedBox(height: 50),
             Expanded(
               child: Container(
                 // alignment: Alignment.center,
-                width: SizeUtils.width,
+                width: 1.sw,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
@@ -80,7 +80,7 @@ class _InviteLinkScreenState extends State<InviteLinkScreen> {
                               ),
                             ),
 
-                            SizedBox(height: SizeUtils.height * 0.1),
+                            SizedBox(height: 1.sh * 0.1),
                             CustomElevatedButton(
                               onPressed: () {
                                 showDialog(
@@ -97,7 +97,7 @@ class _InviteLinkScreenState extends State<InviteLinkScreen> {
                                       child: Form(
                                         key: formKey,
                                         child: SizedBox(
-                                          width: SizeUtils.width * 0.7,
+                                          width: 1.sw * 0.7,
                                           child: Padding(
                                             padding: const EdgeInsets.symmetric(
                                               horizontal: 20.0,

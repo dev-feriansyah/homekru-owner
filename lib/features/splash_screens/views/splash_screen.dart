@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:homekru_owner/core/constants/image_constant.dart';
-import 'package:homekru_owner/shared/utils/size_utils.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:homekru_owner/core/routes/app_navigator.dart';
 import 'package:homekru_owner/core/routes/app_routes.dart';
@@ -36,7 +36,7 @@ class _SplashScreenState extends State<SplashScreen> {
         child: Center(
           child: CustomImageView(
             imagePath: ImageConstant.appLogo,
-            width: SizeUtils.width * 0.5,
+            width: 1.sw * 0.5,
           ),
         ),
       ),

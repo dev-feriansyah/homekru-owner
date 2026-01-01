@@ -205,7 +205,7 @@ class _ActionScreenState extends State<ActionScreen>
       padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h),
       itemCount: items.length,
       itemBuilder: (context, index) {
-        final isSelected = selectedItems[tabKey]!.contains(index);
+        // final isSelected = selectedItems[tabKey]!.contains(index);
         return Container(
           margin: EdgeInsets.only(bottom: 12.h),
           child: Row(

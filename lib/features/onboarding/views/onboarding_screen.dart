@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:homekru_owner/core/constants/image_constant.dart';
-import 'package:homekru_owner/shared/utils/size_utils.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:homekru_owner/core/routes/app_navigator.dart';
 import 'package:homekru_owner/core/routes/app_routes.dart';
 import 'package:homekru_owner/core/theme/theme_helper.dart';
@@ -81,10 +81,7 @@ class OnboardingScreen extends HookWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          CustomImageView(
-            imagePath: page.image,
-            height: SizeUtils.height * 0.3,
-          ),
+          CustomImageView(imagePath: page.image, height: 1.sh * 0.3),
           const SizedBox(height: 30),
           CText(
             page.title,
@@ -99,7 +96,7 @@ class OnboardingScreen extends HookWidget {
             color: appTheme.grey,
             textAlign: TextAlign.center,
           ),
-          SizedBox(height: SizeUtils.height * 0.1),
+          SizedBox(height: 1.sh * 0.1),
 
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

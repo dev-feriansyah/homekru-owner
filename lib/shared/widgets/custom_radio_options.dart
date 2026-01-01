@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:homekru_owner/shared/utils/size_utils.dart';
 import 'package:homekru_owner/core/theme/theme_helper.dart';
 import 'package:homekru_owner/shared/widgets/custom_text.dart';
 
@@ -26,7 +25,7 @@ class CustomRadioOption<T> extends StatelessWidget {
       onTap: () => onChanged(value),
       child: Container(
         height: 57.h,
-        width: width ?? SizeUtils.width,
+        width: width ?? 1.sw,
         padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 15.h),
         decoration: ShapeDecoration(
           color: appTheme.white,

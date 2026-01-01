@@ -6,7 +6,6 @@ import 'package:homekru_owner/shared/utils/common_utils.dart';
 import 'package:homekru_owner/core/constants/app_strings.dart';
 import 'package:homekru_owner/core/constants/image_constant.dart';
 import 'package:homekru_owner/shared/utils/logger.dart';
-import 'package:homekru_owner/shared/utils/size_utils.dart';
 import 'package:homekru_owner/features/member/ui/widgets/circular_progress.dart';
 import 'package:homekru_owner/features/member/ui/widgets/eligibility_widget.dart';
 import 'package:homekru_owner/features/member/ui/widgets/helper_profile_card.dart';
@@ -519,7 +518,7 @@ class PunctualityCard extends StatelessWidget {
                 flipY: true,
                 child: CustomImageView(
                   imagePath: ImageConstant.maskGroup,
-                  width: SizeUtils.width * 0.55,
+                  width: 1.sw * 0.55,
                 ),
               ),
             ),

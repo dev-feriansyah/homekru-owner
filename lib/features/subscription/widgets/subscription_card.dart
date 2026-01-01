@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:homekru_owner/shared/utils/size_utils.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SubscriptionCard extends StatelessWidget {
   const SubscriptionCard({super.key});
@@ -7,7 +7,7 @@ class SubscriptionCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: SizeUtils.width,
+      width: 1.sw,
       // height: 102,
       padding: EdgeInsets.all(20),
       decoration: BoxDecoration(

@@ -5,7 +5,6 @@ import 'package:homekru_owner/shared/domain/value_objects/frequency_options.dart
 import 'package:homekru_owner/core/constants/app_strings.dart';
 import 'package:homekru_owner/core/constants/image_constant.dart';
 import 'package:homekru_owner/shared/utils/logger.dart';
-import 'package:homekru_owner/shared/utils/size_utils.dart';
 import 'package:homekru_owner/features/member/ui/providers/add_member_form_provider.dart';
 import 'package:homekru_owner/core/theme/theme_helper.dart';
 import 'package:homekru_owner/shared/widgets/custom_app_bar.dart';
@@ -56,7 +55,7 @@ class LiveInHelperSettings extends ConsumerWidget {
                     borderRadius: BorderRadius.circular(25),
                     child: CustomImageView(
                       imagePath: ImageConstant.maskGroup,
-                      width: SizeUtils.width * 0.55,
+                      width: 1.sw * 0.55,
                     ),
                   ),
                 ),
@@ -500,7 +499,7 @@ class LiveInHelperSettings extends ConsumerWidget {
     //                     },
 
     //                     child: Container(
-    //                       width: SizeUtils.width,
+    //                       width: 1.sw,
     //                       padding: EdgeInsets.symmetric(vertical: 15),
     //                       decoration: BoxDecoration(
     //                         color: appTheme.primaryColor,

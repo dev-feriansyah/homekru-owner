@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:homekru_owner/shared/utils/size_utils.dart';
 import 'package:homekru_owner/features/task/ui/widgets/status_chip.dart';
 import 'package:homekru_owner/core/theme/theme_helper.dart';
 import 'package:homekru_owner/shared/widgets/custom_text.dart';
@@ -25,7 +24,7 @@ class TaskCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(bottom: 16.sp),
-      width: SizeUtils.width,
+      width: 1.sw,
       padding: EdgeInsets.all(16.w),
       decoration: BoxDecoration(
         color: appTheme.white,
@@ -47,7 +46,7 @@ class TaskCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
-                width: SizeUtils.width * 0.5,
+                width: 1.sw * 0.5,
                 child: CText(
                   title,
                   color: appTheme.textPrimary,
@@ -59,7 +58,7 @@ class TaskCard extends StatelessWidget {
               ),
               SizedBox(height: 5.h),
               SizedBox(
-                width: SizeUtils.width * 0.5,
+                width: 1.sw * 0.5,
                 child: CText(
                   description,
                   color: appTheme.grey,

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:homekru_owner/core/constants/image_constant.dart';
-import 'package:homekru_owner/shared/utils/size_utils.dart';
 import 'package:homekru_owner/core/theme/theme_helper.dart';
 import 'package:homekru_owner/shared/widgets/custom_image_view.dart';
 
@@ -54,7 +53,7 @@ Widget bottomWaveWidget({double? height, double? width}) {
     child: CustomImageView(
       imagePath: ImageConstant.bottomWave2,
       height: height,
-      width: width ?? SizeUtils.width * 0.6,
+      width: width ?? 1.sw * 0.6,
       fit: BoxFit.fill,
     ),
   );

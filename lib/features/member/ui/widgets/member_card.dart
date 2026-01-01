@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:homekru_owner/shared/utils/common_utils.dart';
-import 'package:homekru_owner/shared/utils/size_utils.dart';
 import 'package:homekru_owner/features/action_item/widgets/redo_parameters_dialog.dart';
 import 'package:homekru_owner/core/routes/app_navigator.dart';
 import 'package:homekru_owner/core/theme/theme_helper.dart';
@@ -14,7 +13,7 @@ class MemberCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: SizeUtils.width,
+      width: 1.sw,
       margin: EdgeInsets.only(bottom: 16.h, left: 20.w, right: 20.w),
       decoration: BoxDecoration(
         color: appTheme.white,
@@ -513,7 +512,7 @@ void reminderPopup(context, {required GlobalKey<FormState> formKey}) {
                     },
 
                     child: Container(
-                      width: SizeUtils.width,
+                      width: 1.sw,
                       padding: EdgeInsets.symmetric(vertical: 15),
                       decoration: BoxDecoration(
                         color: appTheme.primaryColor,

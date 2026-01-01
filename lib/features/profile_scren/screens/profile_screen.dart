@@ -5,7 +5,6 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:homekru_owner/core/constants/image_constant.dart';
 import 'package:homekru_owner/shared/utils/common_utils.dart';
-import 'package:homekru_owner/shared/utils/size_utils.dart';
 import 'package:homekru_owner/core/routes/app_navigator.dart';
 
 import 'package:homekru_owner/core/theme/theme_helper.dart';
@@ -61,7 +60,7 @@ class ProfileScreen extends HookWidget {
           //   ),
           // ),
           SizedBox(
-            height: SizeUtils.height,
+            height: 1.sh,
             child: SingleChildScrollView(
               child: Column(
                 children: [
@@ -70,7 +69,7 @@ class ProfileScreen extends HookWidget {
                       horizontal: 20.0,
                       vertical: 40,
                     ),
-                    width: SizeUtils.width,
+                    width: 1.sw,
                     decoration: BoxDecoration(
                       image: DecorationImage(
                         image: AssetImage(ImageConstant.profileBackground),
@@ -110,8 +109,8 @@ class ProfileScreen extends HookWidget {
                               onTap: () {},
                               // _showImagePickerBottomSheet(context),
                               child: Container(
-                                height: SizeUtils.width * 0.3,
-                                width: SizeUtils.width * 0.3,
+                                height: 1.sw * 0.3,
+                                width: 1.sw * 0.3,
                                 decoration: BoxDecoration(
                                   image: DecorationImage(
                                     image:

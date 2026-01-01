@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:homekru_owner/shared/utils/common_utils.dart';
 import 'package:homekru_owner/core/constants/app_strings.dart';
 import 'package:homekru_owner/core/constants/image_constant.dart';
-import 'package:homekru_owner/shared/utils/size_utils.dart';
 import 'package:homekru_owner/core/theme/theme_helper.dart';
 import 'package:homekru_owner/shared/widgets/custom_image_view.dart';
 import 'package:homekru_owner/shared/widgets/custom_text.dart';
@@ -57,7 +56,7 @@ class HelperProfileCard extends StatelessWidget {
               borderRadius: BorderRadius.circular(25),
               child: CustomImageView(
                 imagePath: ImageConstant.maskGroup,
-                width: SizeUtils.width * 0.55,
+                width: 1.sw * 0.55,
               ),
             ),
           ),

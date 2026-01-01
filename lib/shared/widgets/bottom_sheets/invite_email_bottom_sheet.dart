@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:homekru_owner/shared/utils/common_utils.dart';
 import 'package:homekru_owner/core/constants/app_strings.dart';
-import 'package:homekru_owner/shared/utils/size_utils.dart' show SizeUtils;
 import 'package:homekru_owner/core/theme/theme_helper.dart';
 import 'package:homekru_owner/shared/widgets/bottom_sheets/access_bottom_sheet.dart';
 import 'package:homekru_owner/shared/widgets/custom_elevated_button.dart';
@@ -30,7 +29,7 @@ class _InviteEmailBottomSheetState extends State<InviteEmailBottomSheet> {
             /// Drag indicator
             Container(
               height: 40.h,
-              width: SizeUtils.width,
+              width: 1.sw,
               decoration: BoxDecoration(
                 color: appTheme.silver2,
                 borderRadius: BorderRadius.only(

@@ -4,7 +4,7 @@ import 'package:homekru_owner/features/home_screen/ui/screens/home_screen.dart';
 import 'package:homekru_owner/features/member/ui/screens/member_screen.dart';
 import 'package:homekru_owner/features/settings/settings_screen.dart';
 import 'package:homekru_owner/features/task/ui/screens/task_screen.dart';
-import 'package:homekru_owner/shared/utils/size_utils.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:homekru_owner/features/side_drawer/side_drawer.dart';
 
 import 'package:homekru_owner/core/theme/theme_helper.dart';
@@ -65,7 +65,7 @@ class Dashboard extends ConsumerWidget {
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 300),
                 curve: Curves.easeInOut,
-                width: SizeUtils.width / 4,
+                width: 1.sw / 4,
                 decoration: BoxDecoration(
                   gradient:
                       isSelected
@@ -88,7 +88,7 @@ class Dashboard extends ConsumerWidget {
                     AnimatedContainer(
                       duration: const Duration(milliseconds: 300),
                       height: 3,
-                      width: isSelected ? SizeUtils.width / 4 : 0,
+                      width: isSelected ? 1.sw / 4 : 0,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         color: appTheme.primaryColor,

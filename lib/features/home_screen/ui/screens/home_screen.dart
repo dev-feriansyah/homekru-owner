@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:homekru_owner/features/dashboard/ui/providers/dashboard_index.dart';
 import 'package:homekru_owner/shared/utils/common_utils.dart';
 import 'package:homekru_owner/core/constants/image_constant.dart';
-import 'package:homekru_owner/shared/utils/size_utils.dart';
 
 import 'package:homekru_owner/core/routes/app_navigator.dart';
 import 'package:homekru_owner/core/routes/app_routes.dart';
@@ -61,8 +60,8 @@ class HomeScreen extends ConsumerWidget {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       body: Container(
-        height: SizeUtils.height,
-        width: SizeUtils.width,
+        height: 1.sh,
+        width: 1.sw,
         decoration: BoxDecoration(
           color: appTheme.lightBlue,
           borderRadius: BorderRadius.circular(10),
@@ -78,8 +77,8 @@ class HomeScreen extends ConsumerWidget {
                 right: 0,
                 child: CustomImageView(
                   imagePath: ImageConstant.ellipse,
-                  height: SizeUtils.height * 0.45, // 🔹 Control height here
-                  width: SizeUtils.width,
+                  height: 1.sh * 0.45, // 🔹 Control height here
+                  width: 1.sw,
                   fit: BoxFit.cover,
                 ),
               ),
@@ -315,7 +314,7 @@ class HomeScreen extends ConsumerWidget {
                     Padding(
                       padding: const EdgeInsets.only(left: 20.0),
                       child: SizedBox(
-                        height: SizeUtils.height * 0.14,
+                        height: 1.sh * 0.14,
                         child: ListView.builder(
                           itemCount: 5,
                           scrollDirection: Axis.horizontal,
@@ -329,7 +328,7 @@ class HomeScreen extends ConsumerWidget {
                                 );
                               },
                               child: Container(
-                                width: SizeUtils.width * 0.65,
+                                width: 1.sw * 0.65,
                                 margin: EdgeInsets.only(right: 15),
                                 padding: EdgeInsets.only(
                                   top: 15,
@@ -343,7 +342,7 @@ class HomeScreen extends ConsumerWidget {
                                 child: Row(
                                   children: [
                                     Container(
-                                      height: SizeUtils.height * 0.08,
+                                      height: 1.sh * 0.08,
                                       width: 4,
                                       decoration: BoxDecoration(
                                         color: Color(0xFF83E888),

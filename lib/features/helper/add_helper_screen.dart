@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:homekru_owner/shared/domain/value_objects/live_in_status.dart';
 import 'package:homekru_owner/shared/domain/value_objects/user_role.dart';
 import 'package:homekru_owner/shared/utils/common_utils.dart';
-import 'package:homekru_owner/shared/utils/size_utils.dart';
 import 'package:homekru_owner/features/settings/settings_screen.dart';
 import 'package:homekru_owner/core/routes/app_navigator.dart';
 import 'package:homekru_owner/core/theme/theme_helper.dart';
@@ -45,7 +44,7 @@ class AddHelperScreen extends HookWidget {
           // ),
           SizedBox(
             // color: appTheme.lightBlue,
-            height: SizeUtils.height,
+            height: 1.sh,
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
               child: SingleChildScrollView(

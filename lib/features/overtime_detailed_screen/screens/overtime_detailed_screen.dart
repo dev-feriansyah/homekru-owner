@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:homekru_owner/shared/domain/value_objects/date_range.dart';
 import 'package:homekru_owner/shared/utils/common_utils.dart';
-import 'package:homekru_owner/shared/utils/size_utils.dart';
 
 import 'package:homekru_owner/core/theme/theme_helper.dart';
 import 'package:homekru_owner/shared/widgets/custom_app_bar.dart';
@@ -35,7 +34,7 @@ class _OvertimeDetailedScreenState extends State<OvertimeDetailedScreen> {
           //   ),
           // ),
           SizedBox(
-            height: SizeUtils.height,
+            height: 1.sh,
             child: Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: 20.0,
@@ -95,7 +94,7 @@ class _OvertimeDetailedScreenState extends State<OvertimeDetailedScreen> {
                     SizedBox(height: 20),
 
                     Container(
-                      width: SizeUtils.width,
+                      width: 1.sw,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(30),
                         color: appTheme.white,
@@ -107,7 +106,7 @@ class _OvertimeDetailedScreenState extends State<OvertimeDetailedScreen> {
                               vertical: 10,
                               horizontal: 20,
                             ),
-                            width: SizeUtils.width,
+                            width: 1.sw,
                             decoration: BoxDecoration(
                               color: appTheme.primaryColor,
                               borderRadius: BorderRadius.only(
@@ -180,7 +179,7 @@ class _OvertimeDetailedScreenState extends State<OvertimeDetailedScreen> {
                             separatorBuilder:
                                 (context, index) => Container(
                                   height: 1,
-                                  width: SizeUtils.width,
+                                  width: 1.sw,
                                   color: appTheme.veryLightGrey,
                                 ),
                             itemBuilder: (context, index) {
@@ -287,7 +286,7 @@ class _OvertimeDetailedScreenState extends State<OvertimeDetailedScreen> {
                           ),
                           Container(
                             height: 1,
-                            width: SizeUtils.width,
+                            width: 1.sw,
                             color: appTheme.veryLightGrey,
                           ),
                           Container(

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:homekru_owner/core/constants/image_constant.dart';
-import 'package:homekru_owner/shared/utils/size_utils.dart';
 import 'package:homekru_owner/core/routes/app_navigator.dart';
 import 'package:homekru_owner/core/theme/theme_helper.dart';
 import 'package:homekru_owner/shared/widgets/custom_image_view.dart';
@@ -212,7 +211,7 @@ class TodayAttendanceTab extends HookWidget {
                         },
 
                         child: Container(
-                          width: SizeUtils.width,
+                          width: 1.sw,
                           padding: EdgeInsets.symmetric(vertical: 15),
                           decoration: BoxDecoration(
                             color: appTheme.primaryColor,

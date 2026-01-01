@@ -10,7 +10,6 @@ import 'package:homekru_owner/shared/widgets/custom_text.dart';
 import 'package:homekru_owner/shared/widgets/custom_elevated_button.dart';
 import 'package:homekru_owner/shared/widgets/custom_image_view.dart';
 import 'package:homekru_owner/core/constants/image_constant.dart';
-import 'package:homekru_owner/shared/utils/size_utils.dart';
 
 class TaskDetailScreen extends StatefulWidget {
   const TaskDetailScreen({super.key});
@@ -329,8 +328,8 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
                 // Full screen image
                 Center(
                   child: Container(
-                    width: SizeUtils.width * 0.9,
-                    height: SizeUtils.height * 0.7,
+                    width: 1.sw * 0.9,
+                    height: 1.sh * 0.7,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(12.r),
                     ),

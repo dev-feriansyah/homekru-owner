@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:homekru_owner/shared/utils/common_utils.dart';
 import 'package:homekru_owner/core/constants/image_constant.dart';
-import 'package:homekru_owner/shared/utils/size_utils.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:homekru_owner/core/routes/app_navigator.dart';
 import 'package:homekru_owner/core/routes/app_routes.dart';
@@ -22,8 +22,8 @@ class _WouldYouLikeScreenState extends State<WouldYouLikeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        width: SizeUtils.width,
-        height: SizeUtils.height,
+        width: 1.sw,
+        height: 1.sh,
         decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage(ImageConstant.backgroundImage),
@@ -36,13 +36,13 @@ class _WouldYouLikeScreenState extends State<WouldYouLikeScreen> {
             SizedBox(height: 50),
             CustomImageView(
               imagePath: ImageConstant.homeKruLogo,
-              height: SizeUtils.width * 0.2,
+              height: 1.sw * 0.2,
             ),
             SizedBox(height: 50),
             Expanded(
               child: Container(
                 // alignment: Alignment.center,
-                width: SizeUtils.width,
+                width: 1.sw,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
@@ -159,7 +159,7 @@ class _WouldYouLikeScreenState extends State<WouldYouLikeScreen> {
   Widget customContainer(label) {
     return GestureDetector(
       child: Container(
-        width: SizeUtils.width,
+        width: 1.sw,
         padding: EdgeInsets.all(13),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:homekru_owner/shared/utils/common_utils.dart';
-import 'package:homekru_owner/shared/utils/size_utils.dart';
 import 'package:homekru_owner/features/settings/settings_screen.dart';
 import 'package:homekru_owner/core/routes/app_navigator.dart';
 import 'package:homekru_owner/core/theme/theme_helper.dart';
@@ -50,7 +49,7 @@ class _AddCoOwnerScreenState extends State<AddCoOwnerScreen> {
           // ),
           SizedBox(
             // color: appTheme.lightBlue,
-            height: SizeUtils.height,
+            height: 1.sh,
             child: Padding(
               padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 20.w),
               child: SingleChildScrollView(

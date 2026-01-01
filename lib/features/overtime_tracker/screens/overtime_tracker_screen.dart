@@ -3,7 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:homekru_owner/shared/domain/value_objects/date_range.dart';
 import 'package:homekru_owner/core/constants/image_constant.dart';
 import 'package:homekru_owner/shared/utils/common_utils.dart';
-import 'package:homekru_owner/shared/utils/size_utils.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:homekru_owner/core/routes/app_navigator.dart';
 import 'package:homekru_owner/core/routes/app_routes.dart';
 import 'package:homekru_owner/core/theme/theme_helper.dart';
@@ -96,7 +96,7 @@ class OvertimeTrackerScreen extends HookWidget {
                   ),
                   SizedBox(height: 20),
                   Container(
-                    width: SizeUtils.width,
+                    width: 1.sw,
                     // padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
                       color: appTheme.white,
@@ -114,8 +114,8 @@ class OvertimeTrackerScreen extends HookWidget {
                             borderRadius: BorderRadius.circular(28),
                             child: CustomImageView(
                               imagePath: ImageConstant.maskGroup,
-                              // width: SizeUtils.width * 0.7,
-                              height: SizeUtils.height * 0.14,
+                              // width: 1.sw * 0.7,
+                              height: 1.sh * 0.14,
                             ),
                           ),
                         ),
@@ -189,7 +189,7 @@ class OvertimeTrackerScreen extends HookWidget {
 
                   SizedBox(height: 20),
                   Container(
-                    width: SizeUtils.width,
+                    width: 1.sw,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(30),
                       color: appTheme.white,
@@ -201,7 +201,7 @@ class OvertimeTrackerScreen extends HookWidget {
                             vertical: 10,
                             horizontal: 20,
                           ),
-                          width: SizeUtils.width,
+                          width: 1.sw,
                           decoration: BoxDecoration(
                             color: appTheme.primaryColor,
                             borderRadius: BorderRadius.only(
@@ -250,7 +250,7 @@ class OvertimeTrackerScreen extends HookWidget {
                           separatorBuilder:
                               (context, index) => Container(
                                 height: 1,
-                                width: SizeUtils.width,
+                                width: 1.sw,
                                 color: appTheme.veryLightGrey,
                               ),
                           itemBuilder: (context, index) {

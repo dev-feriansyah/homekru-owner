@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:homekru_owner/core/constants/image_constant.dart';
 import 'package:homekru_owner/shared/utils/common_utils.dart';
-import 'package:homekru_owner/shared/utils/size_utils.dart';
 
 import 'package:homekru_owner/core/routes/app_navigator.dart';
 import 'package:homekru_owner/core/theme/theme_helper.dart';
@@ -53,7 +52,7 @@ class _NotificationScreenState extends State<NotificationScreen>
           //   ),
           // ),
           SizedBox(
-            height: SizeUtils.height,
+            height: 1.sh,
             child: Column(
               children: [
                 // Tab Bar

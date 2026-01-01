@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:homekru_owner/shared/utils/common_utils.dart';
-import 'package:homekru_owner/shared/utils/size_utils.dart';
 
 import 'package:homekru_owner/core/theme/theme_helper.dart';
 import 'package:homekru_owner/shared/widgets/custom_app_bar.dart';
@@ -39,7 +38,7 @@ class _CoownerListScreenState extends State<CoownerListScreen> {
           // ),
           SizedBox(
             // color: appTheme.lightBlue,
-            height: SizeUtils.height,
+            height: 1.sh,
             child: Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: 20.0,
@@ -72,7 +71,7 @@ class _CoownerListScreenState extends State<CoownerListScreen> {
                             vertical: 16.h,
                           ),
                           margin: EdgeInsets.only(bottom: 20.h),
-                          width: SizeUtils.width,
+                          width: 1.sw,
                           decoration: BoxDecoration(
                             color: appTheme.white,
                             borderRadius: BorderRadius.circular(15.r),

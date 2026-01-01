@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:homekru_owner/shared/utils/size_utils.dart';
 import 'package:homekru_owner/core/theme/theme_helper.dart';
 import 'package:homekru_owner/shared/widgets/custom_text.dart';
 
@@ -21,7 +20,7 @@ class InfoCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: SizeUtils.width * 0.28, // using ScreenUtil (same as yours)
+      width: 1.sw * 0.28, // using ScreenUtil (same as yours)
       padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 12.w),
       decoration: BoxDecoration(
         color: appTheme.white,

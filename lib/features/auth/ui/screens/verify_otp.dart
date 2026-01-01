@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:homekru_owner/shared/utils/common_utils.dart';
 import 'package:homekru_owner/core/constants/image_constant.dart';
-import 'package:homekru_owner/shared/utils/size_utils.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:homekru_owner/core/routes/app_navigator.dart';
 import 'package:homekru_owner/core/routes/app_routes.dart';
@@ -25,8 +25,8 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        width: SizeUtils.width,
-        height: SizeUtils.height,
+        width: 1.sw,
+        height: 1.sh,
         decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage(ImageConstant.backgroundImage),
@@ -39,7 +39,7 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
             SizedBox(height: 50),
             CustomImageView(
               imagePath: ImageConstant.homeKruLogo,
-              height: SizeUtils.width * 0.2,
+              height: 1.sw * 0.2,
             ),
             SizedBox(height: 50),
             Expanded(
@@ -47,7 +47,7 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
                 key: _formKey,
                 child: Container(
                   // alignment: Alignment.center,
-                  width: SizeUtils.width,
+                  width: 1.sw,
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(

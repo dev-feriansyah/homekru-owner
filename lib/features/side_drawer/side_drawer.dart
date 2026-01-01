@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:homekru_owner/features/dashboard/ui/providers/dashboard_index.dart';
 import 'package:homekru_owner/shared/utils/common_utils.dart';
 import 'package:homekru_owner/core/constants/image_constant.dart';
-import 'package:homekru_owner/shared/utils/size_utils.dart';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:homekru_owner/core/routes/app_navigator.dart';
@@ -36,7 +35,7 @@ class Sidebar extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
-      width: SizeUtils.width * 0.8,
+      width: 1.sw * 0.8,
       decoration: BoxDecoration(
         color: appTheme.primaryColor,
         borderRadius: BorderRadius.only(

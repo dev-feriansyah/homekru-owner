@@ -4,7 +4,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:homekru_owner/core/constants/image_constant.dart';
 import 'package:homekru_owner/shared/domain/value_objects/date_range.dart';
 import 'package:homekru_owner/shared/utils/common_utils.dart';
-import 'package:homekru_owner/shared/utils/size_utils.dart';
 import 'package:homekru_owner/core/routes/app_navigator.dart';
 import 'package:homekru_owner/core/routes/app_routes.dart';
 
@@ -97,7 +96,7 @@ class _DeductionScreenState extends State<DeductionScreen> {
                   ),
                   SizedBox(height: 20.h),
                   Container(
-                    width: SizeUtils.width,
+                    width: 1.sw,
                     // padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
                       color: appTheme.white,
@@ -115,7 +114,7 @@ class _DeductionScreenState extends State<DeductionScreen> {
                             borderRadius: BorderRadius.circular(28),
                             child: CustomImageView(
                               imagePath: ImageConstant.maskGroup,
-                              height: SizeUtils.height * 0.14,
+                              height: 1.sh * 0.14,
                             ),
                           ),
                         ),
@@ -254,7 +253,7 @@ class _DeductionScreenState extends State<DeductionScreen> {
                   // ),
                   SizedBox(height: 20),
                   Container(
-                    width: SizeUtils.width,
+                    width: 1.sw,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(30),
                       color: appTheme.white,
@@ -266,7 +265,7 @@ class _DeductionScreenState extends State<DeductionScreen> {
                             vertical: 10,
                             horizontal: 20,
                           ),
-                          width: SizeUtils.width,
+                          width: 1.sw,
                           decoration: BoxDecoration(
                             color: appTheme.primaryColor,
                             borderRadius: BorderRadius.only(
@@ -315,7 +314,7 @@ class _DeductionScreenState extends State<DeductionScreen> {
                           separatorBuilder:
                               (context, index) => Container(
                                 height: 1,
-                                width: SizeUtils.width,
+                                width: 1.sw,
                                 color: appTheme.veryLightGrey,
                               ),
                           itemBuilder: (context, index) {
