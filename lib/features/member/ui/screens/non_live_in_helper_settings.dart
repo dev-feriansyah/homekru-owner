@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:homekru_owner/core/constants/app_strings.dart';
 import 'package:homekru_owner/core/routes/app_navigator.dart';
 import 'package:homekru_owner/features/member/ui/providers/add_member_form_provider.dart';
-import 'package:homekru_owner/core/theme/app_colors.dart';
+import 'package:homekru_owner/core/theme/app_color_extension.dart';
 import 'package:homekru_owner/shared/widgets/custom_app_bar.dart';
 import 'package:homekru_owner/shared/widgets/custom_dropdown_widget.dart';
 import 'package:homekru_owner/shared/widgets/custom_elevated_button.dart';
@@ -18,11 +18,14 @@ class NonLiveInHelperSettings extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final appColors = context.appColorExtension;
+
     final state = ref.watch(addMemberFormProvider);
     final notifier = ref.read(addMemberFormProvider.notifier);
 
     return Scaffold(
-      backgroundColor: appColors.lightBlue,
+      backgroundColor: colorScheme.primaryContainer,
       appBar: CustomCommonAppBar(title: AppStrings.nonLiveInHelperSettings),
       body: ListView(
         padding: EdgeInsets.symmetric(horizontal: 20.w),
@@ -30,7 +33,7 @@ class NonLiveInHelperSettings extends ConsumerWidget {
           // GPS Based Check-in/Check-out Section
           CText(
             AppStrings.gpsBasedCheckInOut,
-            color: appColors.textPrimary,
+            color: colorScheme.onSurface,
             size: 18.sp,
             weight: FontWeight.w500,
           ),
@@ -50,28 +53,28 @@ class NonLiveInHelperSettings extends ConsumerWidget {
                     data: Theme.of(context).copyWith(
                       timePickerTheme: TimePickerThemeData(
                         backgroundColor: Colors.white,
-                        hourMinuteTextColor: appColors.primaryColor,
-                        hourMinuteColor: appColors.primaryColor.withValues(
+                        hourMinuteTextColor: colorScheme.primary,
+                        hourMinuteColor: colorScheme.primary.withValues(
                           alpha: 0.2,
                         ),
-                        dayPeriodTextColor: appColors.primaryColor,
-                        dayPeriodColor: appColors.primaryColor.withValues(
+                        dayPeriodTextColor: colorScheme.primary,
+                        dayPeriodColor: colorScheme.primary.withValues(
                           alpha: 0.2,
                         ),
-                        dialHandColor: appColors.primaryColor,
-                        dialBackgroundColor: appColors.primaryColor.withValues(
+                        dialHandColor: colorScheme.primary,
+                        dialBackgroundColor: colorScheme.primary.withValues(
                           alpha: 0.2,
                         ),
-                        entryModeIconColor: appColors.primaryColor,
+                        entryModeIconColor: colorScheme.primary,
                       ),
                       textButtonTheme: TextButtonThemeData(
                         style: TextButton.styleFrom(
                           foregroundColor:
-                              appColors.primaryColor, // Cancel/OK button color
+                              colorScheme.primary, // Cancel/OK button color
                         ),
                       ),
                       colorScheme: ColorScheme.light(
-                        primary: appColors.primaryColor, // Active dial
+                        primary: colorScheme.primary, // Active dial
                         onPrimary: Colors.white,
                         onSurface: Colors.black, // Numbers
                       ),
@@ -112,28 +115,28 @@ class NonLiveInHelperSettings extends ConsumerWidget {
                     data: Theme.of(context).copyWith(
                       timePickerTheme: TimePickerThemeData(
                         backgroundColor: Colors.white,
-                        hourMinuteTextColor: appColors.primaryColor,
-                        hourMinuteColor: appColors.primaryColor.withValues(
+                        hourMinuteTextColor: colorScheme.primary,
+                        hourMinuteColor: colorScheme.primary.withValues(
                           alpha: 0.2,
                         ),
-                        dayPeriodTextColor: appColors.primaryColor,
-                        dayPeriodColor: appColors.primaryColor.withValues(
+                        dayPeriodTextColor: colorScheme.primary,
+                        dayPeriodColor: colorScheme.primary.withValues(
                           alpha: 0.2,
                         ),
-                        dialHandColor: appColors.primaryColor,
-                        dialBackgroundColor: appColors.primaryColor.withValues(
+                        dialHandColor: colorScheme.primary,
+                        dialBackgroundColor: colorScheme.primary.withValues(
                           alpha: 0.2,
                         ),
-                        entryModeIconColor: appColors.primaryColor,
+                        entryModeIconColor: colorScheme.primary,
                       ),
                       textButtonTheme: TextButtonThemeData(
                         style: TextButton.styleFrom(
                           foregroundColor:
-                              appColors.primaryColor, // Cancel/OK button color
+                              colorScheme.primary, // Cancel/OK button color
                         ),
                       ),
                       colorScheme: ColorScheme.light(
-                        primary: appColors.primaryColor, // Active dial
+                        primary: colorScheme.primary, // Active dial
                         onPrimary: Colors.white,
                         onSurface: Colors.black, // Numbers
                       ),
@@ -178,7 +181,7 @@ class NonLiveInHelperSettings extends ConsumerWidget {
 
               CText(
                 "Downtime Preference",
-                color: appColors.textPrimary,
+                color: colorScheme.onSurface,
                 size: 16.sp,
                 weight: FontWeight.w500,
               ),
@@ -203,7 +206,7 @@ class NonLiveInHelperSettings extends ConsumerWidget {
           // Check-in/Check-out Frequency Section
           CText(
             AppStrings.checkInCheckOutFrequency,
-            color: appColors.textPrimary,
+            color: colorScheme.onSurface,
             size: 18.sp,
             weight: FontWeight.w500,
           ),
@@ -234,7 +237,7 @@ class NonLiveInHelperSettings extends ConsumerWidget {
           // Overtime Settings Section
           CText(
             AppStrings.overtimeSettings,
-            color: appColors.textPrimary,
+            color: colorScheme.onSurface,
             size: 18.sp,
             weight: FontWeight.w500,
           ),
@@ -244,7 +247,7 @@ class NonLiveInHelperSettings extends ConsumerWidget {
           Container(
             padding: EdgeInsets.all(16.w),
             decoration: BoxDecoration(
-              color: appColors.white,
+              color: colorScheme.surface,
               borderRadius: BorderRadius.circular(15.r),
               // border: Border.all(
               //   color: appTheme.primaryColor.withValues(alpha: 0.2),
@@ -256,7 +259,7 @@ class NonLiveInHelperSettings extends ConsumerWidget {
               children: [
                 CText(
                   AppStrings.eligibleForOvertime,
-                  color: appColors.textPrimary,
+                  color: colorScheme.onSurface,
                   size: 16.sp,
                   weight: FontWeight.w500,
                 ),
@@ -273,7 +276,7 @@ class NonLiveInHelperSettings extends ConsumerWidget {
             Container(
               padding: EdgeInsets.all(16.w),
               decoration: BoxDecoration(
-                color: appColors.white,
+                color: colorScheme.surface,
                 borderRadius: BorderRadius.circular(15.r),
               ),
               child: Row(
@@ -282,7 +285,7 @@ class NonLiveInHelperSettings extends ConsumerWidget {
                   Expanded(
                     child: CText(
                       "Would you like us to keep track of Maria's overtime based on check-out time?",
-                      color: appColors.textPrimary,
+                      color: colorScheme.onSurface,
                       size: 16.sp,
                       weight: FontWeight.w500,
                     ),
@@ -313,7 +316,7 @@ class NonLiveInHelperSettings extends ConsumerWidget {
             children: [
               CText(
                 AppStrings.deductionSettings,
-                color: appColors.textPrimary,
+                color: colorScheme.onSurface,
                 size: 18.sp,
                 weight: FontWeight.w500,
               ),
@@ -350,7 +353,7 @@ class NonLiveInHelperSettings extends ConsumerWidget {
                     'Helper added successfully!',
                     color: Colors.white,
                   ),
-                  backgroundColor: appColors.primaryColor,
+                  backgroundColor: colorScheme.primary,
                   duration: Duration(seconds: 2),
                 ),
               );

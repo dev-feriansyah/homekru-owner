@@ -5,103 +5,112 @@ import 'package:homekru_owner/core/constants/app_strings.dart';
 import 'package:homekru_owner/features/member/ui/widgets/member_task_card.dart';
 import 'package:homekru_owner/core/routes/app_navigator.dart';
 import 'package:homekru_owner/core/routes/app_routes.dart';
-import 'package:homekru_owner/core/theme/app_colors.dart';
+import 'package:homekru_owner/core/theme/app_color_extension.dart';
 import 'package:homekru_owner/shared/widgets/bottom_sheets/sort_by_filter_bottom_sheet.dart';
 import 'package:homekru_owner/shared/widgets/custom_app_bar.dart';
 import 'package:homekru_owner/shared/widgets/custom_text.dart';
 
 class MemberTasksScreen extends StatelessWidget {
-  MemberTasksScreen({super.key});
-  final tasks = [
-    {
-      "title": "Laundry",
-      "timeRange": "10:00 AM - 3:00 PM",
-      "status": "Pending",
-      "statusColor": Colors.amber,
-      "statusBgColor": appColors.lightYellow,
-    },
-    {
-      "title": "Kitchen Cleaning",
-      "timeRange": "10:00 AM - 3:00 PM",
-      "status": "Done",
-      "statusColor": appColors.darkGreen,
-      "statusBgColor": appColors.mintGreen,
-    },
-    {
-      "title": "Laundry",
-      "timeRange": "10:00 AM - 3:00 PM",
-      "status": "Pending",
-      "statusColor": Colors.amber,
-      "statusBgColor": appColors.lightYellow,
-    },
-    {
-      "title": "Kitchen Cleaning",
-      "timeRange": "10:00 AM - 3:00 PM",
-      "status": "Done",
-      "statusColor": appColors.darkGreen,
-      "statusBgColor": appColors.mintGreen,
-    },
-    {
-      "title": "Laundry",
-      "timeRange": "10:00 AM - 3:00 PM",
-      "status": "Pending",
-      "statusColor": Colors.amber,
-      "statusBgColor": appColors.lightYellow,
-    },
-    {
-      "title": "Kitchen Cleaning",
-      "timeRange": "10:00 AM - 3:00 PM",
-      "status": "Done",
-      "statusColor": appColors.darkGreen,
-      "statusBgColor": appColors.mintGreen,
-    },
-    {
-      "title": "Laundry",
-      "timeRange": "10:00 AM - 3:00 PM",
-      "status": "Pending",
-      "statusColor": Colors.amber,
-      "statusBgColor": appColors.lightYellow,
-    },
-    {
-      "title": "Kitchen Cleaning",
-      "timeRange": "10:00 AM - 3:00 PM",
-      "status": "Done",
-      "statusColor": appColors.darkGreen,
-      "statusBgColor": appColors.mintGreen,
-    },
-    {
-      "title": "Laundry",
-      "timeRange": "10:00 AM - 3:00 PM",
-      "status": "Pending",
-      "statusColor": Colors.amber,
-      "statusBgColor": appColors.lightYellow,
-    },
-    {
-      "title": "Kitchen Cleaning",
-      "timeRange": "10:00 AM - 3:00 PM",
-      "status": "Done",
-      "statusColor": appColors.darkGreen,
-      "statusBgColor": appColors.mintGreen,
-    },
-    {
-      "title": "Laundry",
-      "timeRange": "10:00 AM - 3:00 PM",
-      "status": "Pending",
-      "statusColor": Colors.amber,
-      "statusBgColor": appColors.lightYellow,
-    },
-    {
-      "title": "Kitchen Cleaning",
-      "timeRange": "10:00 AM - 3:00 PM",
-      "status": "Done",
-      "statusColor": appColors.darkGreen,
-      "statusBgColor": appColors.mintGreen,
-    },
-  ];
+  const MemberTasksScreen({super.key});
+
+  List<Map<String, dynamic>> _getTasks(BuildContext context) {
+    final appColors = context.appColorExtension;
+
+    return [
+      {
+        "title": "Laundry",
+        "timeRange": "10:00 AM - 3:00 PM",
+        "status": "Pending",
+        "statusColor": Colors.amber,
+        "statusBgColor": appColors.lightYellow,
+      },
+      {
+        "title": "Kitchen Cleaning",
+        "timeRange": "10:00 AM - 3:00 PM",
+        "status": "Done",
+        "statusColor": appColors.darkGreen,
+        "statusBgColor": appColors.mintGreen,
+      },
+      {
+        "title": "Laundry",
+        "timeRange": "10:00 AM - 3:00 PM",
+        "status": "Pending",
+        "statusColor": Colors.amber,
+        "statusBgColor": appColors.lightYellow,
+      },
+      {
+        "title": "Kitchen Cleaning",
+        "timeRange": "10:00 AM - 3:00 PM",
+        "status": "Done",
+        "statusColor": appColors.darkGreen,
+        "statusBgColor": appColors.mintGreen,
+      },
+      {
+        "title": "Laundry",
+        "timeRange": "10:00 AM - 3:00 PM",
+        "status": "Pending",
+        "statusColor": Colors.amber,
+        "statusBgColor": appColors.lightYellow,
+      },
+      {
+        "title": "Kitchen Cleaning",
+        "timeRange": "10:00 AM - 3:00 PM",
+        "status": "Done",
+        "statusColor": appColors.darkGreen,
+        "statusBgColor": appColors.mintGreen,
+      },
+      {
+        "title": "Laundry",
+        "timeRange": "10:00 AM - 3:00 PM",
+        "status": "Pending",
+        "statusColor": Colors.amber,
+        "statusBgColor": appColors.lightYellow,
+      },
+      {
+        "title": "Kitchen Cleaning",
+        "timeRange": "10:00 AM - 3:00 PM",
+        "status": "Done",
+        "statusColor": appColors.darkGreen,
+        "statusBgColor": appColors.mintGreen,
+      },
+      {
+        "title": "Laundry",
+        "timeRange": "10:00 AM - 3:00 PM",
+        "status": "Pending",
+        "statusColor": Colors.amber,
+        "statusBgColor": appColors.lightYellow,
+      },
+      {
+        "title": "Kitchen Cleaning",
+        "timeRange": "10:00 AM - 3:00 PM",
+        "status": "Done",
+        "statusColor": appColors.darkGreen,
+        "statusBgColor": appColors.mintGreen,
+      },
+      {
+        "title": "Laundry",
+        "timeRange": "10:00 AM - 3:00 PM",
+        "status": "Pending",
+        "statusColor": Colors.amber,
+        "statusBgColor": appColors.lightYellow,
+      },
+      {
+        "title": "Kitchen Cleaning",
+        "timeRange": "10:00 AM - 3:00 PM",
+        "status": "Done",
+        "statusColor": appColors.darkGreen,
+        "statusBgColor": appColors.mintGreen,
+      },
+    ];
+  }
+
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final tasks = _getTasks(context);
+
     return Scaffold(
-      backgroundColor: appColors.lightBlue,
+      backgroundColor: colorScheme.primaryContainer,
       appBar: CustomCommonAppBar(title: AppStrings.memberTasks),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 20.w),
@@ -117,7 +126,7 @@ class MemberTasksScreen extends StatelessWidget {
                       AppStrings.allTasks,
                       size: 18.sp,
                       weight: FontWeight.w600,
-                      color: appColors.textPrimary,
+                      color: colorScheme.onSurface,
                     ),
                     Spacer(),
                     InkWell(
@@ -128,13 +137,11 @@ class MemberTasksScreen extends StatelessWidget {
                         width: 80.w,
                         padding: EdgeInsets.symmetric(vertical: 4.sp),
                         decoration: ShapeDecoration(
-                          color: appColors.white.withValues(alpha: 0.10),
+                          color: colorScheme.surface.withValues(alpha: 0.10),
                           shape: RoundedRectangleBorder(
                             side: BorderSide(
                               width: 1.w,
-                              color: appColors.primaryColor.withValues(
-                                alpha: 0.5,
-                              ),
+                              color: colorScheme.primary.withValues(alpha: 0.5),
                             ),
                             borderRadius: BorderRadius.circular(9.r),
                           ),
@@ -147,7 +154,7 @@ class MemberTasksScreen extends StatelessWidget {
                           children: [
                             Icon(
                               Icons.filter_list,
-                              color: appColors.primaryColor,
+                              color: colorScheme.primary,
                               size: 14.sp,
                             ),
                             CText(
@@ -155,7 +162,7 @@ class MemberTasksScreen extends StatelessWidget {
                               textAlign: TextAlign.center,
                               size: 14.sp,
                               weight: FontWeight.w500,
-                              color: appColors.primaryColor,
+                              color: colorScheme.primary,
                             ),
                           ],
                         ),

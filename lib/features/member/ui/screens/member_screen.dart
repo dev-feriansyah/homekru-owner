@@ -5,7 +5,6 @@ import 'package:homekru_owner/core/constants/image_constant.dart';
 import 'package:homekru_owner/features/member/ui/widgets/member_card.dart';
 import 'package:homekru_owner/core/routes/app_navigator.dart';
 import 'package:homekru_owner/core/routes/app_routes.dart';
-import 'package:homekru_owner/core/theme/app_colors.dart';
 import 'package:homekru_owner/shared/widgets/custom_text.dart';
 
 class MemberScreen extends StatelessWidget {
@@ -13,6 +12,8 @@ class MemberScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     /// 🔹 Members list ===================================
     final members = [
       Member(
@@ -77,7 +78,7 @@ class MemberScreen extends StatelessWidget {
       ),
     ];
     return Scaffold(
-      backgroundColor: appColors.lightBlue,
+      backgroundColor: colorScheme.primaryContainer,
       body: Stack(
         children: [
           /// 🔹 Background header image (sirf upar ke liye)
@@ -102,7 +103,7 @@ class MemberScreen extends StatelessWidget {
                   "Members List",
                   size: 18.sp,
                   weight: FontWeight.w600,
-                  color: appColors.white,
+                  color: colorScheme.surface,
                 ),
               ),
               SizedBox(height: 10.h),

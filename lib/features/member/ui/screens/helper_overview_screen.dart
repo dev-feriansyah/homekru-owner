@@ -14,7 +14,7 @@ import 'package:homekru_owner/features/member/ui/widgets/member_task_card.dart';
 import 'package:homekru_owner/features/task/ui/widgets/action_task_card.dart';
 import 'package:homekru_owner/core/routes/app_navigator.dart';
 import 'package:homekru_owner/core/routes/app_routes.dart';
-import 'package:homekru_owner/core/theme/app_colors.dart';
+import 'package:homekru_owner/core/theme/app_color_extension.dart';
 import 'package:homekru_owner/shared/widgets/custom_app_bar.dart';
 import 'package:homekru_owner/shared/widgets/custom_dropdown_widget.dart';
 import 'package:homekru_owner/shared/widgets/custom_elevated_button.dart';
@@ -37,6 +37,9 @@ class HelperOverviewScreen extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final appColors = context.appColorExtension;
+
     final selectedFrequency = useState<String>(FrequencyOptions.weekly.label);
     final allocatedLeaves = useState<int>(4);
 
@@ -53,7 +56,7 @@ class HelperOverviewScreen extends HookWidget {
     }
 
     return Scaffold(
-      backgroundColor: appColors.lightBlue,
+      backgroundColor: colorScheme.primaryContainer,
       appBar: CustomCommonAppBar(title: AppStrings.helperOverview),
       body: Stack(
         children: [
@@ -81,19 +84,19 @@ class HelperOverviewScreen extends HookWidget {
                 children: [
                   InfoCard(
                     icon: Icons.list_alt,
-                    iconBgColor: appColors.lightBlue,
+                    iconBgColor: colorScheme.primaryContainer,
                     value: "8/9",
                     label: "Tasks",
                   ),
                   InfoCard(
                     icon: Icons.access_time,
-                    iconBgColor: appColors.lightBlue,
+                    iconBgColor: colorScheme.primaryContainer,
                     value: "40H",
                     label: "Hours",
                   ),
                   InfoCard(
                     icon: Icons.check_circle,
-                    iconBgColor: appColors.lightBlue,
+                    iconBgColor: colorScheme.primaryContainer,
                     value: "30",
                     label: "Completion",
                   ),
@@ -102,7 +105,7 @@ class HelperOverviewScreen extends HookWidget {
               vGap(20.h),
               CText(
                 AppStrings.todaysTasks,
-                color: appColors.textPrimary,
+                color: colorScheme.onSurface,
                 size: 18.sp,
                 weight: FontWeight.w500,
               ),
@@ -152,7 +155,7 @@ class HelperOverviewScreen extends HookWidget {
                 children: [
                   CText(
                     AppStrings.dayOffEligibility,
-                    color: appColors.textPrimary,
+                    color: colorScheme.onSurface,
                     size: 18.sp,
                     weight: FontWeight.w500,
                   ),
@@ -170,7 +173,7 @@ class HelperOverviewScreen extends HookWidget {
                         vertical: 5,
                       ),
                       decoration: ShapeDecoration(
-                        color: appColors.primaryColor,
+                        color: colorScheme.primary,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
@@ -178,7 +181,7 @@ class HelperOverviewScreen extends HookWidget {
                       child: CText(
                         AppStrings.edit,
                         textAlign: TextAlign.center,
-                        color: appColors.white,
+                        color: colorScheme.surface,
                         size: 14,
                         weight: FontWeight.w600,
                       ),
@@ -200,7 +203,7 @@ class HelperOverviewScreen extends HookWidget {
 
               CText(
                 AppStrings.resourceRequests,
-                color: appColors.textPrimary,
+                color: colorScheme.onSurface,
                 size: 18.sp,
                 weight: FontWeight.w500,
               ),
@@ -249,6 +252,9 @@ class HelperOverviewScreen extends HookWidget {
     required Function onIncrement,
     required int allocatedLeaves,
   }) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final appColors = context.appColorExtension;
+
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -257,7 +263,7 @@ class HelperOverviewScreen extends HookWidget {
           child: Container(
             padding: EdgeInsets.all(20.w),
             decoration: BoxDecoration(
-              color: appColors.white,
+              color: colorScheme.surface,
               borderRadius: BorderRadius.circular(25.r),
             ),
             child: Column(
@@ -273,17 +279,17 @@ class HelperOverviewScreen extends HookWidget {
                         textAlign: TextAlign.center,
                         size: 18.sp,
                         weight: FontWeight.bold,
-                        color: appColors.textPrimary,
+                        color: colorScheme.onSurface,
                       ),
                     ),
                     GestureDetector(
                       onTap: () => Navigator.of(context).pop(),
                       child: CircleAvatar(
                         radius: 16.r,
-                        backgroundColor: appColors.lightBlueTwo,
+                        backgroundColor: colorScheme.secondaryContainer,
                         child: Icon(
                           Icons.close,
-                          color: appColors.primaryColor,
+                          color: colorScheme.primary,
                           size: 16.sp,
                         ),
                       ),
@@ -300,11 +306,11 @@ class HelperOverviewScreen extends HookWidget {
                       "Frequency",
                       size: 16.sp,
                       weight: FontWeight.w500,
-                      color: appColors.textPrimary,
+                      color: colorScheme.onSurface,
                     ),
                     SizedBox(height: 8.h),
                     CustomDropdownWidget(
-                      borderColor: appColors.offWhite,
+                      borderColor: colorScheme.surfaceContainerHighest,
                       items:
                           FrequencyOptions.values.map((e) => e.label).toList(),
                       hintText: "Select Frequency",
@@ -323,7 +329,7 @@ class HelperOverviewScreen extends HookWidget {
                       "Allocated Leaves",
                       size: 16.sp,
                       weight: FontWeight.w500,
-                      color: appColors.textPrimary,
+                      color: colorScheme.onSurface,
                     ),
                     SizedBox(height: 8.h),
                     Row(
@@ -344,7 +350,7 @@ class HelperOverviewScreen extends HookWidget {
                             ),
                             child: Icon(
                               Icons.remove,
-                              color: appColors.darkRed,
+                              color: colorScheme.error,
                               size: 20.sp,
                             ),
                           ),
@@ -358,13 +364,13 @@ class HelperOverviewScreen extends HookWidget {
                             vertical: 10.h,
                           ),
                           decoration: BoxDecoration(
-                            color: appColors.lightBlue,
+                            color: colorScheme.primaryContainer,
                             borderRadius: BorderRadius.circular(8.r),
                           ),
                           child: CText(
                             allocatedLeaves.toString(),
                             size: 18.sp,
-                            color: appColors.primaryColor,
+                            color: colorScheme.primary,
                             weight: FontWeight.w600,
                           ),
                         ),
@@ -411,7 +417,7 @@ class HelperOverviewScreen extends HookWidget {
                               ),
                             ),
                             side: WidgetStateProperty.all(
-                              BorderSide(color: appColors.primaryColor),
+                              BorderSide(color: colorScheme.primary),
                             ),
                           ),
                           onPressed: () => Navigator.of(context).pop(),
@@ -420,7 +426,7 @@ class HelperOverviewScreen extends HookWidget {
                             child: CText(
                               "Cancel",
                               size: 14.sp,
-                              color: appColors.primaryColor,
+                              color: colorScheme.primary,
                               weight: FontWeight.w600,
                             ),
                           ),
@@ -438,7 +444,7 @@ class HelperOverviewScreen extends HookWidget {
                               ),
                             ),
                             backgroundColor: WidgetStateProperty.all(
-                              appColors.primaryColor,
+                              colorScheme.primary,
                             ),
                           ),
                           onPressed: () {
@@ -449,7 +455,7 @@ class HelperOverviewScreen extends HookWidget {
                                   'Day off eligibility updated successfully!',
                                   color: Colors.white,
                                 ),
-                                backgroundColor: appColors.primaryColor,
+                                backgroundColor: colorScheme.primary,
                                 duration: Duration(seconds: 2),
                               ),
                             );
@@ -458,7 +464,7 @@ class HelperOverviewScreen extends HookWidget {
                             padding: EdgeInsets.symmetric(vertical: 15.h),
                             child: CText(
                               "Save",
-                              color: appColors.white,
+                              color: colorScheme.surface,
                               size: 14.sp,
                               weight: FontWeight.w600,
                             ),
@@ -489,19 +495,22 @@ class PunctualityCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final appColors = context.appColorExtension;
+
     return Container(
       decoration: ShapeDecoration(
-        color: appColors.white,
+        color: colorScheme.surface,
         shape: RoundedRectangleBorder(
           side: BorderSide(
             width: 1,
-            color: appColors.primaryColor.withValues(alpha: 0.3),
+            color: colorScheme.primary.withValues(alpha: 0.3),
           ),
           borderRadius: BorderRadius.circular(25),
         ),
         shadows: [
           BoxShadow(
-            color: appColors.shadowColor,
+            color: colorScheme.primary.withValues(alpha: 0.08),
             blurRadius: 50,
             offset: const Offset(10, 20),
           ),
@@ -542,7 +551,7 @@ class PunctualityCard extends StatelessWidget {
                     children: [
                       CText(
                         "85%",
-                        color: appColors.primaryColor,
+                        color: colorScheme.primary,
                         size: 30.sp,
                         weight: FontWeight.w600,
                       ),

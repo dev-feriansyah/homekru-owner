@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:homekru_owner/shared/utils/common_utils.dart';
 import 'package:homekru_owner/features/action_item/widgets/redo_parameters_dialog.dart';
 import 'package:homekru_owner/core/routes/app_navigator.dart';
-import 'package:homekru_owner/core/theme/app_colors.dart';
+import 'package:homekru_owner/core/theme/app_color_extension.dart';
 import 'package:homekru_owner/shared/widgets/custom_text.dart';
 
 class MemberCard extends StatelessWidget {
@@ -12,19 +12,22 @@ class MemberCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final appColors = context.appColorExtension;
+
     return Container(
       width: 1.sw,
       margin: EdgeInsets.only(bottom: 16.h, left: 20.w, right: 20.w),
       decoration: BoxDecoration(
-        color: appColors.white,
+        color: colorScheme.surface,
         borderRadius: BorderRadius.circular(25.r),
         border: Border.all(
           width: 1.w,
-          color: appColors.primaryColor.withValues(alpha: 0.2),
+          color: colorScheme.primary.withValues(alpha: 0.2),
         ),
         boxShadow: [
           BoxShadow(
-            color: appColors.shadowColor,
+            color: colorScheme.primary.withValues(alpha: 0.08),
             blurRadius: 50.r,
             offset: Offset(10.w, 20.h),
           ),
@@ -41,7 +44,7 @@ class MemberCard extends StatelessWidget {
               height: 60.w,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                border: Border.all(width: 1.w, color: appColors.primaryColor),
+                border: Border.all(width: 1.w, color: colorScheme.primary),
               ),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(30.r),
@@ -66,7 +69,7 @@ class MemberCard extends StatelessWidget {
                     children: [
                       CText(
                         member.name,
-                        color: appColors.textPrimary,
+                        color: colorScheme.onSurface,
                         size: 16.sp,
                         weight: FontWeight.w600,
                         height: 1.38,
@@ -75,7 +78,7 @@ class MemberCard extends StatelessWidget {
                       Icon(
                         Icons.arrow_forward_ios,
                         size: 16.sp,
-                        color: appColors.textPrimary,
+                        color: colorScheme.onSurface,
                       ),
                     ],
                   ),
@@ -127,6 +130,8 @@ class MemberCard extends StatelessWidget {
 
   /// Builds status chips based on member status
   List<Widget> _buildStatusChips(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final appColors = context.appColorExtension;
     final chips = <Widget>[];
 
     if (member.isCheckedIn) {
@@ -134,8 +139,8 @@ class MemberCard extends StatelessWidget {
         _buildChip(
           dischargeOnTap: () {},
           label: "Checked-in",
-          bgColor: appColors.lightBlue,
-          textColor: appColors.primaryColor,
+          bgColor: colorScheme.primaryContainer,
+          textColor: colorScheme.primary,
           fontWeight: FontWeight.w700,
         ),
       );
@@ -147,7 +152,7 @@ class MemberCard extends StatelessWidget {
           dischargeOnTap: () {},
           label: "Not checked-in",
           bgColor: appColors.lightPink.withValues(alpha: 0.4),
-          textColor: appColors.darkRed,
+          textColor: colorScheme.error,
           fontWeight: FontWeight.w700,
         ),
       );
@@ -171,7 +176,7 @@ class MemberCard extends StatelessWidget {
           dischargeOnTap: () => _showDischargeDialog(context),
           label: "Discharge",
           bgColor: appColors.lightPink.withValues(alpha: 0.4),
-          textColor: appColors.darkRed,
+          textColor: colorScheme.error,
         ),
       );
     }
@@ -204,13 +209,14 @@ class MemberCard extends StatelessWidget {
     showDialog(
       context: context,
       builder: (BuildContext context) {
+        final colorScheme = Theme.of(context).colorScheme;
         return Dialog(
           insetPadding: EdgeInsets.symmetric(horizontal: 20),
 
           child: Container(
             padding: EdgeInsets.all(20),
             decoration: BoxDecoration(
-              color: appColors.white,
+              color: colorScheme.surface,
               borderRadius: BorderRadius.circular(25),
             ),
             child: Column(
@@ -235,8 +241,8 @@ class MemberCard extends StatelessWidget {
                       },
                       child: CircleAvatar(
                         radius: 16,
-                        backgroundColor: appColors.lightBlueTwo,
-                        child: Icon(Icons.close, color: appColors.primaryColor),
+                        backgroundColor: colorScheme.secondaryContainer,
+                        child: Icon(Icons.close, color: colorScheme.primary),
                       ),
                     ),
                   ],
@@ -263,7 +269,7 @@ class MemberCard extends StatelessWidget {
                                 ),
                               ),
                               side: WidgetStateProperty.all(
-                                BorderSide(color: appColors.primaryColor),
+                                BorderSide(color: colorScheme.primary),
                               ),
                             ),
                             onPressed: () {
@@ -277,7 +283,7 @@ class MemberCard extends StatelessWidget {
                               child: CText(
                                 "Default",
                                 size: 14,
-                                color: appColors.primaryColor,
+                                color: colorScheme.primary,
                                 weight: FontWeight.bold,
                                 fontFamily: "PoppinsMedium",
                               ),
@@ -297,7 +303,7 @@ class MemberCard extends StatelessWidget {
                               ),
                             ),
                             backgroundColor: WidgetStateProperty.all(
-                              appColors.primaryColor,
+                              colorScheme.primary,
                             ),
                           ),
                           onPressed: () {
@@ -311,7 +317,7 @@ class MemberCard extends StatelessWidget {
                             ),
                             child: CText(
                               "Custom",
-                              color: appColors.white,
+                              color: colorScheme.surface,
                               size: 14,
                               weight: FontWeight.bold,
                               fontFamily: "PoppinsMedium",
@@ -337,7 +343,7 @@ class MemberCard extends StatelessWidget {
   //         '${member.name} has been discharged successfully',
   //         color: Colors.white,
   //       ),
-  //       backgroundColor: appColors.darkRed,
+  //       backgroundColor: colorScheme.error,
   //       duration: Duration(seconds: 2),
   //     ),
   //   );
@@ -373,13 +379,16 @@ void reminderPopup(context, {required GlobalKey<FormState> formKey}) {
     context: context,
     builder: (BuildContext context) {
       final TextEditingController timeController = TextEditingController();
+      final colorScheme = Theme.of(context).colorScheme;
+      final appColors = context.appColorExtension;
+
       return Dialog(
         child: StatefulBuilder(
           builder: (context, setState) {
             return Container(
               padding: EdgeInsets.all(20),
               decoration: BoxDecoration(
-                color: appColors.white,
+                color: colorScheme.surface,
                 borderRadius: BorderRadius.circular(25),
               ),
               child: Column(
@@ -405,11 +414,8 @@ void reminderPopup(context, {required GlobalKey<FormState> formKey}) {
                         },
                         child: CircleAvatar(
                           radius: 16,
-                          backgroundColor: appColors.lightBlueTwo,
-                          child: Icon(
-                            Icons.close,
-                            color: appColors.primaryColor,
-                          ),
+                          backgroundColor: colorScheme.secondaryContainer,
+                          child: Icon(Icons.close, color: colorScheme.primary),
                         ),
                       ),
                     ],
@@ -431,27 +437,26 @@ void reminderPopup(context, {required GlobalKey<FormState> formKey}) {
                               data: Theme.of(context).copyWith(
                                 timePickerTheme: TimePickerThemeData(
                                   backgroundColor: Colors.white,
-                                  hourMinuteTextColor: appColors.primaryColor,
-                                  hourMinuteColor: appColors.primaryColor
+                                  hourMinuteTextColor: colorScheme.primary,
+                                  hourMinuteColor: colorScheme.primary
                                       .withValues(alpha: 0.2),
-                                  dayPeriodTextColor: appColors.primaryColor,
-                                  dayPeriodColor: appColors.primaryColor
+                                  dayPeriodTextColor: colorScheme.primary,
+                                  dayPeriodColor: colorScheme.primary
                                       .withValues(alpha: 0.2),
-                                  dialHandColor: appColors.primaryColor,
-                                  dialBackgroundColor: appColors.primaryColor
+                                  dialHandColor: colorScheme.primary,
+                                  dialBackgroundColor: colorScheme.primary
                                       .withValues(alpha: 0.2),
-                                  entryModeIconColor: appColors.primaryColor,
+                                  entryModeIconColor: colorScheme.primary,
                                 ),
                                 textButtonTheme: TextButtonThemeData(
                                   style: TextButton.styleFrom(
                                     foregroundColor:
-                                        appColors
-                                            .primaryColor, // Cancel/OK button color
+                                        colorScheme
+                                            .primary, // Cancel/OK button color
                                   ),
                                 ),
                                 colorScheme: ColorScheme.light(
-                                  primary:
-                                      appColors.primaryColor, // Active dial
+                                  primary: colorScheme.primary, // Active dial
                                   onPrimary: Colors.white,
                                   onSurface: Colors.black, // Numbers
                                 ),
@@ -516,14 +521,14 @@ void reminderPopup(context, {required GlobalKey<FormState> formKey}) {
                       width: 1.sw,
                       padding: EdgeInsets.symmetric(vertical: 15),
                       decoration: BoxDecoration(
-                        color: appColors.primaryColor,
+                        color: colorScheme.primary,
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: CText(
                         'Save',
                         textAlign: TextAlign.center,
                         size: 16,
-                        color: appColors.white,
+                        color: colorScheme.surface,
                         weight: FontWeight.bold,
                       ),
                     ),

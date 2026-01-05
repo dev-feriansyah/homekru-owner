@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:homekru_owner/shared/utils/common_utils.dart';
 import 'package:homekru_owner/core/constants/app_strings.dart';
 import 'package:homekru_owner/core/constants/image_constant.dart';
-import 'package:homekru_owner/core/theme/app_colors.dart';
+import 'package:homekru_owner/core/theme/app_color_extension.dart';
 import 'package:homekru_owner/shared/widgets/custom_image_view.dart';
 import 'package:homekru_owner/shared/widgets/custom_text.dart';
 
@@ -29,19 +29,22 @@ class HelperProfileCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final appColors = context.appColorExtension;
+
     return Container(
       decoration: ShapeDecoration(
-        color: appColors.white,
+        color: colorScheme.surface,
         shape: RoundedRectangleBorder(
           side: BorderSide(
             width: 1,
-            color: appColors.primaryColor.withValues(alpha: 0.3),
+            color: colorScheme.primary.withValues(alpha: 0.3),
           ),
           borderRadius: BorderRadius.circular(25),
         ),
         shadows: [
           BoxShadow(
-            color: appColors.shadowColor,
+            color: colorScheme.primary.withValues(alpha: 0.08),
             blurRadius: 50,
             offset: const Offset(10, 20),
           ),
@@ -70,7 +73,7 @@ class HelperProfileCard extends StatelessWidget {
                   height: 60,
                   decoration: ShapeDecoration(
                     shape: CircleBorder(
-                      side: BorderSide(color: appColors.primaryColor, width: 1),
+                      side: BorderSide(color: colorScheme.primary, width: 1),
                     ),
                   ),
                   child: ClipRRect(
@@ -92,7 +95,7 @@ class HelperProfileCard extends StatelessWidget {
                     children: [
                       CText(
                         name,
-                        color: appColors.textPrimary.withValues(alpha: 0.8),
+                        color: colorScheme.onSurface.withValues(alpha: 0.8),
                         size: 16.sp,
                         weight: FontWeight.w600,
                       ),
@@ -124,7 +127,7 @@ class HelperProfileCard extends StatelessWidget {
                                 vertical: 6,
                               ),
                               decoration: ShapeDecoration(
-                                color: appColors.lightBlue,
+                                color: colorScheme.primaryContainer,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(9),
                                 ),
@@ -132,7 +135,7 @@ class HelperProfileCard extends StatelessWidget {
                               child: CText(
                                 statusText,
                                 textAlign: TextAlign.center,
-                                color: appColors.primaryColor,
+                                color: colorScheme.primary,
                                 size: 14,
                                 weight: FontWeight.w700,
                                 height: 1.29,
@@ -149,7 +152,7 @@ class HelperProfileCard extends StatelessWidget {
                                 vertical: 5,
                               ),
                               decoration: ShapeDecoration(
-                                color: appColors.primaryColor,
+                                color: colorScheme.primary,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10),
                                 ),
@@ -157,7 +160,7 @@ class HelperProfileCard extends StatelessWidget {
                               child: CText(
                                 AppStrings.edit,
                                 textAlign: TextAlign.center,
-                                color: appColors.white,
+                                color: colorScheme.surface,
                                 size: 14,
                                 weight: FontWeight.w600,
                               ),

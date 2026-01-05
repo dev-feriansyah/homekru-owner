@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:homekru_owner/shared/utils/common_utils.dart';
 import 'package:homekru_owner/core/constants/app_strings.dart';
-import 'package:homekru_owner/core/theme/app_colors.dart';
+import 'package:homekru_owner/core/theme/app_color_extension.dart';
 import 'package:homekru_owner/shared/widgets/custom_app_bar.dart';
 import 'package:homekru_owner/shared/widgets/custom_text.dart';
 
@@ -11,8 +11,10 @@ class AttendenceLogScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Scaffold(
-      backgroundColor: appColors.lightBlue,
+      backgroundColor: colorScheme.primaryContainer,
       appBar: CustomCommonAppBar(title: AppStrings.attendanceTime),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -21,7 +23,7 @@ class AttendenceLogScreen extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 20.w),
             child: CText(
               'Maria Johnson',
-              color: appColors.textPrimary,
+              color: colorScheme.onSurface,
               size: 18.sp,
               weight: FontWeight.w600,
               height: 1.56,
@@ -53,6 +55,9 @@ class AttendenceLogWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final appColors = context.appColorExtension;
+
     return Container(
       width: 1.sw,
       margin: EdgeInsets.symmetric(horizontal: 20.w),
@@ -60,12 +65,12 @@ class AttendenceLogWidget extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(20),
         border: Border.all(
-          color: appColors.primaryColor.withValues(alpha: 0.2),
+          color: colorScheme.primary.withValues(alpha: 0.2),
           width: 1,
         ),
         boxShadow: [
           BoxShadow(
-            color: appColors.shadowColor,
+            color: colorScheme.primary.withValues(alpha: 0.08),
             blurRadius: 50,
             offset: Offset(10, 20),
           ),
@@ -102,7 +107,7 @@ class AttendenceLogWidget extends StatelessWidget {
                       ),
                       child: CText(
                         "12/03/2025",
-                        color: appColors.primaryColor,
+                        color: colorScheme.primary,
                         size: 12.sp,
                         weight: FontWeight.w600,
                         height: 1.5,
