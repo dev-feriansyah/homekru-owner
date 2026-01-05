@@ -390,7 +390,7 @@ class _NotificationScreenState extends State<NotificationScreen>
           height: 50,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: Colors.green.withOpacity(0.2),
+            color: Colors.green.withValues(alpha: 0.2),
           ),
           child: Icon(Icons.check, color: Colors.green, size: 24),
         );
@@ -400,7 +400,7 @@ class _NotificationScreenState extends State<NotificationScreen>
           height: 50,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: Colors.red.withOpacity(0.2),
+            color: Colors.red.withValues(alpha: 0.2),
           ),
           child: Icon(Icons.warning, color: Colors.red, size: 24),
         );

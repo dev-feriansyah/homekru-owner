@@ -101,7 +101,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
         borderRadius: BorderRadius.circular(12.r),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: 0.05),
             offset: Offset(0, 2),
             blurRadius: 10,
             spreadRadius: 0,
@@ -157,7 +157,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
         borderRadius: BorderRadius.circular(12.r),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: 0.05),
             offset: Offset(0, 2),
             blurRadius: 10,
             spreadRadius: 0,
@@ -224,7 +224,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
         borderRadius: BorderRadius.circular(12.r),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: 0.05),
             offset: Offset(0, 2),
             blurRadius: 10,
             spreadRadius: 0,
@@ -285,7 +285,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
         borderRadius: BorderRadius.circular(12.r),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: 0.05),
             offset: Offset(0, 2),
             blurRadius: 10,
             spreadRadius: 0,
@@ -324,7 +324,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
         borderRadius: BorderRadius.circular(12.r),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: 0.05),
             offset: Offset(0, 2),
             blurRadius: 10,
             spreadRadius: 0,
@@ -374,7 +374,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
       margin: EdgeInsets.only(bottom: 12.h),
       padding: EdgeInsets.all(12.w),
       decoration: BoxDecoration(
-        color: appColors.veryLightGrey.withOpacity(0.3),
+        color: appColors.veryLightGrey.withValues(alpha: 0.3),
         borderRadius: BorderRadius.circular(8.r),
       ),
       child: Column(

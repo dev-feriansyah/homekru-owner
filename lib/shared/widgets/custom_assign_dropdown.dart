@@ -86,7 +86,7 @@ class CustomAssignDropdown extends StatelessWidget {
                                   height: 30.h,
                                   decoration: BoxDecoration(
                                     color: appColors.blueAccentCustom
-                                        .withOpacity(0.2),
+                                        .withValues(alpha: 0.2),
                                     shape: BoxShape.circle,
                                   ),
                                   child: Center(

@@ -23,6 +23,7 @@ class HomeSetupScreen extends StatelessWidget {
             onAdd: () async {
               final result = await showAddRoomBottomSheet(context);
               if (result != null) {
+                if (!context.mounted) return;
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     content: Text(
@@ -50,6 +51,7 @@ class HomeSetupScreen extends StatelessWidget {
             onAdd: () async {
               final result = await showAddRoomBottomSheet(context);
               if (result != null) {
+                if (!context.mounted) return;
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     content: Text(
@@ -77,6 +79,7 @@ class HomeSetupScreen extends StatelessWidget {
             onAdd: () async {
               final result = await showAddRoomBottomSheet(context);
               if (result != null) {
+                if (!context.mounted) return;
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     content: Text(
@@ -105,6 +108,7 @@ class HomeSetupScreen extends StatelessWidget {
             onAdd: () async {
               final result = await showAddRoomBottomSheet(context);
               if (result != null) {
+                if (!context.mounted) return;
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     content: Text(
@@ -206,7 +210,7 @@ class _RoomItem extends StatelessWidget {
     //   borderRadius: BorderRadius.circular(16),
     //   boxShadow: [
     //     BoxShadow(
-    //       color: Colors.black.withOpacity(0.06),
+    //       color: Colors.black.withValues(alpha: 0.06),
     //       blurRadius: 10,
     //       offset: const Offset(0, 3),
     //     ),

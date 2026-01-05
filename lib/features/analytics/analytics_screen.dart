@@ -248,7 +248,7 @@ class _AnalyticsScreenState extends State<AnalyticsScreen>
         borderRadius: BorderRadius.circular(12.r),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: 0.05),
             offset: Offset(0, 2),
             blurRadius: 10,
             spreadRadius: 0,
@@ -309,7 +309,7 @@ class _AnalyticsScreenState extends State<AnalyticsScreen>
         borderRadius: BorderRadius.circular(12.r),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: 0.05),
             offset: Offset(0, 2),
             blurRadius: 10,
             spreadRadius: 0,
@@ -346,7 +346,7 @@ class _AnalyticsScreenState extends State<AnalyticsScreen>
         borderRadius: BorderRadius.circular(12.r),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: 0.05),
             offset: Offset(0, 2),
             blurRadius: 10,
             spreadRadius: 0,
@@ -406,7 +406,7 @@ class _AnalyticsScreenState extends State<AnalyticsScreen>
         borderRadius: BorderRadius.circular(12.r),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: 0.05),
             offset: Offset(0, 2),
             blurRadius: 10,
             spreadRadius: 0,
@@ -440,7 +440,7 @@ class _AnalyticsScreenState extends State<AnalyticsScreen>
         borderRadius: BorderRadius.circular(12.r),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: 0.05),
             offset: Offset(0, 2),
             blurRadius: 10,
             spreadRadius: 0,
@@ -474,7 +474,7 @@ class _AnalyticsScreenState extends State<AnalyticsScreen>
         borderRadius: BorderRadius.circular(12.r),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: 0.05),
             offset: Offset(0, 2),
             blurRadius: 10,
             spreadRadius: 0,
@@ -537,7 +537,7 @@ class _AnalyticsScreenState extends State<AnalyticsScreen>
         borderRadius: BorderRadius.circular(12.r),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: 0.05),
             offset: Offset(0, 2),
             blurRadius: 10,
             spreadRadius: 0,
@@ -570,7 +570,7 @@ class _AnalyticsScreenState extends State<AnalyticsScreen>
         children: [
           CircleAvatar(
             radius: 20.r,
-            backgroundColor: appColors.primaryColor.withOpacity(0.1),
+            backgroundColor: appColors.primaryColor.withValues(alpha: 0.1),
             child: CText(
               name[0],
               size: 16.sp,
@@ -618,7 +618,7 @@ class _AnalyticsScreenState extends State<AnalyticsScreen>
         borderRadius: BorderRadius.circular(12.r),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: 0.05),
             offset: Offset(0, 2),
             blurRadius: 10,
             spreadRadius: 0,
@@ -655,7 +655,7 @@ class _AnalyticsScreenState extends State<AnalyticsScreen>
         borderRadius: BorderRadius.circular(12.r),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: 0.05),
             offset: Offset(0, 2),
             blurRadius: 10,
             spreadRadius: 0,

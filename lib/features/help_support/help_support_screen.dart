@@ -140,7 +140,7 @@ class _HelpSupportScreenState extends State<HelpSupportScreen> {
         borderRadius: BorderRadius.circular(12.r),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: 0.05),
             offset: Offset(0, 2),
             blurRadius: 10,
             spreadRadius: 0,
@@ -199,7 +199,7 @@ class _HelpSupportScreenState extends State<HelpSupportScreen> {
         borderRadius: BorderRadius.circular(12.r),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: 0.05),
             offset: Offset(0, 2),
             blurRadius: 10,
             spreadRadius: 0,
@@ -269,9 +269,9 @@ class _HelpSupportScreenState extends State<HelpSupportScreen> {
       child: Container(
         padding: EdgeInsets.all(16.w),
         decoration: BoxDecoration(
-          color: color.withOpacity(0.1),
+          color: color.withValues(alpha: 0.1),
           borderRadius: BorderRadius.circular(8.r),
-          border: Border.all(color: color.withOpacity(0.3)),
+          border: Border.all(color: color.withValues(alpha: 0.3)),
         ),
         child: Column(
           children: [
@@ -298,7 +298,7 @@ class _HelpSupportScreenState extends State<HelpSupportScreen> {
         borderRadius: BorderRadius.circular(12.r),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: 0.05),
             offset: Offset(0, 2),
             blurRadius: 10,
             spreadRadius: 0,
@@ -334,7 +334,7 @@ class _HelpSupportScreenState extends State<HelpSupportScreen> {
           child: Container(
             padding: EdgeInsets.all(16.w),
             decoration: BoxDecoration(
-              color: appColors.veryLightGrey.withOpacity(0.3),
+              color: appColors.veryLightGrey.withValues(alpha: 0.3),
               borderRadius: BorderRadius.circular(8.r),
             ),
             child: Row(
@@ -342,7 +342,7 @@ class _HelpSupportScreenState extends State<HelpSupportScreen> {
                 Container(
                   padding: EdgeInsets.all(12.w),
                   decoration: BoxDecoration(
-                    color: option['color'].withOpacity(0.1),
+                    color: option['color'].withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(8.r),
                   ),
                   child: Icon(
@@ -404,7 +404,7 @@ class _HelpSupportScreenState extends State<HelpSupportScreen> {
         borderRadius: BorderRadius.circular(12.r),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: 0.05),
             offset: Offset(0, 2),
             blurRadius: 10,
             spreadRadius: 0,
@@ -443,7 +443,7 @@ class _HelpSupportScreenState extends State<HelpSupportScreen> {
     return Container(
       margin: EdgeInsets.only(bottom: 12.h),
       decoration: BoxDecoration(
-        color: appColors.veryLightGrey.withOpacity(0.3),
+        color: appColors.veryLightGrey.withValues(alpha: 0.3),
         borderRadius: BorderRadius.circular(8.r),
       ),
       child: ExpansionTile(

@@ -478,7 +478,6 @@ class OvertimeTrackerScreen extends HookWidget {
                   child: GestureDetector(
                     onTap: () {
                       Navigator.pop(context);
-                      // TODO: Add your "Mark as Paid" logic here
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(content: Text("Marked as Paid")),
                       );

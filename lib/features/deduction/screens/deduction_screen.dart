@@ -505,7 +505,6 @@ class _DeductionScreenState extends State<DeductionScreen> {
                   child: GestureDetector(
                     onTap: () {
                       Navigator.pop(context);
-                      // TODO: Add your "Mark as Deducted" logic here
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(content: Text("Marked as Deducted")),
                       );

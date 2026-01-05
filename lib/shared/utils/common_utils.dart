@@ -22,11 +22,11 @@ Future<TimeOfDay?> showCustomTimePicker(BuildContext context) async {
           timePickerTheme: TimePickerThemeData(
             backgroundColor: Colors.white,
             hourMinuteTextColor: appColors.primaryColor,
-            hourMinuteColor: appColors.primaryColor.withOpacity(0.2),
+            hourMinuteColor: appColors.primaryColor.withValues(alpha: 0.2),
             dayPeriodTextColor: appColors.primaryColor,
-            dayPeriodColor: appColors.primaryColor.withOpacity(0.2),
+            dayPeriodColor: appColors.primaryColor.withValues(alpha: 0.2),
             dialHandColor: appColors.primaryColor,
-            dialBackgroundColor: appColors.primaryColor.withOpacity(0.2),
+            dialBackgroundColor: appColors.primaryColor.withValues(alpha: 0.2),
             entryModeIconColor: appColors.primaryColor,
           ),
           textButtonTheme: TextButtonThemeData(

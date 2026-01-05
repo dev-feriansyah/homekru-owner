@@ -48,3 +48,8 @@ flutter:
     - family: PoppinsMedium
       fonts:
         - asset: assets/fonts/Poppins-Medium.ttf
+
+# add rps to dart run this script: `dart pub global activate rps`
+scripts:
+  install: flutter pub get
+  gen_code: dart run build_runner build --delete-conflicting-outputs

@@ -50,7 +50,7 @@ class _ReportsScreenState extends State<ReportsScreen> {
                     borderRadius: BorderRadius.circular(12.r),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withOpacity(0.05),
+                        color: Colors.black.withValues(alpha: 0.05),
                         offset: Offset(0, 2),
                         blurRadius: 10,
                         spreadRadius: 0,
@@ -165,7 +165,7 @@ class _ReportsScreenState extends State<ReportsScreen> {
         borderRadius: BorderRadius.circular(12.r),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: 0.05),
             offset: Offset(0, 2),
             blurRadius: 10,
             spreadRadius: 0,
@@ -182,7 +182,7 @@ class _ReportsScreenState extends State<ReportsScreen> {
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
                 decoration: BoxDecoration(
-                  color: color.withOpacity(0.1),
+                  color: color.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(8.r),
                 ),
                 child: CText(
@@ -221,7 +221,7 @@ class _ReportsScreenState extends State<ReportsScreen> {
         borderRadius: BorderRadius.circular(12.r),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: 0.05),
             offset: Offset(0, 2),
             blurRadius: 10,
             spreadRadius: 0,
@@ -303,7 +303,7 @@ class _ReportsScreenState extends State<ReportsScreen> {
           Container(
             padding: EdgeInsets.all(12.w),
             decoration: BoxDecoration(
-              color: appColors.primaryColor.withOpacity(0.1),
+              color: appColors.primaryColor.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(8.r),
             ),
             child: Icon(icon, color: appColors.primaryColor, size: 20.sp),

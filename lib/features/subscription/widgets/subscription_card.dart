@@ -11,7 +11,7 @@ class SubscriptionCard extends StatelessWidget {
       // height: 102,
       padding: EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.7),
+        color: Colors.white.withValues(alpha: 0.7),
         borderRadius: BorderRadius.circular(24),
         border: Border.all(width: 1, color: const Color(0x7FBCBCBC)),
         boxShadow: const [
@@ -84,7 +84,7 @@ class SubscriptionCard extends StatelessWidget {
                   Text(
                     "\$",
                     style: TextStyle(
-                      color: Color(0xFF616161).withOpacity(0.6),
+                      color: Color(0xFF616161).withValues(alpha: 0.6),
                       fontSize: 18,
                       fontFamily: "Poppins",
                       fontWeight: FontWeight.w500,
@@ -94,7 +94,7 @@ class SubscriptionCard extends StatelessWidget {
                   Text(
                     "299",
                     style: TextStyle(
-                      color: Color(0xFF212121).withOpacity(0.8),
+                      color: Color(0xFF212121).withValues(alpha: 0.8),
                       fontSize: 28,
                       fontFamily: "Poppins",
                       fontWeight: FontWeight.w600,

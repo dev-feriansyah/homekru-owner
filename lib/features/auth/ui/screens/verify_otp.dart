@@ -129,7 +129,7 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
                                   } else {
                                     // Validation failed, show errors
                                     // Optionally: show a snackbar or toast
-                                    print("Validation failed");
+                                    debugPrint("Validation failed");
                                   }
                                 },
                                 text: "Verify OTP",

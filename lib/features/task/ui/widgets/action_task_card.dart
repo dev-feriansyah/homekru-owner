@@ -284,7 +284,6 @@ class ActionTaskCard extends StatelessWidget {
         ]);
         break;
       case null:
-      // TODO: Handle this case.
     }
 
     return buttons;

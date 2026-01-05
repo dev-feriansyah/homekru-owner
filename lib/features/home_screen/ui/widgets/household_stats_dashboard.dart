@@ -76,7 +76,7 @@ class HouseholdStatsDashboard extends StatelessWidget {
         borderRadius: BorderRadius.circular(16.r),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: 0.05),
             offset: Offset(0, 2),
             blurRadius: 10,
             spreadRadius: 0,
@@ -140,7 +140,7 @@ class HouseholdStatsDashboard extends StatelessWidget {
                             color: appColors.lightBlueTwo,
                             shape: BoxShape.circle,
                             // border: Border.all(
-                            //   color: appTheme.primaryColor.withOpacity(0.3),
+                            //   color: appTheme.primaryColor.withValues(alpha: 0.3),
                             //   width: 2,
                             //   style: BorderStyle.solid,
                             // ),
@@ -215,7 +215,7 @@ class HouseholdStatsDashboard extends StatelessWidget {
         borderRadius: BorderRadius.circular(16.r),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: 0.05),
             offset: Offset(0, 2),
             blurRadius: 10,
             spreadRadius: 0,
@@ -327,7 +327,7 @@ class HouseholdStatsDashboard extends StatelessWidget {
         borderRadius: BorderRadius.circular(16.r),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: 0.05),
             offset: Offset(0, 2),
             blurRadius: 10,
             spreadRadius: 0,

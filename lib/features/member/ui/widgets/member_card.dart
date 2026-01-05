@@ -330,18 +330,18 @@ class MemberCard extends StatelessWidget {
     );
   }
 
-  void _confirmDischarge(BuildContext context) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: CText(
-          '${member.name} has been discharged successfully',
-          color: Colors.white,
-        ),
-        backgroundColor: appColors.darkRed,
-        duration: Duration(seconds: 2),
-      ),
-    );
-  }
+  // void _confirmDischarge(BuildContext context) {
+  //   ScaffoldMessenger.of(context).showSnackBar(
+  //     SnackBar(
+  //       content: CText(
+  //         '${member.name} has been discharged successfully',
+  //         color: Colors.white,
+  //       ),
+  //       backgroundColor: appColors.darkRed,
+  //       duration: Duration(seconds: 2),
+  //     ),
+  //   );
+  // }
 }
 
 class Member {
@@ -433,13 +433,13 @@ void reminderPopup(context, {required GlobalKey<FormState> formKey}) {
                                   backgroundColor: Colors.white,
                                   hourMinuteTextColor: appColors.primaryColor,
                                   hourMinuteColor: appColors.primaryColor
-                                      .withOpacity(0.2),
+                                      .withValues(alpha: 0.2),
                                   dayPeriodTextColor: appColors.primaryColor,
                                   dayPeriodColor: appColors.primaryColor
-                                      .withOpacity(0.2),
+                                      .withValues(alpha: 0.2),
                                   dialHandColor: appColors.primaryColor,
                                   dialBackgroundColor: appColors.primaryColor
-                                      .withOpacity(0.2),
+                                      .withValues(alpha: 0.2),
                                   entryModeIconColor: appColors.primaryColor,
                                 ),
                                 textButtonTheme: TextButtonThemeData(
@@ -478,19 +478,19 @@ void reminderPopup(context, {required GlobalKey<FormState> formKey}) {
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                           borderSide: BorderSide(
-                            color: appColors.grey.withOpacity(0.2),
+                            color: appColors.grey.withValues(alpha: 0.2),
                           ),
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                           borderSide: BorderSide(
-                            color: appColors.grey.withOpacity(0.2),
+                            color: appColors.grey.withValues(alpha: 0.2),
                           ),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                           borderSide: BorderSide(
-                            color: appColors.grey.withOpacity(0.2),
+                            color: appColors.grey.withValues(alpha: 0.2),
                           ),
                         ),
                       ),

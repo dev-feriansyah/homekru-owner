@@ -92,7 +92,7 @@ class _FAQsScreenState extends State<FAQsScreen> {
                 borderRadius: BorderRadius.circular(20.r),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.1),
+                    color: Colors.black.withValues(alpha: 0.1),
                     blurRadius: 10,
                     offset: const Offset(0, 5),
                   ),
@@ -130,7 +130,7 @@ class _FAQsScreenState extends State<FAQsScreen> {
                     Container(
                       padding: EdgeInsets.all(16.w),
                       decoration: BoxDecoration(
-                        color: appColors.lightBlue.withOpacity(0.3),
+                        color: appColors.lightBlue.withValues(alpha: 0.3),
                         borderRadius: BorderRadius.circular(12.r),
                       ),
                       child: Column(
@@ -211,7 +211,7 @@ class _FAQsScreenState extends State<FAQsScreen> {
     return Container(
       margin: EdgeInsets.only(bottom: 12.h),
       decoration: BoxDecoration(
-        border: Border.all(color: appColors.grey.withOpacity(0.2)),
+        border: Border.all(color: appColors.grey.withValues(alpha: 0.2)),
         borderRadius: BorderRadius.circular(12.r),
       ),
       child: Theme(

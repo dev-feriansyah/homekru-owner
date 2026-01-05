@@ -227,7 +227,7 @@ class _PlanCard extends StatelessWidget {
                     color:
                         isGradient
                             ? appColors.lightYellow
-                            : const Color(0x26BDBDBD).withOpacity(0.15),
+                            : const Color(0x26BDBDBD).withValues(alpha: 0.15),
                     borderRadius: BorderRadius.circular(12.r),
                   ),
 
@@ -347,8 +347,8 @@ class _Chip extends StatelessWidget {
               isSelected
                   ? (isGradient ? Colors.white : appColors.primaryColor)
                   : (isGradient
-                      ? Color(0xFFBDBDBD).withOpacity(0.40)
-                      : Color(0xFFBDBDBD).withOpacity(0.40)),
+                      ? Color(0xFFBDBDBD).withValues(alpha: 0.40)
+                      : Color(0xFFBDBDBD).withValues(alpha: 0.40)),
           borderRadius: BorderRadius.circular(20.r),
           border: Border.all(
             color:

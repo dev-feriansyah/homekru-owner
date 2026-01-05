@@ -53,11 +53,13 @@ class CustomRadioOption<T> extends StatelessWidget {
             SizedBox(
               height: 20,
               width: 20,
-              child: Radio<T>(
-                value: value,
+              child: RadioGroup<T>(
                 groupValue: groupValue,
                 onChanged: onChanged,
-                activeColor: appColors.primaryColor,
+                child: Radio<T>(
+                  value: value,
+                  activeColor: appColors.primaryColor,
+                ),
               ),
             ),
           ],
