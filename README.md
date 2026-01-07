@@ -108,7 +108,53 @@ lib/
 └── features/      → Feature modules (auth, tasks, attendance, etc.)
 ```
 
-For detailed architecture documentation, see [ARCHITECTURE.md.](./ARCHITECTURE.md)
+For detailed architecture documentation, see [ARCHITECTURE.md.](./docs/ARCHITECTURE.md)
+
+## 📡 API Documentation
+
+The app uses a **global API layer** built with Dio, clean architecture, and Riverpod for state management.
+
+### 📚 Documentation
+
+- **[API Developer Guide](./docs/api/API_DEVELOPER_GUIDE.md)** - Complete guide for developers (start here!)
+- **[API Quick Reference](./docs/api/API_QUICK_REFERENCE.md)** - Quick copy-paste examples and templates
+
+### 🚀 Quick Start with API
+
+```dart
+// 1. Create a model (Freezed)
+@freezed
+sealed class MyModel with _$MyModel {
+  const factory MyModel({required String id, required String name}) = _MyModel;
+  factory MyModel.fromJson(Map<String, dynamic> json) => _$MyModelFromJson(json);
+}
+
+// 2. Create a service (API calls)
+class MyService {
+  Future<MyModel> getData() => _apiClient.get<MyModel>('/endpoint', ...);
+}
+
+// 3. Create a repository (business logic)
+class MyRepository {
+  Future<MyModel> fetchData() => _service.getData();
+}
+
+// 4. Use in UI with Riverpod
+final data = ref.watch(myProvider);
+```
+
+**Need help?** Check the [API Developer Guide](./docs/api/API_DEVELOPER_GUIDE.md) for detailed tutorials.
+
+### 🎯 Key Features
+
+- ✅ **Smart Authentication** - Auto-attach tokens to authenticated requests
+- ✅ **Type-Safe Models** - Using Freezed 3.x with sealed classes
+- ✅ **Error Handling** - Custom exceptions for different error scenarios
+- ✅ **Clean Architecture** - Clear separation: UI → Provider → Repository → Service → ApiClient
+- ✅ **Environment Config** - Separate dev/prod configurations
+- ✅ **Encrypted Storage** - Secure token storage with FlutterSecureStorage
+
+**Generate code:** `dart run build_runner build --delete-conflicting-outputs`
 
 ## 🌍 Localization Migration
 
