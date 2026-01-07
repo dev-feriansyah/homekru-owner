@@ -6,7 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:homekru_owner/core/flavors/flavors.dart';
 import 'package:homekru_owner/core/l10n/generated/app_localizations.dart';
 import 'package:homekru_owner/core/routes/app_routes.dart';
-import 'package:homekru_owner/shared/providers/locale_provider.dart';
+import 'package:homekru_owner/core/l10n/locale_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'core/theme/app_theme.dart';

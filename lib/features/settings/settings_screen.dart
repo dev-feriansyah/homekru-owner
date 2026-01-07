@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:homekru_owner/shared/domain/value_objects/app_language.dart';
+import 'package:homekru_owner/core/l10n/app_language.dart';
 import 'package:homekru_owner/shared/domain/value_objects/notification_setting.dart';
-import 'package:homekru_owner/shared/providers/locale_provider.dart';
+import 'package:homekru_owner/core/l10n/locale_provider.dart';
 import 'package:homekru_owner/shared/utils/common_utils.dart';
 import 'package:homekru_owner/core/routes/app_navigator.dart';
 import 'package:homekru_owner/core/routes/app_routes.dart';
